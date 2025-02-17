@@ -32,14 +32,14 @@
                 d="M9 15a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z" class="duoicon-secondary-layer" opacity="0.3" />
             </svg>
             Dashboard
-            
           </li>
-          <li id="pengguna">
+
+          <li id="pemilih">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" style="margin-top: 2px;">
               <path fill="currentColor" d="M11 7c0 1.66-1.34 3-3 3S5 8.66 5 7s1.34-3 3-3s3 1.34 3 3" />
               <path fill="currentColor" fill-rule="evenodd" d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75" clip-rule="evenodd" />
             </svg>
-            Pengguna
+            Pemilih
           </li>
           
           <li id="kandidat">
@@ -64,9 +64,16 @@
                 d="M12.728 2.216a.75.75 0 0 1 .544-.212a9 9 0 0 1 8.724 8.724a.75.75 0 0 1-.75.772H13.25a.75.75 0 0 1-.75-.75V2.754a.75.75 0 0 1 .228-.538M11 4.784a.75.75 0 0 0-.817-.747a9 9 0 1 0 9.78 9.78a.75.75 0 0 0-.747-.817H11z"
               />
             </svg>
-            Quick Count
+            Pengaturan
           </li>
 
+          <li class="logout" onclick="alert('apakah anda yakin ingin logout?')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6 2h9a2 2 0 0 1 2 2v2h-2V4H6v16h9v-2h2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2" />
+              <path fill="currentColor" d="M16.09 15.59L17.5 17l5-5l-5-5l-1.41 1.41L18.67 11H9v2h9.67z" />
+            </svg>
+            Logout
+          </li>
         </ul>
         <!-- footer -->
         <div class="footer">&copy; 2025, SuaraKita. All rights reserved.</div>
@@ -78,15 +85,15 @@
 
         <!-- quck count access settings -->
         <div class="time-settings">
-          <h3>Akses Waktu Voting</h3>
+          <h3>Akses Untuk Voting</h3>
 
           <!-- time -->
-           <input type="time" name="" id="" required>
+           <input type="time" name="" id="">
            <br>
-           <input type="time" name="" id="" required>
-          <br>
-          <!-- click to save -->
-          <hr> 
+           <input type="time" name="" id="">
+     
+          <hr>
+
           <h3>Akses Quick Count</h3>
 
           <!-- time -->
@@ -94,73 +101,71 @@
            <br>
            <input type="time" name="" id="">
             <br>
-            
-          <button>Simpan</button>
-
-          
+          <!-- click to save -->
+           <button>Simpan</button>
         </div>
        </main>
     </div>
 
     <!-- javascript -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const sidebar = document.querySelector(".sidebar");
-          const toggleIcon = document.querySelector(".sidebar .logo i");
-
-          // Fungsi toggle sidebar
-          toggleIcon.addEventListener("click", function () {
-              sidebar.classList.toggle("closed");
-
-              // Ganti ikon
-              if (sidebar.classList.contains("closed")) {
-                  toggleIcon.classList.remove("bi-layout-sidebar-inset");
-                  toggleIcon.classList.add("bi-layout-sidebar-inset-reverse");
-              } else {
-                  toggleIcon.classList.remove("bi-layout-sidebar-inset-reverse");
-                  toggleIcon.classList.add("bi-layout-sidebar-inset");
-              }
-          });
-      });
-
-      // Fungsi untuk menangani klik pada <li>
+        document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.querySelector(".sidebar");
+        const toggleIcon = document.querySelector(".sidebar .logo i");
+  
+        // Fungsi toggle sidebar
+        toggleIcon.addEventListener("click", function () {
+            sidebar.classList.toggle("closed");
+  
+            // Ganti ikon
+            if (sidebar.classList.contains("closed")) {
+                toggleIcon.classList.remove("bi-layout-sidebar-inset");
+                toggleIcon.classList.add("bi-layout-sidebar-inset-reverse");
+            } else {
+                toggleIcon.classList.remove("bi-layout-sidebar-inset-reverse");
+                toggleIcon.classList.add("bi-layout-sidebar-inset");
+            }
+        });
+    });
+  
+    // Fungsi untuk menangani klik pada <li>
       function handleLiClick(event) {
-          // Dapatkan ID dari elemen yang diklik
-          const id = event.currentTarget.id;
-
-          // Tentukan URL berdasarkan ID
-          let url;
-          switch (id) {
-              case 'dashboard':
-                  url = '../admin/dashboard.html';
-                  break;
-              case 'pengguna':
-                  url = '../admin/data_pengguna.html';
-                  break;
-              case 'kandidat':
-                  url = '../admin/data_kandidat.html';
-                  break;
-              case 'data-suara':
-                  url = '../admin/data_suara.html';
-                  break;
-              case 'quick-count':
-                  url = '../admin/quick_count.html';
-                  break;
-              default:
-                  url = '#';
-          }
-
-          // Arahkan ke URL yang sesuai
-          window.location.href = url;
+      // Dapatkan ID dari elemen yang diklik
+      const id = event.currentTarget.id;
+  
+      // Tentukan URL berdasarkan ID
+      let url;
+      switch (id) {
+        case 'dashboard':
+          url = '../admin/dashboard.html';
+          break;
+        case 'pemilih':
+          url = '../admin/data_pemilih.html';
+          break;
+        case 'kandidat':
+          url = '../admin/data_kandidat.html';
+          break;
+        case 'data-suara':
+          url = '../admin/data_suara.html';
+          break;
+        case 'quick-count':
+          url = '../admin/pengaturan.html';
+          break;
+        default:
+          url = '#';
       }
-
-      // Dapatkan semua elemen <li> dengan ID
-      const liElements = document.querySelectorAll('ul.menu li[id]');
-
-      // Tambahkan event listener untuk setiap elemen <li>
-      liElements.forEach(li => {
-          li.addEventListener('click', handleLiClick);
-      });
-  </script>
+  
+      // Arahkan ke URL yang sesuai
+      window.location.href = url;
+    }
+  
+    // Dapatkan semua elemen <li> dengan ID
+    const liElements = document.querySelectorAll('ul.menu li[id]');
+  
+    // Tambahkan event listener untuk setiap elemen <li>
+    liElements.forEach(li => {
+      li.addEventListener('click', handleLiClick);
+    });
+    </script>
 </body>
 </html>
