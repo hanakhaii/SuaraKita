@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dashboardser.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header onload="masuk()">
+        <h1><span>Suara</span>Kita</h1>
+
+        <nav>
+            <ul>
+                <li><a href="#kandidat">Kandidat</a></li>
+                <li><a href="#rules">Peraturan</a></li>
+                <li><a href="#vote">Pilih Sekarang</a></li>
+                <li><a href="#quick">QuickCount</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sec1">
+        <div class="inline1">
+            <h1>Halo Selamat Datang <br> <span>NamaUser!</span></h1>
+
+            <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan. Mari
+                berpartisipasi dalam pemilihan ini untuk menentukan pemimpin terbaik. Suara Anda adalah masa depan kita!
+            </p>
+        </div>
+    </section>
+
+    <section id="kandidat" class="sec2">
+        <h1>KANDIDAT</h1>
+        <div class="inline2">
+            <div class="kandidat">
+                <h1 class="judul">01</h1>
+                <img src="/gambal/harry.jpg" alt="">
+                <p>[Nama Kandidat] adalah seorang pemimpin yang berkomitmen pada inovasi dan kemajuan. Dengan pengalaman
+                    dan dedikasinya, ia ingin membawa perubahan positif bagi kita semua.</p>
+                <button onclick="window.location.href='tampilan_kandidat.html'">Lihat</button>
+            </div>
+            <div class="kandidat">
+                <h1 class="judul">02</h1>
+                <img src="../gambal/hamonue.jpg" alt="">
+                <p>Dengan semangat kebersamaan, [Nama Kandidat] bertekad menciptakan lingkungan yang lebih harmonis dan
+                    inklusif. Ia percaya bahwa setiap suara memiliki peran penting dalam membangun masa depan.</p>
+                <button onclick="window.location.href='tampilan_kandidat2.html'">Lihat</button>
+
+            </div>
+            <div class="kandidat">
+                <h1 class="judul">03</h1>
+                <img src="../gambal/ron.jpg" alt="">
+                <p>Kepemimpinan yang adil dan transparan adalah visi utama [Nama Kandidat]. Ia siap mendengar, bekerja,
+                    dan berkolaborasi untuk mencapai tujuan bersama.
+                </p>
+                <button onclick="window.location.href='tampilan_kandidat3.html'">Lihat</button>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="rules" class="sec3">
+        <div class="inline3">
+            <h1>Peraturan yang berlaku</h1>
+            <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi peraturan yang berlaku. Gunakan
+                hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman. Suara Anda menentukan
+                arah kebijakan ke depan!</p>
+        </div>
+    </section>
+
+    <section id="vote" class="sec4">
+        <div class="inline4">
+            <h1>Ayo Memilih!</h1>
+            <p>Saatnya memilih! Berikan suara Anda untuk calon terbaik yang akan membawa perubahan positif. Jangan
+                biarkan hak suara Anda terbuang sia-sia, karena satu suara bisa membuat perbedaan besar!</p>
+            <button class="btn-vote" onclick="window.location.href='voting.html'">Vote Now!</button>
+        </div>
+    </section>
+
+    <section id="quick" class="sec5">
+        <h1>Quick Count</h1>
+        <div class="inline5">
+            <div class="count">
+                <p>Pantau hasil sementara pemungutan suara secara real-time dengan fitur Quick Count. Data diperbarui
+                    secara berkala agar Anda selalu mendapatkan informasi terbaru. Transparansi adalah kunci utama dalam
+                    pemilihan ini!</p>
+                <button class="btn-detail" onclick="window.location.href='quickcount.html'">Lihat Detail</button>
+            </div>
+            <div>
+                <img src="../gambal/bar.png" alt="" srcset="">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p> &copy; 2025, SuaraKita. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
