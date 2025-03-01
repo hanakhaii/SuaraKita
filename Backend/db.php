@@ -1,30 +1,46 @@
-<?php 
-
-// class untuk Database
+<?php
 class Database {
     var $host = "localhost";
     var $username = "root";
     var $password = "";
     var $database = "suarakita";
+    var $connect; // Property untuk menyimpan koneksi
 
-    // method untuk connect ke database
+    // Method untuk connect ke database
     function __construct() {
-        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $this->connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
 
-        if ($koneksi) {
-            echo "Connection successful";
-        } else {
-            echo "Connection failed";
+        if (!$this->connect) {
+            die("Koneksi gagal: " . mysqli_connect_error());
         }
     }
 
-    //method untuk insert data kandidat
-    function tambahkandidat($foto, $nis, $nama, $visi, $misi){
-        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        mysqli_query($koneksi, "INSERT INTO kandidat VALUES( '$foto' , '$nis' , '$nama', '$visi' , '$misi')");
+    // Method untuk tampil data kandidat
+    function viewKandidat() {
+        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
+        $query = mysqli_query($connect, "SELECT * FROM kandidat");
+
+        $result = [];
+
+        while ($data = mysqli_fetch_array($query)) {
+            $result[] = $data;
+        }
+        return $result;
+    }
+
+    // Method untuk input data kandidat
+    function inputKandidat($foto, $nis, $nama, $visi, $misi) {
+        // Escape input untuk menghindari SQL injection
+        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
+
+        // Query untuk menyimpan data ke database
+        mysqli_query($connect, "
+        INSERT INTO kandidat (foto, nis, nama, visi, misi)
+        VALUES ('$foto', '$nis', '$nama', '$visi', '$misi')
+    ");
     }
 }
-// installasi
-$db = new Database();
 
+// Instansiasi
+$dbsuara = new Database();
 ?>
