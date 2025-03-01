@@ -17,6 +17,12 @@ class Database {
             echo "Connection failed";
         }
     }
+
+    //method untuk insert data kandidat
+    function tambahkandidat($foto, $nis, $nama, $visi, $misi){
+        $koneksi = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        mysqli_query($koneksi, "INSERT INTO kandidat VALUES( '$foto' , '$nis' , '$nama', '$visi' , '$misi')");
+    }
 }
 // installasi
 $db = new Database();

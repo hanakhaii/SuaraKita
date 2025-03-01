@@ -1,0 +1,361 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Poppins", serif;
+}
+
+/* css navigasi */
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 75px;
+    background-color: #0056d6;
+}
+nav h1{
+    color: #FFFF;
+    font-weight: bold;
+}
+li a:hover {
+    background-color: #FC0134; /* Warna merah seperti di logo */
+    color: white;
+}
+nav span{
+    color: #FC0134;
+}
+ul{
+    display: flex;
+    margin-top: 13px;
+}
+ul li{
+    margin: 0px 10px;
+}
+
+li a{
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* slideshow */
+.slideshow {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 70vh;
+}
+
+/* Efek hover tetap ada */
+li button:hover, 
+.inline3 button:hover, 
+.text-overlay button:hover {
+    background-color: #FC0134; /* Merah seperti logo */
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+
+/* Simulasi hover saat tap (touch) */
+li button:active, 
+.inline3 button:active, 
+.text-overlay button:active {
+    background-color: #d4002a; /* Warna lebih gelap saat ditekan */
+    transform: scale(0.95);
+    border: none;
+    transition: transform 0.1s ease-in-out;
+}
+
+.slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Gelap dengan transparansi */
+    z-index: 1;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex: 1 0 100%;
+    min-width: 100%;
+    height: 70vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 2; /* Di atas overlay */
+}
+
+.text-overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.text-overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.text-overlay button {
+    padding: 10px 20px;
+    background-color: #0056d6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.text-overlay button:hover {
+    background-color: #003d9a;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* sec1 */
+.sec1{
+    padding: 70px 70px;
+}
+
+.inline1{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #0066FF;
+    padding: 50px 50px;
+    color: aliceblue;
+    border-radius: 20px;
+    box-shadow: 1px 2px 15px 5px rgba(76, 75, 75, 0.2);
+}
+
+.inline1 h1{
+    font-size: 35px;
+}
+
+.inline1 p{
+    width: 500px;
+    font-size: 19px;
+}
+
+/* sec2 */
+.sec2{
+    padding: 105px 70px;
+}
+
+.inline2 h1{
+    padding-bottom: 15px;
+    font-size:35px;
+}
+
+.inline2 p{
+    font-size: 19px;
+    width: 750px;
+}
+
+/* sec3 */
+.sec3{
+    padding: 70px 70px;
+}
+
+.gambal img{
+    width: 240px;
+}
+
+.inline3 h1{
+    padding-bottom: 19px;
+    font-size: 30px;
+}
+
+.inline3 p{
+    width: 750px;
+    font-size: 19px;
+    padding-bottom: 30px;
+}
+
+.inline3 button{
+    font-size: 20px;
+    background-color: #1E1E1E;
+    color: #FFFF;
+    border-radius: 10PX;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.inline3 a:hover {
+    background-color: #003d9a; /* Biru tua agar serasi */
+    color: white;
+}
+
+.inline3{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #ffff;
+    padding: 50px 50px;
+    box-shadow: 0px 0px 10px 0px #D9D9D9;
+    border-radius:20px ;
+}
+
+/* footer */
+footer{
+    padding: 40px;
+    padding-bottom: 25px;
+    background-color: #0056d6;
+    color: #ffff;
+    text-align: center;
+}
+
+/* responsif di mobile */
+@media only screen and (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    ul {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    ul li {
+        margin: 5px 0;
+    }
+
+    /* Slideshow */
+    .slideshow {
+        height: 40vh;
+    }
+
+    .slide {
+        height: 40vh;
+    }
+
+    .text-overlay h1 {
+        font-size: 1.8rem;
+    }
+
+    .text-overlay p {
+        font-size: 1rem;
+    }
+
+    .text-overlay button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    /* Section 1 */
+    .sec1 {
+        padding: 40px 20px;
+    }
+
+    .inline1 {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .inline1 h1 {
+        font-size: 28px;
+    }
+
+    .inline1 p {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    /* Section 2 */
+    .sec2 {
+        padding: 50px 20px;
+    }
+
+    .inline2 h1 {
+        font-size: 28px;
+    }
+
+    .inline2 p {
+        font-size: 18px;
+        width: 100%;
+    }
+
+    /* Section 3 */
+    .sec3 {
+        padding: 40px 20px;
+    }
+
+    .inline3 {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .inline3 h1 {
+        font-size: 24px;
+    }
+
+    .inline3 p {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .inline3 button {
+        font-size: 16px;
+        padding: 8px 12px;
+        text-decoration: none;
+    }
+
+    .gambal img {
+        width: 200px;
+        margin-top: 15px;
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 20px;
+    }
+}
+
