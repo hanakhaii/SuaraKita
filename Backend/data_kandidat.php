@@ -114,7 +114,7 @@ $dbsuara = new Database();
                   <tr>
                     <td><?php echo $dataKandidat['no_urut']; ?></td>
                     <td>
-                      <img src="<?php echo $dataKandidat['foto']; ?>" width="100">
+                      <img src="uploads/<?= $dataKandidat['foto'] ?>">
                     </td>
                     <td><?php echo $dataKandidat['nis']; ?></td>
                     <td><?php echo $dataKandidat['nama']; ?></td>

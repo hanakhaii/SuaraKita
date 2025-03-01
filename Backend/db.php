@@ -17,7 +17,8 @@ class Database {
 
     // Method untuk tampil data kandidat
     function viewKandidat() {
-        $query = mysqli_query($this->connect, "SELECT * FROM kandidat");
+        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
+        $query = mysqli_query($connect, "SELECT * FROM kandidat");
 
         $result = [];
 
@@ -30,23 +31,13 @@ class Database {
     // Method untuk input data kandidat
     function inputKandidat($foto, $nis, $nama, $visi, $misi) {
         // Escape input untuk menghindari SQL injection
-        $foto = mysqli_real_escape_string($this->connect, $foto);
-        $nis = mysqli_real_escape_string($this->connect, $nis);
-        $nama = mysqli_real_escape_string($this->connect, $nama);
-        $visi = mysqli_real_escape_string($this->connect, $visi);
-        $misi = mysqli_real_escape_string($this->connect, $misi);
+        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
 
         // Query untuk menyimpan data ke database
-        $query = "INSERT INTO kandidat (foto, nis, nama, visi, misi) VALUES ('$foto', '$nis', '$nama', '$visi', '$misi')";
-
-        // Eksekusi query
-        if (mysqli_query($this->connect, $query)) {
-            return true; // Berhasil
-        } else {
-            // Tampilkan pesan error
-            echo "Error: " . mysqli_error($this->connect);
-            return false; // Gagal
-        }
+        mysqli_query($connect, "
+        INSERT INTO kandidat (foto, nis, nama, visi, misi)
+        VALUES ('$foto', '$nis', '$nama', '$visi', '$misi')
+    ");
     }
 }
 
