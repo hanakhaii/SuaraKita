@@ -64,6 +64,12 @@ class Database {
         return mysqli_fetch_assoc($query); // Mengembalikan data satu kandidat sebagai array asosiatif
     }
     
+    // Method untuk hapus data kandidat
+    function deleteKandidat($no_urut) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $query = mysqli_query($connect, "DELETE FROM kandidat WHERE no_urut='$no_urut'");
+        return $query;
+    }
 }
 
 // Instansiasi

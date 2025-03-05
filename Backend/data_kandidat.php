@@ -121,7 +121,7 @@ $dbsuara = new Database();
                     <td>
                       <div class="flex-button">
                         <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit">Edit</a> |
-                        <a href="" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                        <a href="process.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                       </div>
                     </td>
                   </tr>
@@ -134,7 +134,7 @@ $dbsuara = new Database();
     </div>
     <!-- tombol aksi -->
     <div class="tombol-aksi-kandidat">
-        <a href="upload_kandidat.php? " style="background-color: #181B3C;">TAMBAH</a>
+        <a href="upload_kandidat.php" style="background-color: #181B3C;">TAMBAH</a>
         <a href="" style="background-color: #FC0134;">HAPUS</a>
     </div>
 </main>    
@@ -170,19 +170,19 @@ $dbsuara = new Database();
       let url;
       switch (id) {
         case 'dashboard':
-          url = '../admin/dashboard.html';
+          url = 'dashboard.php';
           break;
         case 'pemilih':
-          url = '../admin/data_pemilih.html';
+          url = 'data_pemilih.php';
           break;
         case 'kandidat':
-          url = '../admin/data_kandidat.html';
+          url = 'data_kandidat.php';
           break;
         case 'data-suara':
-          url = '../admin/data_suara.html';
+          url = 'data_suara.php';
           break;
         case 'quick-count':
-          url = '../admin/pengaturan.html';
+          url = 'pengaturan.php';
           break;
         default:
           url = '#';

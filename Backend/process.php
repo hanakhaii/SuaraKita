@@ -41,5 +41,12 @@ if ($action == "add") {
     } else {
         echo "Edit kandidat gagal!";
     }
+} else if ($action == "delete") {
+    // Panggil method deleteKandidat
+    if ($dbsuara->deleteKandidat($_GET['no_urut'])) {
+        header("location:data_kandidat.php");
+    } else {
+        echo "Hapus kandidat gagal!";
+    }
 }
 ?>
