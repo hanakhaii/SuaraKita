@@ -106,29 +106,28 @@ $dbsuara = new Database();
                   <th>AKSI</th>
                 </tr>
               </thead>
-                <?php 
-                $no = 1;
+              <tbody>
+                <?php
                 foreach ($dbsuara->viewKandidat() as $dataKandidat) {
                 ?>
-              <tbody>
                   <tr>
                     <td><?php echo $dataKandidat['no_urut']; ?></td>
-                    <td>
-                      <img src="uploads/<?= $dataKandidat['foto'] ?>">
-                    </td>
+                    <td><img src="uploads/<?= $dataKandidat['foto'] ?>"></td>
                     <td><?php echo $dataKandidat['nis']; ?></td>
                     <td><?php echo $dataKandidat['nama']; ?></td>
                     <td><?php echo $dataKandidat['visi']; ?></td>
                     <td><?php echo $dataKandidat['misi']; ?></td>
                     <td></td>
                     <td>
-                        <div class="flex-button">
-                        <a href="">Edit</a> |
+                      <div class="flex-button">
+                        <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit">Edit</a> |
                         <a href="" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                        </div>
+                      </div>
                     </td>
-                </tr>
-                <?php } ?>              
+                  </tr>
+                <?php
+                }
+                ?>
               </tbody>
             </table>
           </section>
