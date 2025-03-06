@@ -28,6 +28,27 @@ class Database {
         return $result;
     }
 
+    function viewPemilih() {
+        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
+        $query = mysqli_query($connect, "SELECT * FROM pengguna");
+
+        $result = [];
+
+        while ($data = mysqli_fetch_array($query)) {
+            $result[] = $data;
+        }
+        return $result;
+    }
+    
+
+    function inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        mysqli_query($connect, "
+        INSERT INTO pengguna (nis, password, username, nama, role, validasi_memilih)
+        VALUES ('$nis', '$password', '$username', '$nama', '$role', '$validasi_memilih')");
+    }
+    
+
     // Method untuk input data kandidat
     function inputKandidat($foto, $nis, $nama, $visi, $misi) {
         // Escape input untuk menghindari SQL injection

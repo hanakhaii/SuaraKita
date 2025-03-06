@@ -3,10 +3,15 @@ include 'db.php';
 $dbsuara = new Database();
 
 $action = $_GET['action'];
-if ($action == "add") {
+if ($action == "add_kandidat") {
+    // Proses untuk input data kandidat
     $dbsuara->inputKandidat($_FILES['foto']['name'], $_POST['nis'], $_POST['nama'], $_POST['visi'], $_POST['misi']);
     header("location:data_kandidat.php");
-} 
+} elseif ($action == "add_pemilih") {
+    // Proses untuk input data pemilih
+    $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);  
+    header("location:data_pemilih.php");
+}
 // elseif ($aksi == "hapus") {
 //     $dbsuara->hapus($_GET['no_urut']);
 //     header("location:data_kandidat.php");

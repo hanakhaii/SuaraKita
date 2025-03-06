@@ -153,8 +153,10 @@ body {
             max-width: 800px;
         }
 
+     
+
         .table_body-kandidat {
-            width:1100px;
+            width:110%;
             background-color: #fff;
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -169,6 +171,12 @@ body {
             margin: 0 auto;
         }
 
+        .tablemilih{
+            width: 700px;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        
         th {
             background-color: #0066FF;
             color: white;
@@ -228,6 +236,12 @@ body {
 
         .button {
             display: flex;
+        }
+
+        .flex-button-milih {
+            margin-top: 0%; 
+            display: flex;
+            margin-left: 3%;
         }
 
         .flex-button {
