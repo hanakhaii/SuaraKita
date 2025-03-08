@@ -2,7 +2,7 @@
 include 'db.php';
 $dbsuara = new Database(); 
 ?>
-
+<!-- inputtt pemilih -->
 <!DOCTYPE html>
 <html lang="en">
 <head>

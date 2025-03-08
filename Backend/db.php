@@ -67,12 +67,12 @@ class Database {
     
         // Query untuk mengedit data kandidat, termasuk foto
         $query = "UPDATE kandidat SET 
-                  nis='$nis', 
-                  nama='$nama', 
-                  visi='$visi', 
-                  misi='$misi', 
-                  foto='$foto' 
-                  WHERE no_urut='$no_urut'";
+                nis='$nis', 
+                nama='$nama', 
+                visi='$visi', 
+                misi='$misi', 
+                foto='$foto' 
+                WHERE no_urut='$no_urut'";
         
         $result = mysqli_query($connect, $query);
     

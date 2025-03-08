@@ -12,13 +12,7 @@ if ($action == "add_kandidat") {
     $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);  
     header("location:data_pemilih.php");
 }
-// elseif ($aksi == "hapus") {
-//     $dbsuara->hapus($_GET['no_urut']);
-//     header("location:data_kandidat.php");
-// } elseif ($aksi == "update") {
-//     $dbsuara->update($_POST['no_urut'], $_POST['foto'], $_POST['nis'], $_POST['nama'], $_POST['visi'], $_POST['misi']);
-//     header("location:data_kandidat.php");
-// }
+
 
 if(isset($_FILES['foto'])){
     $file_name = $_FILES['foto']['name'];
@@ -30,8 +24,9 @@ if(isset($_FILES['foto'])){
         $query = "INSERT INTO foto_table (judul, nama_file) VALUES (:judul, :nama_file)";
         // Eksekusi query dengan prepared statement, dll.
     } else {
-        echo "Upload gagal!";
+        echo "Upload gagal!"; 
     }
+    // perubahan process.php
 } else if ($action == "edit") {
     // Ambil data file foto
     $foto = $_POST['foto_lama']; // Default: gunakan foto lama
