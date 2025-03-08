@@ -59,4 +59,18 @@ if(isset($_FILES['foto'])){
         echo "Hapus kandidat gagal!";
     }
 }
+
+    //  Panggil method loginAdmin
+    if ($action == "login") {
+        $dbsuara->loginAdmin($_POST['username'], $_POST['password']);
+    } else if ($action == "logout") {
+        $dbsuara->logoutAdmin();
+    }
+
+    // Panggil method loginUser
+    if ($action == "loginUser") {
+        $dbsuara->loginUser($_POST['nis'], $_POST['password']);
+    } else if ($action == "logoutUser") {
+        $dbsuara->logoutUser();
+    }
 ?>

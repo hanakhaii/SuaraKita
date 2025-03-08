@@ -91,6 +91,34 @@ class Database {
         $query = mysqli_query($connect, "DELETE FROM kandidat WHERE no_urut='$no_urut'");
         return $query;
     }
+
+    // Method untuk login admin
+    function loginAdmin($username, $password) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $query = mysqli_query($connect, "SELECT * FROM pengguna WHERE username='$username' AND password='$password'");
+        return mysqli_fetch_assoc($query);
+    }
+
+    // Method untuk logout admin
+    function logoutAdmin() {
+        session_start();
+        session_destroy();
+        header('Location: login-admin.php');
+    }
+
+    // Method untuk login user
+    function loginUser($nis, $password) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $query = mysqli_query($connect, "SELECT * FROM pengguna WHERE nis='$nis' AND password='$password'");
+        return mysqli_fetch_assoc($query);
+    }
+    
+    // Method untuk logout user
+    function logoutUser() {
+        session_start();
+        session_destroy();
+        header('Location: login-user.php');
+    }
 }
 
 // Instansiasi

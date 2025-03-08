@@ -1,0 +1,97 @@
+body {
+    text-align: center;
+    font-family: 'Poppins';
+}
+/* hanaaa lucuuu cantikkk*/
+main {
+    margin: 90px;
+    margin-left: 430px;
+    margin-right: 430px;
+    background-color: #0066ffee;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 15px 5px rgba(76, 75, 75, 0.2);
+}
+
+h1 {
+    font-weight: bolder;
+    color: white;
+}
+
+h4 {
+    margin-top: -16px;
+    margin-bottom: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+span {
+    color: red;
+    font-size: 12px;
+}
+
+.label {
+    color: white;
+    margin-top: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+input {
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid white;
+    -webkit-transition: 0.3s;
+    transition: 0.2s;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+input:focus {
+    border: 2px solid #435bd3;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px;
+    padding-left: 35px;
+    padding-right: 35px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #181B3C;
+    border-radius: 7px;
+    border: 2px transparent;
+    transition: all 0.3s ease;
+    outline: none;
+    color: white;
+}
+
+button:hover {
+    border-color: #0056b3; 
+    background-color: #ff0033; 
+}
+
+button:active {
+    background-color: #1b75cf; 
+}
+
+.password-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.toggle-password {
+    margin-top: -3px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #8eaddd; /* Warna ikon mata */
+}
+
+.toggle-password:hover {
+    color: #435bd3; /* Warna ikon mata saat dihover */
+}
