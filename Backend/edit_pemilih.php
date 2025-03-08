@@ -9,7 +9,7 @@ $dbsuara = new Database();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <title>Edit Data Kandidat</title>
+    <title>Edit Data Pemilih</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
@@ -72,19 +72,13 @@ $dbsuara = new Database();
         }
 
         input[type="text"],
-        input[type="number"],
-        textarea,
-        input[type="file"] {
+        input[type="password"],
+        select {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
-        }
-
-        textarea {
-            height: 100px;
-            resize: vertical;
         }
 
         button {
@@ -118,55 +112,57 @@ $dbsuara = new Database();
 
     <!-- Judul -->
     <main class="form-container">
-        <h2>Edit Data Kandidat</h2>
+        <h2>Edit Data Pemilih</h2>
         <h3><Span>Suara</Span>Kita</h3>
     
-        <form action="process.php?action=edit_kandidat" method="post" enctype="multipart/form-data">
+        <form action="process.php?action=edit_pemilih" method="post">
 
         <?php
-        $editKandidat = $dbsuara->getKandidatById($_GET['no_urut']);
+        $editPemilih = $dbsuara->getPemilihById($_GET['nis']);
         ?>
 
-            <!-- hidden input no_urut kandidat -->
-            <input type="hidden" name="no_urut" value="<?php echo $editKandidat['no_urut']; ?>">
+            <!-- hidden input nis pemilih -->
+            <input type="hidden" name="nis" value="<?php echo $editPemilih['nis']; ?>">
 
-            <!-- hidden input untuk foto lama -->
-            <input type="hidden" name="foto_lama" value="<?php echo $editKandidat['foto']; ?>">
-
-            <!-- edit foto kandidat -->
+            <!-- edit username pemilih -->
             <div class="form-group">
-                <label for="foto">Foto:</label>
-                <input type="file" name="foto" required>
-                <img src="uploads/<?php echo $editKandidat['foto']; ?>" width="100" height="100">
+                <label for="username">Username:</label>
+                <input type="text" name="username" value="<?php echo $editPemilih['username']; ?>" required>
             </div>
 
-            <!-- edit nis kandidat -->
+            <!-- edit nama pemilih -->
             <div class="form-group">
-                <label for="nis">NIS:</label>
-                <input type="number" name="nis" value="<?php echo $editKandidat['nis']; ?>">
+                <label for="nama">Nama:</label>
+                <input type="text" name="nama" value="<?php echo $editPemilih['nama']; ?>" required>
             </div>
 
-            <!-- edit nama kandidat -->
+            <!-- edit password pemilih -->
             <div class="form-group">
-                <label for="nama">Nama Kandidat:</label>
-                <input type="text" id="nama" name="nama" value="<?php echo $editKandidat['nama']; ?>" required>
+                <label for="password">Password:</label>
+                <input type="password" name="password" value="<?php echo $editPemilih['password']; ?>" required>
             </div>
 
-            <!-- edit visi kandidat -->
+            <!-- edit role pemilih -->
             <div class="form-group">
-                <label for="visi">Visi:</label>
-                <textarea id="visi" name="visi" required><?php echo $editKandidat['visi']; ?></textarea>
+                <label for="role">Role:</label>
+                <select name="role" required>
+                    <option value="admin" <?php echo ($editPemilih['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
+                    <option value="user" <?php echo ($editPemilih['role'] == 'user') ? 'selected' : ''; ?>>User</option>
+                </select>
             </div>
 
-            <!-- edit misi kandidat -->
+            <!-- edit validasi memilih -->
             <div class="form-group">
-                <label for="misi">Misi:</label>
-                <textarea id="misi" name="misi" required><?php echo $editKandidat['misi']; ?></textarea>
+                <label for="validasi_memilih">Validasi Memilih:</label>
+                <select name="validasi_memilih" required>
+                    <option value="sudah_memilih" <?php echo ($editPemilih['validasi_memilih'] == 'sudah_memilih') ? 'selected' : ''; ?>>Sudah Memilih</option>
+                    <option value="belum_memilih" <?php echo ($editPemilih['validasi_memilih'] == 'belum_memilih') ? 'selected' : ''; ?>>Belum Memilih</option>
+                </select>
             </div>
 
             <!-- Submit Button -->
             <div class="form-group">
-                <button type="submit" name="submit">Edit Kandidat</button>
+                <button type="submit" name="submit">Edit Pemilih</button>
             </div>
         </form>
     </main>

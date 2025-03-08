@@ -27,7 +27,7 @@ if(isset($_FILES['foto'])){
         echo "Upload gagal!"; 
     }
     // perubahan process.php
-} else if ($action == "edit") {
+} else if ($action == "edit_kandidat") {
     // Ambil data file foto
     $foto = $_POST['foto_lama']; // Default: gunakan foto lama
 
@@ -51,7 +51,34 @@ if(isset($_FILES['foto'])){
     } else {
         echo "Edit kandidat gagal!";
     }
-} else if ($action == "delete") {
+}elseif ($action == "edit_pemilih") {
+    // Ambil data dari form
+    $nis = $_POST['nis'];
+    $username = $_POST['username'];
+    $nama = $_POST['nama'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+    $validasi_memilih = $_POST['validasi_memilih'];
+
+    // Panggil method editPemilih
+    if ($dbsuara->editPemilih($nis, $username, $nama, $password, $role, $validasi_memilih)) {
+        header("location:data_pemilih.php");
+    } else {
+        echo "Edit pemilih gagal!";
+    }
+}
+else if ($action == "delete_pemilih") {
+    // Ambil nis dari URL
+    $nis = $_GET['nis'];
+
+    // Panggil method deletePemilih
+    if ($dbsuara->deletePemilih($nis)) {
+        header("location:data_pemilih.php"); // Redirect ke halaman data_pemilih.php setelah berhasil menghapus
+    } else {
+        echo "Hapus pemilih gagal!";
+    }
+} 
+else if ($action == "delete_kandidat") {
     // Panggil method deleteKandidat
     if ($dbsuara->deleteKandidat($_GET['no_urut'])) {
         header("location:data_kandidat.php");

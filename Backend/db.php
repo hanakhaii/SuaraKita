@@ -79,6 +79,31 @@ class Database {
         return $result; // Tambahkan return supaya bisa dicek berhasil atau tidak
     }
 
+    function editPemilih($nis, $username, $nama, $password, $role, $validasi_memilih) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);   
+    
+        // Query untuk mengedit data pemilih
+        $query = "UPDATE pengguna SET 
+                username='$username', 
+                nama='$nama', 
+                password='$password', 
+                role='$role', 
+                validasi_memilih='$validasi_memilih' 
+                WHERE nis='$nis'";
+        
+        $result = mysqli_query($connect, $query);
+    
+        return $result; // Tambahkan return supaya bisa dicek berhasil atau tidak
+    }
+
+    // Method untuk mendapatkan data pemilih berdasarkan NIS
+    function getPemilihById($nis) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $query = mysqli_query($connect, "SELECT * FROM pengguna WHERE nis='$nis'");
+        return mysqli_fetch_assoc($query); // Mengembalikan data satu pemilih sebagai array asosiatif
+    }
+
+
     function getKandidatById($no_urut) {
         $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
         $query = mysqli_query($connect, "SELECT * FROM kandidat WHERE no_urut='$no_urut'");
@@ -89,6 +114,12 @@ class Database {
     function deleteKandidat($no_urut) {
         $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
         $query = mysqli_query($connect, "DELETE FROM kandidat WHERE no_urut='$no_urut'");
+        return $query;
+    }
+
+    function deletePemilih($nis) {
+        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $query = mysqli_query($connect, "DELETE FROM pengguna WHERE nis='$nis'");
         return $query;
     }
 }

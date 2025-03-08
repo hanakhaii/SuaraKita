@@ -120,7 +120,7 @@ $dbsuara = new Database();
                     <td></td>
                     <td>
                       <div class="flex-button">
-                        <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit">Edit</a> |
+                        <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit_kandidat">Edit</a> |
                         <a href="process.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                       </div>
                     </td>

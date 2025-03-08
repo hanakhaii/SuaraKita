@@ -98,10 +98,10 @@ $dbsuara = new Database();
                         <tr>
                             <th>NO</th>
                             <th>NIS</th>
-                            
+
                             <th>USERNAME</th>
                             <th>NAMA</th>
-                            
+
                             <th>VALIDASI PEMILIHAN</th>
                             <th>AKSI</th>
                         </tr>
@@ -110,22 +110,22 @@ $dbsuara = new Database();
                     $no = 1;
                     foreach ($dbsuara->viewPemilih() as $dataPemilih) {
                     ?>
-                    <tbody>
-                        <tr>
-                            <td><?php  echo $no++; ?></td>
-                            <td><?php echo $dataPemilih['nis']; ?></td>
-                            <td><?php echo $dataPemilih['username']; ?></td>
-                            <td><?php echo $dataPemilih['nama']; ?></td>
-                            <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
-                            <td>
-                                <div class="flex-button-milih">
-                                    <a href="">Edit</a> |
-                                    <a href="" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php } ?>              
-                    </tbody>
+                        <tbody>
+                            <tr>
+                                <td><?php echo $no++; ?></td>
+                                <td><?php echo $dataPemilih['nis']; ?></td>
+                                <td><?php echo $dataPemilih['username']; ?></td>
+                                <td><?php echo $dataPemilih['nama']; ?></td>
+                                <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
+                                <td>
+                                    <div class="flex-button-milih">
+                                        <a href="edit_pemilih.php?nis=<?php echo $dataPemilih['nis']; ?>">Edit</a> |
+                                        <a href="process.php?action=delete_pemilih&nis=<?php echo $dataPemilih['nis']; ?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                        </tbody>
                 </table>
             </section>
     </div>
