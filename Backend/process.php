@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'db.php';
 $dbsuara = new Database();
 
@@ -9,22 +9,22 @@ if ($action == "add_kandidat") {
     header("location:data_kandidat.php");
 } elseif ($action == "add_pemilih") {
     // Proses untuk input data pemilih
-    $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);  
+    $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);
     header("location:data_pemilih.php");
 }
 
 
-if(isset($_FILES['foto'])){
+if (isset($_FILES['foto'])) {
     $file_name = $_FILES['foto']['name'];
     $tmp_file = $_FILES['foto']['tmp_name'];
     $folder   = "uploads/";
-    
-    if(move_uploaded_file($tmp_file, $folder . $file_name)){
+
+    if (move_uploaded_file($tmp_file, $folder . $file_name)) {
         // Simpan $file_name ke database, misalnya:
         $query = "INSERT INTO foto_table (judul, nama_file) VALUES (:judul, :nama_file)";
         // Eksekusi query dengan prepared statement, dll.
     } else {
-        echo "Upload gagal!"; 
+        echo "Upload gagal!";
     }
     // perubahan process.php
 } else if ($action == "edit_kandidat") {
@@ -51,7 +51,7 @@ if(isset($_FILES['foto'])){
     } else {
         echo "Edit kandidat gagal!";
     }
-}elseif ($action == "edit_pemilih") {
+} elseif ($action == "edit_pemilih") {
     // Ambil data dari form
     $nis = $_POST['nis'];
     $username = $_POST['username'];
@@ -66,8 +66,7 @@ if(isset($_FILES['foto'])){
     } else {
         echo "Edit pemilih gagal!";
     }
-}
-else if ($action == "delete_pemilih") {
+} else if ($action == "delete_pemilih") {
     // Ambil nis dari URL
     $nis = $_GET['nis'];
 
@@ -77,8 +76,7 @@ else if ($action == "delete_pemilih") {
     } else {
         echo "Hapus pemilih gagal!";
     }
-} 
-else if ($action == "delete_kandidat") {
+} else if ($action == "delete_kandidat") {
     // Panggil method deleteKandidat
     if ($dbsuara->deleteKandidat($_GET['no_urut'])) {
         header("location:data_kandidat.php");
@@ -86,4 +84,33 @@ else if ($action == "delete_kandidat") {
         echo "Hapus kandidat gagal!";
     }
 }
-?>
+
+// Login Admin
+if ($action == "login") {
+    $result = $dbsuara->loginAdmin($_POST['username'], $_POST['password']);
+
+    if ($result) {
+        $_SESSION['admin'] = $result['username'];
+        $_SESSION['role'] = 'admin';
+        header("Location: dashboardmin.php"); // Redirect ke dashboard admin
+        exit();
+    } else {
+        echo "<script>alert('Username atau password salah!'); window.location.href='login.php';</script>";
+    }
+}
+
+// Login User
+if ($action == "loginUser") {
+    $result = $dbsuara->loginUser($_POST['nis'], $_POST['password']);
+
+    if ($result) {
+        $_SESSION['nis'] = $result['nis'];
+        $_SESSION['nama'] = $result['nama'];
+        $_SESSION['role'] = $result['role'] ?? 'user'; // Role default 'user'
+        header("Location: dashboardser.php"); // Arahkan ke dashboardser.php
+        exit();
+    } else {
+        echo "<script>alert('NIS atau password salah!'); window.location.href='login-user.php';</script>";
+    }
+}
+

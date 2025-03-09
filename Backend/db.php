@@ -1,129 +1,123 @@
 <?php
 class Database {
-    var $host = "localhost";
-    var $username = "root";
-    var $password = "";
-    var $database = "suarakita";
-    var $connect; // Property untuk menyimpan koneksi
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "suarakita";
+    private $connect;
 
-    // Method untuk connect ke database
     function __construct() {
-        $this->connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
+        $this->connect = new mysqli($this->host, $this->username, $this->password, $this->database);
 
-        if (!$this->connect) {
-            die("Koneksi gagal: " . mysqli_connect_error());
+        if ($this->connect->connect_error) {
+            die("Koneksi gagal: " . $this->connect->connect_error);
         }
     }
 
-    // Method untuk tampil data kandidat
+    public function getConnection() {
+        return $this->connect;
+    }
+    
+    // Tampilkan semua kandidat
     function viewKandidat() {
-        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
-        $query = mysqli_query($connect, "SELECT * FROM kandidat");
-
-        $result = [];
-
-        while ($data = mysqli_fetch_array($query)) {
-            $result[] = $data;
-        }
-        return $result;
+        $query = $this->connect->query("SELECT * FROM kandidat");
+        return $query->fetch_all(MYSQLI_ASSOC);
     }
 
+    // Tampilkan semua pemilih
     function viewPemilih() {
-        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
-        $query = mysqli_query($connect, "SELECT * FROM pengguna");
-
-        $result = [];
-
-        while ($data = mysqli_fetch_array($query)) {
-            $result[] = $data;
-        }
-        return $result;
+        $query = $this->connect->query("SELECT * FROM pengguna");
+        return $query->fetch_all(MYSQLI_ASSOC);
     }
-    
 
-    function inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        mysqli_query($connect, "
-        INSERT INTO pengguna (nis, password, username, nama, role, validasi_memilih)
-        VALUES ('$nis', '$password', '$username', '$nama', '$role', '$validasi_memilih')");
+    // Tambah pemilih dengan password hashed
+    function inputPemilih($nis, $password, $username, $nama) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->connect->prepare("INSERT INTO pengguna (nis, password, username, nama, role, validasi_memilih) VALUES (?, ?, ?, ?, 'user', 'belum_memilih')");
+        $stmt->bind_param("ssss", $nis, $hashed_password, $username, $nama);
+        return $stmt->execute();
     }
-    
 
-    // Method untuk input data kandidat
+    // Tambah kandidat
     function inputKandidat($foto, $nis, $nama, $visi, $misi) {
-        // Escape input untuk menghindari SQL injection
-        $connect = mysqli_connect ($this->host, $this->username, $this->password, $this->database);   
-
-        // Query untuk menyimpan data ke database
-        mysqli_query($connect, "
-        INSERT INTO kandidat (foto, nis, nama, visi, misi)
-        VALUES ('$foto', '$nis', '$nama', '$visi', '$misi')
-    ");
+        $stmt = $this->connect->prepare("INSERT INTO kandidat (foto, nis, nama, visi, misi) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $foto, $nis, $nama, $visi, $misi);
+        return $stmt->execute();
     }
 
-    // Method untuk edit data kandidat
+    // Edit pemilih
+    function editPemilih($nis, $username, $nama, $password) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $this->connect->prepare("UPDATE pengguna SET username=?, nama=?, password=? WHERE nis=?");
+        $stmt->bind_param("ssss", $username, $nama, $hashed_password, $nis);
+        return $stmt->execute();
+    }
+
+    // Edit kandidat
     function editKandidat($no_urut, $nis, $nama, $visi, $misi, $foto) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);   
-    
-        // Query untuk mengedit data kandidat, termasuk foto
-        $query = "UPDATE kandidat SET 
-                nis='$nis', 
-                nama='$nama', 
-                visi='$visi', 
-                misi='$misi', 
-                foto='$foto' 
-                WHERE no_urut='$no_urut'";
-        
-        $result = mysqli_query($connect, $query);
-    
-        return $result; // Tambahkan return supaya bisa dicek berhasil atau tidak
+        $stmt = $this->connect->prepare("UPDATE kandidat SET nis=?, nama=?, visi=?, misi=?, foto=? WHERE no_urut=?");
+        $stmt->bind_param("sssssi", $nis, $nama, $visi, $misi, $foto, $no_urut);
+        return $stmt->execute();
     }
 
-    function editPemilih($nis, $username, $nama, $password, $role, $validasi_memilih) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);   
-    
-        // Query untuk mengedit data pemilih
-        $query = "UPDATE pengguna SET 
-                username='$username', 
-                nama='$nama', 
-                password='$password', 
-                role='$role', 
-                validasi_memilih='$validasi_memilih' 
-                WHERE nis='$nis'";
-        
-        $result = mysqli_query($connect, $query);
-    
-        return $result; // Tambahkan return supaya bisa dicek berhasil atau tidak
-    }
-
-    // Method untuk mendapatkan data pemilih berdasarkan NIS
-    function getPemilihById($nis) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        $query = mysqli_query($connect, "SELECT * FROM pengguna WHERE nis='$nis'");
-        return mysqli_fetch_assoc($query); // Mengembalikan data satu pemilih sebagai array asosiatif
-    }
-
-
-    function getKandidatById($no_urut) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        $query = mysqli_query($connect, "SELECT * FROM kandidat WHERE no_urut='$no_urut'");
-        return mysqli_fetch_assoc($query); // Mengembalikan data satu kandidat sebagai array asosiatif
-    }
-    
-    // Method untuk hapus data kandidat
+    // Hapus kandidat
     function deleteKandidat($no_urut) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        $query = mysqli_query($connect, "DELETE FROM kandidat WHERE no_urut='$no_urut'");
-        return $query;
+        $stmt = $this->connect->prepare("DELETE FROM kandidat WHERE no_urut=?");
+        $stmt->bind_param("i", $no_urut);
+        return $stmt->execute();
     }
 
+    // Hapus pemilih
     function deletePemilih($nis) {
-        $connect = mysqli_connect($this->host, $this->username, $this->password, $this->database);
-        $query = mysqli_query($connect, "DELETE FROM pengguna WHERE nis='$nis'");
-        return $query;
+        $stmt = $this->connect->prepare("DELETE FROM pengguna WHERE nis=?");
+        $stmt->bind_param("s", $nis);
+        return $stmt->execute();
+    }
+
+    // Dapatkan data pemilih berdasarkan NIS
+    function getPemilihById($nis) {
+        $stmt = $this->connect->prepare("SELECT * FROM pengguna WHERE nis=?");
+        $stmt->bind_param("s", $nis);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Dapatkan data kandidat berdasarkan No Urut
+    function getKandidatById($no_urut) {
+        $stmt = $this->connect->prepare("SELECT * FROM kandidat WHERE no_urut=?");
+        $stmt->bind_param("i", $no_urut);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+     // Login admin
+    function loginAdmin($username, $password) {
+        $stmt = $this->connect->prepare("SELECT * FROM admin WHERE username=?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        return ($result && password_verify($password, $result['password'])) ? $result : false;
+    }
+
+    // Login user
+    function loginUser($nis, $password) {
+        $stmt = $this->connect->prepare("SELECT * FROM pengguna WHERE nis=? AND role='user'");
+        $stmt->bind_param("s", $nis);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        return ($result && password_verify($password, $result['password'])) ? $result : false;
+    }
+    // Logout
+    function logout() {
+        session_start();
+        session_destroy();
+        header('Location: login.php');
+        exit();
     }
 }
 
-// Instansiasi
+// Instansiasi database
 $dbsuara = new Database();
 ?>
