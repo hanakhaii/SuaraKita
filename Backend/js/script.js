@@ -9,21 +9,6 @@
         window.location.href = "login.html"; 
     });
 
-// untuk validasi password
-function togglePassword() {
-    const passwordInput = document.getElementById('password');
-    const eyeIcon = document.getElementById('eye-icon');
-
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text'; // Tampilkan password
-        eyeIcon.classList.remove('fa-eye');
-        eyeIcon.classList.add('fa-eye-slash'); // Ganti ikon ke mata tertutup
-    } else {
-        passwordInput.type = 'password'; // Sembunyikan password
-        eyeIcon.classList.remove('fa-eye-slash');
-        eyeIcon.classList.add('fa-eye'); // Ganti ikon ke mata terbuka
-    }
-}
 
 // fungsi untuk tampilan dashboard utama admin
 function dashboardAdmin() {

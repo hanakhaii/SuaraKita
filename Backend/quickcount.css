@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+/* hanaaa lucuuu cantikkk*/
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: "Poppins", serif;
+}
+
+/* codingan header */
+header {
+    padding: 50px 120px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo a {
+    color: #0066FF;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+}
+
+.logo svg {
+    margin-left: 0;
+}
+
+.h1 {
+    padding-bottom: 100px;
+}
+
+.h1 h1 {
+    font-size: 35px;
+}
+
+/* diagram */
+/* disclaimer */
+.disclaimer {
+    padding: 80px 75px;
+}
+
+.paragraf {
+    padding: 30px 30px;
+    background-color: #0066FF;
+    color: white;
+    width: 900px;
+    margin-left: 11%;
+    border-radius: 20px;
+    margin-top: 50px;
+}
+
+.paragraf h1 {
+    font-size: 33px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+/* footer */
+footer {
+    padding: 35px 75px;
+    background-color: #0056d6;
+    color: #ffff;
+    text-align: center;
+}
+
+/* Tambahkan di bagian bawah CSS sebelum penutup </style> */
+/* Tambahkan di bagian bawah CSS sebelum penutup </style> */
+
+@media screen and (max-width: 600px) {
+    header {
+        padding: 20px 20px !important;
+    }
+
+    .h1 h1 {
+        font-size: 28px !important;
+        line-height: 1.3;
+        padding-bottom: 50px !important;
+    }
+
+    .data {
+        width: 100% !important;
+        padding: 0 10px;
+    }
+
+    .data div {
+        width: 100% !important;
+        max-width: 300px;
+        margin: 0 auto !important;
+    }
+
+    .disclaimer {
+        padding: 30px 15px !important;
+    }
+
+    .paragraf {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 20px 15px !important;
+        box-sizing: border-box;
+    }
+
+    .paragraf h1 {
+        font-size: 24px !important;
+    }
+
+    .paragraf li {
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    footer {
+        padding: 25px 15px !important;
+        font-size: 14px;
+    }
+
+    /* Adjust chart legend */
+    #myChart {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    /* Adjust chart text size */
+    .chartjs-render-monitor {
+        font-size: 12px !important;
+    }
+}

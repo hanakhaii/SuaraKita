@@ -18,7 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     if ($result->num_rows > 0) {
         $admin = $result->fetch_assoc();
-        
+
         // Verifikasi password
         if (password_verify($password, $admin['password'])) {
             $_SESSION['username'] = $admin['username'];
@@ -38,6 +38,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +47,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <link rel="stylesheet" href="login.css">
     <title>Login Admin SuaraKita</title>
 </head>
+
 <body>
     <main>
         <h1>LOGIN</h1>
@@ -67,6 +69,23 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             <button onclick="window.location.href = 'dashboard.html';">Login</button>
         </form>
     </main>
-    <script src="../js/script.js"></script>
+    <script>
+        // untuk validasi password
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text'; // Tampilkan password
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash'); // Ganti ikon ke mata tertutup
+            } else {
+                passwordInput.type = 'password'; // Sembunyikan password
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye'); // Ganti ikon ke mata terbuka
+            }
+        }
+    </script>
 </body>
+
 </html>

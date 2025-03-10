@@ -1,9 +1,9 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['username'])) {
-        header("Location: login-admin.php");
-        exit;
-    }
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login-admin.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +84,7 @@
                     Pengaturan
                 </li>
 
-                <li class="logout" onclick="alert('apakah anda yakin ingin logout?')">
+                <li class="logout" onclick="confirmLogout()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor"
                             d="M6 2h9a2 2 0 0 1 2 2v2h-2V4H6v16h9v-2h2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2" />
@@ -92,6 +92,15 @@
                     </svg>
                     Logout
                 </li>
+
+                <!-- buat logout -->
+                <script>
+                    function confirmLogout() {
+                        if (confirm("Apakah Anda yakin ingin logout?")) {
+                            window.location.href = 'logout.php';
+                        }
+                    }
+                </script>
             </ul>
             <!-- footer -->
             <div class="footer">&copy; 2025, SuaraKita. All rights reserved.</div>
@@ -204,19 +213,19 @@
             let url;
             switch (id) {
                 case 'dashboard':
-                    url = '../admin/dashboard.html';
+                    url = '/Backend/dashboardmin.php';
                     break;
                 case 'pemilih':
-                    url = '../admin/data_pemilih.html';
+                    url = '/Backend/data_pemilih.php';
                     break;
                 case 'kandidat':
-                    url = '../admin/data_kandidat.html';
+                    url = '/Backend/data_kandidat.php';
                     break;
                 case 'data-suara':
-                    url = '../admin/data_suara.html';
+                    url = '/Backend/data_suara.php';
                     break;
                 case 'quick-count':
-                    url = '../admin/pengaturan.html';
+                    url = '/Backend/pengaturan.php';
                     break;
                 default:
                     url = '#';
