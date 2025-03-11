@@ -97,7 +97,7 @@
         <main class="main-quick">
             <h1>Hasil Quick Count</h1>
             <div class="chart-container">
-                <canvas id="voteChart"></canvas>
+                <canvas id="voteChart" style="display: inline;"></canvas>
             </div>
 
             <div class="data-container">
