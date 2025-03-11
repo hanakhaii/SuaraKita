@@ -22,6 +22,7 @@ header("Expires: 0");
 </head>
 
 <body>
+
     <header>
         <h1><span>Suara</span>Kita</h1>
         <nav>
@@ -136,13 +137,23 @@ header("Expires: 0");
             });
         });
 
+        // Mengunci fungsi tombol "Back"
+        history.pushState(null, null, location.href);
+
+        window.onpopstate = function() {
+            // Saat tombol "Back" diklik, tetap berada di halaman ini
+            history.pushState(null, null, location.href);
+            alert("Navigasi mundur tidak diizinkan pada halaman ini!");
+        };
+
+
+
         // Ganti history saat ini dan pastikan tombol "Back" tidak bisa digunakan
         // history.replaceState(null, null, location.href);
         // window.onpopstate = function() {
         //     history.go(1);
         // };
     </script>
-
     <!-- <script>
         // Mencegah tombol "Back" bekerja setelah login
         history.pushState(null, null, location.href);

@@ -54,11 +54,17 @@ class Database {
     }
 
     // Edit kandidat
-    function editKandidat($no_urut, $nis, $nama, $visi, $misi, $foto) {
-        $stmt = $this->connect->prepare("UPDATE kandidat SET nis=?, nama=?, visi=?, misi=?, foto=? WHERE no_urut=?");
-        $stmt->bind_param("sssssi", $nis, $nama, $visi, $misi, $foto, $no_urut);
+    function editKandidat($no_urut, $nis, $nama, $visi, $misi, $foto = null) {
+        if ($foto) {
+            $stmt = $this->connect->prepare("UPDATE kandidat SET nis=?, nama=?, visi=?, misi=?, foto=? WHERE no_urut=?");
+            $stmt->bind_param("sssssi", $nis, $nama, $visi, $misi, $foto, $no_urut);
+        } else {
+            $stmt = $this->connect->prepare("UPDATE kandidat SET nis=?, nama=?, visi=?, misi=? WHERE no_urut=?");
+            $stmt->bind_param("ssssi", $nis, $nama, $visi, $misi, $no_urut);
+        }
         return $stmt->execute();
     }
+    
 
     // Hapus kandidat
     function deleteKandidat($no_urut) {

@@ -136,7 +136,7 @@ $dbsuara = new Database();
             <!-- edit foto kandidat -->
             <div class="form-group">
                 <label for="foto">Foto:</label>
-                <input type="file" name="foto" required>
+                <input type="file" name="foto">
                 <img src="uploads/<?php echo $editKandidat['foto']; ?>" width="100" height="100">
             </div>
 
