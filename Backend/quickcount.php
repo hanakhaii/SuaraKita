@@ -30,7 +30,7 @@
 
     <section class="data">
         <div style="width: 50%; margin: auto;">
-            <canvas id="myChart"></canvas>
+            <canvas id="myChart" style="display: inline;"></canvas>
         </div>
         <script>
             // Data diagram
