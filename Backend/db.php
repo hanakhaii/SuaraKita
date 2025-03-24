@@ -42,7 +42,10 @@ class Database {
     function inputKandidat($foto, $nis, $nama, $visi, $misi) {
         $stmt = $this->connect->prepare("INSERT INTO kandidat (foto, nis, nama, visi, misi) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $foto, $nis, $nama, $visi, $misi);
-        return $stmt->execute();
+        if (!$stmt->execute()) {
+            die("Error: " . $stmt->error); // Tampilkan error SQL
+        }
+        return true;
     }
 
     // Edit pemilih
@@ -121,6 +124,17 @@ class Database {
         session_destroy();
         header('Location: login.php');
         exit();
+    }
+
+    public function simpanPengaturanWaktu($waktu_mulai, $waktu_selesai, $waktu_quickcount = null) {
+        if ($waktu_quickcount === null) {
+            $stmt = $this->connect->prepare("INSERT INTO pengaturan_waktu (waktu_mulai_memilih, waktu_selesai_memilih) VALUES (?, ?)");
+            $stmt->bind_param("ss", $waktu_mulai, $waktu_selesai);
+        } else {
+            $stmt = $this->connect->prepare("INSERT INTO pengaturan_waktu (waktu_mulai_memilih, waktu_selesai_memilih, waktu_quickcount) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $waktu_mulai, $waktu_selesai, $waktu_quickcount);
+        }
+        return $stmt->execute();
     }
 }
 

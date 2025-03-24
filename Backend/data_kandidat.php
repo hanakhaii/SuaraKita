@@ -131,7 +131,7 @@ $dbsuara = new Database();
                 <td>
                   <div class="flex-button">
                     <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit_kandidat">Edit</a> |
-                    <a href="process.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=delete" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                    <a href="process.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=delete_kandidat" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
                   </div>
                 </td>
               </tr>

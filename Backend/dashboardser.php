@@ -1,14 +1,36 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Jakarta');
 if (!isset($_SESSION['nis'])) {
     header("Location: login-user.php");
-    exit;
+    exit();
 }
 
-// Mencegah caching halaman
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
+// Koneksi ke database
+include 'db.php';
+$dbsuara = new Database();
+
+// Ambil waktu voting terbaru
+$sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih 
+        FROM pengaturan_waktu 
+        ORDER BY id DESC LIMIT 1";
+$result = $dbsuara->getConnection()->query($sql);
+
+$waktu_mulai = null;
+$waktu_selesai = null;
+$sekarang = time();
+$voting_dibuka = false;
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $waktu_mulai = strtotime($row['waktu_mulai_memilih']);
+    $waktu_selesai = strtotime($row['waktu_selesai_memilih']);
+
+    // Cek apakah waktu sekarang berada dalam rentang waktu voting
+    if ($sekarang >= $waktu_mulai && $sekarang <= $waktu_selesai) {
+        $voting_dibuka = true;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +117,11 @@ header("Expires: 0");
             <h1>Ayo Memilih!</h1>
             <p>Saatnya memilih! Berikan suara Anda untuk calon terbaik yang akan membawa perubahan positif. Jangan
                 biarkan hak suara Anda terbuang sia-sia, karena satu suara bisa membuat perbedaan besar!</p>
-            <button class="btn-vote" onclick="window.location.href='voting.php'">Vote Now!</button>
+            <?php if ($voting_dibuka): ?>
+                <button class="btn-vote" onclick="window.location.href='voting.php'">Vote Now!</button>
+            <?php else: ?>
+                <button class="btn-vote" disabled>Voting Belum Dibuka atau Sudah Ditutup</button>
+            <?php endif; ?>
         </div>
     </section>
 

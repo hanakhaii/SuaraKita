@@ -96,23 +96,36 @@
             <!-- quck count access settings -->
             <div class="time-settings">
                 <h3>Akses Untuk Voting</h3>
+                <!-- Di dalam pengaturan.php -->
+                <form method="POST" action="process.php?action=simpan_pengaturan">
+                    <!-- Input Waktu Mulai -->
+                    <label>Tanggal Mulai:</label>
+                    <input type="date" name="tanggal_mulai" required>
+                    <br>
+                    <label>Waktu Mulai:</label>
+                    <input type="time" name="waktu_mulai" required>
+                    <br>
 
-                <!-- time -->
-                <input type="time" name="" id="">
-                <br>
-                <input type="time" name="" id="">
+                    <!-- Input Waktu Selesai -->
+                    <label>Tanggal Selesai:</label>
+                    <input type="date" name="tanggal_selesai" required>
+                    <br>
+                    <label>Waktu Selesai:</label>
+                    <input type="time" name="waktu_selesai" required>
+                    <hr>
 
-                <hr>
+                    <!-- Input Quick Count -->
+                    <h3>Akses Quick Count</h3>
+                    <label>Tanggal Quick Count:</label>
+                    <input type="date" name="tanggal_quickcount">
+                    <br>
+                    <label>Waktu Quick Count:</label>
+                    <input type="time" name="waktu_quickcount">
+                    <br>
 
-                <h3>Akses Quick Count</h3>
-
-                <!-- time -->
-                <input type="date" name="" id="">
-                <br>
-                <input type="time" name="" id="">
-                <br>
-                <!-- click to save -->
-                <button>Simpan</button>
+                    <!-- Tombol Simpan -->
+                    <button type="submit">Simpan</button>
+                </form>
             </div>
         </main>
     </div>

@@ -121,7 +121,7 @@ $dbsuara = new Database();
     <main class="form-container">
         <h2>Tambah Kandidat</h2>
         <h3><Span>Suara</Span>Kita</h3>
-        <form action="process.php?action=add" method="post" enctype="multipart/form-data">
+        <form action="process.php?action=add_kandidat" method="post" enctype="multipart/form-data">
 
             <!-- Input Foto -->
             <div class="form-group">

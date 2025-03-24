@@ -1,3 +1,37 @@
+<?php
+session_start();
+date_default_timezone_set('Asia/Jakarta'); // Sesuaikan dengan zona waktu Anda
+if (!isset($_SESSION['nis'])) {
+    header("Location: login-user.php");
+    exit();
+}
+
+// Koneksi ke database
+include 'db.php';
+$dbsuara = new Database();
+
+// Ambil waktu voting terbaru
+$sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih 
+        FROM pengaturan_waktu 
+        ORDER BY id DESC LIMIT 1";
+$result = $dbsuara->getConnection()->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $waktu_mulai = strtotime($row['waktu_mulai_memilih']);
+    $waktu_selesai = strtotime($row['waktu_selesai_memilih']);
+    $sekarang = time();
+
+    // Jika di luar waktu voting
+    if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
+        die("<h2>Voting belum dibuka atau sudah ditutup.</h2>");
+    }
+} else {
+    die("<h2>Waktu voting belum diatur.</h2>");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
