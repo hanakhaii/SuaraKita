@@ -134,7 +134,11 @@ if ($result->num_rows > 0) {
                 <p>Pantau hasil sementara pemungutan suara secara real-time dengan fitur Quick Count. Data diperbarui
                     secara berkala agar Anda selalu mendapatkan informasi terbaru. Transparansi adalah kunci utama dalam
                     pemilihan ini!</p>
-                <button class="btn-detail" onclick="window.location.href='quickcount.php'">Lihat Detail</button>
+                <?php if ($voting_dibuka): ?>
+                    <button class="btn-vote" onclick="window.location.href='quickcount.php'">Lihat Detail!</button>
+                <?php else: ?>
+                    <button class="btn-vote" disabled>Quickcount Belum Dibuka atau Sudah Ditutup</button>
+                <?php endif; ?>
             </div>
             <div>
                 <img src="/Backend/img/pie-chart.png" alt="" srcset="">
@@ -173,7 +177,6 @@ if ($result->num_rows > 0) {
             history.pushState(null, null, location.href);
             alert("Navigasi mundur tidak diizinkan pada halaman ini!");
         };
-
     </script>
 
 </body>

@@ -133,48 +133,35 @@ if ($action == "loginUser") {
 
 // pengaturan waktu
 if ($action == "simpan_pengaturan") {
-    // Debugging: Tampilkan nilai yang diterima
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // Tampilkan debugging (opsional, bisa dihapus jika sudah tidak diperlukan)
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
 
     // Ambil data dari form
     $tanggal_mulai = $_POST['tanggal_mulai'];
-    $waktu_mulai = $_POST['waktu_mulai'];
+    $waktu_mulai_input = $_POST['waktu_mulai'];
     $tanggal_selesai = $_POST['tanggal_selesai'];
-    $waktu_selesai = $_POST['waktu_selesai'];
+    $waktu_selesai_input = $_POST['waktu_selesai'];
     $tanggal_quickcount = $_POST['tanggal_quickcount'];
-    $waktu_quickcount = $_POST['waktu_quickcount'];
+    $waktu_quickcount_input = $_POST['waktu_quickcount'];
+    $tanggal_selesai_quickcount = $_POST['tanggal_selesai_quickcount'];
+    $waktu_selesai_quickcount_input = $_POST['waktu_selesai_quickcount'];
 
-    // Debugging: Tampilkan nilai yang akan disimpan
-    echo "Waktu Mulai: $tanggal_mulai $waktu_mulai<br>";
-    echo "Waktu Selesai: $tanggal_selesai $waktu_selesai<br>";
-    echo "Waktu Quick Count: $tanggal_quickcount $waktu_quickcount<br>";
+    // Gabungkan tanggal dan waktu untuk pemilihan
+    $waktu_mulai_memilih = "$tanggal_mulai $waktu_mulai_input:00";
+    $waktu_selesai_memilih = "$tanggal_selesai $waktu_selesai_input:00";
+    
+    // Gabungkan tanggal dan waktu untuk quick count
+    $waktu_quickcount = "$tanggal_quickcount $waktu_quickcount_input:00";
+    $waktu_selesai_quickcount = "$tanggal_selesai_quickcount $waktu_selesai_quickcount_input:00";
 
-    // Gabungkan tanggal dan waktu
-    $waktu_mulai_memilih = "$tanggal_mulai $waktu_mulai:00";
-    $waktu_selesai_memilih = "$tanggal_selesai $waktu_selesai:00";
-    $waktu_quickcount = (!empty($tanggal_quickcount) && !empty($waktu_quickcount)) ? "$tanggal_quickcount $waktu_quickcount:00" : null;
-
-    // Simpan ke database
-    if ($dbsuara->simpanPengaturanWaktu($waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount)) {
+    // Simpan ke database dengan semua parameter
+    if ($dbsuara->simpanPengaturanWaktu($waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount)) {
         header("Location: pengaturan.php?status=sukses");
         exit();
     } else {
         die("Gagal menyimpan pengaturan waktu!");
     }
-
-    // Di dalam case "simpan_pengaturan":
-    $tanggal_qc = $_POST['tanggal_quickcount'];
-    $waktu_qc = $_POST['waktu_quickcount'];
-    $tanggal_selesai_qc = $_POST['tanggal_selesai_quickcount'];
-    $waktu_selesai_qc = $_POST['waktu_selesai_quickcount'];
-
-    $waktu_quickcount = "$tanggal_qc $waktu_qc:00";
-    $waktu_selesai_quickcount = "$tanggal_selesai_qc $waktu_selesai_qc:00";
-
-    $stmt = $dbsuara->getConnection()->prepare("INSERT INTO pengaturan_waktu 
-    (waktu_mulai_memilih, waktu_selesai_memilih, waktu_quickcount, waktu_selesai_quickcount) 
-    VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount);
 }
+

@@ -1,3 +1,27 @@
+<?php
+session_start();
+date_default_timezone_set('Asia/Jakarta');
+include 'db.php';
+$dbsuara = new Database();
+
+// Ambil waktu quickcount terbaru
+$pengaturan = $dbsuara->getPengaturanWaktu();
+$sekarang = time();
+
+if (!$pengaturan || !$pengaturan['waktu_quickcount'] || !$pengaturan['waktu_selesai_quickcount']) {
+    die("Quick count belum diatur!");
+}
+
+
+$waktu_mulai = strtotime($pengaturan['waktu_quickcount']);
+$waktu_selesai = strtotime($pengaturan['waktu_selesai_quickcount']);
+
+// Cek apakah waktu sekarang dalam rentang quick count
+if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
+    die("Quick count hanya dapat diakses antara " . date('d M Y H:i', $waktu_mulai) . " hingga " . date('d M Y H:i', $waktu_selesai));
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

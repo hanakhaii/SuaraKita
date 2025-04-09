@@ -116,12 +116,17 @@
 
                     <!-- Input Quick Count -->
                     <h3>Akses Quick Count</h3>
-                    <label>Tanggal Quick Count:</label>
-                    <input type="date" name="tanggal_quickcount">
+                    <label>Tanggal Mulai Quick Count:</label>
+                    <input type="date" name="tanggal_quickcount" required>
                     <br>
-                    <label>Waktu Quick Count:</label>
-                    <input type="time" name="waktu_quickcount">
+                    <label>Waktu Mulai Quick Count:</label>
+                    <input type="time" name="waktu_quickcount" required>
                     <br>
+                    <label>Tanggal Selesai Quick Count:</label>
+                    <input type="date" name="tanggal_selesai_quickcount" required>
+                    <br>
+                    <label>Waktu Selesai Quick Count:</label>
+                    <input type="time" name="waktu_selesai_quickcount" required>
 
                     <!-- Tombol Simpan -->
                     <button type="submit">Simpan</button>
