@@ -11,7 +11,7 @@ $action = $_GET['action'];
 if ($action == "add_kandidat") {
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
-    
+
     // Pindahkan file ke folder uploads
     if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
         $dbsuara->inputKandidat($_FILES['foto']['name'], $_POST['nis'], $_POST['nama'], $_POST['visi'], $_POST['misi']);
@@ -21,7 +21,7 @@ if ($action == "add_kandidat") {
     }
 }
 
-    // tambah pemilih 
+// tambah pemilih 
 elseif ($action == "add_pemilih") {
     // Proses untuk input data pemilih
     $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);
@@ -58,8 +58,7 @@ if ($action == "edit_kandidat") {
     } else {
         echo "Edit kandidat gagal!";
     }
-}
-elseif ($action == "edit_pemilih") {
+} elseif ($action == "edit_pemilih") {
     // Ambil data dari form
     $nis = $_POST['nis'];
     $username = $_POST['username'];
@@ -164,4 +163,18 @@ if ($action == "simpan_pengaturan") {
     } else {
         die("Gagal menyimpan pengaturan waktu!");
     }
+
+    // Di dalam case "simpan_pengaturan":
+    $tanggal_qc = $_POST['tanggal_quickcount'];
+    $waktu_qc = $_POST['waktu_quickcount'];
+    $tanggal_selesai_qc = $_POST['tanggal_selesai_quickcount'];
+    $waktu_selesai_qc = $_POST['waktu_selesai_quickcount'];
+
+    $waktu_quickcount = "$tanggal_qc $waktu_qc:00";
+    $waktu_selesai_quickcount = "$tanggal_selesai_qc $waktu_selesai_qc:00";
+
+    $stmt = $dbsuara->getConnection()->prepare("INSERT INTO pengaturan_waktu 
+    (waktu_mulai_memilih, waktu_selesai_memilih, waktu_quickcount, waktu_selesai_quickcount) 
+    VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount);
 }

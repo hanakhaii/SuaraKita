@@ -31,6 +31,8 @@ if ($result->num_rows > 0) {
         $voting_dibuka = true;
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -172,22 +174,7 @@ if ($result->num_rows > 0) {
             alert("Navigasi mundur tidak diizinkan pada halaman ini!");
         };
 
-
-
-        // Ganti history saat ini dan pastikan tombol "Back" tidak bisa digunakan
-        // history.replaceState(null, null, location.href);
-        // window.onpopstate = function() {
-        //     history.go(1);
-        // };
     </script>
-    <!-- <script>
-        // Mencegah tombol "Back" bekerja setelah login
-        history.pushState(null, null, location.href);
-        window.onpopstate = function() {
-            history.go(1);
-        };
-    </script>
- -->
 
 </body>
 
