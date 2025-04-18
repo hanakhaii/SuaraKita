@@ -71,14 +71,14 @@ if ($result->num_rows > 0) {
     <section class="sec1">
         <div class="inline1">
             <h1>Halo, Selamat Datang <br> <span><?php echo $_SESSION['nama']; ?>!</span></h1>
-            <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan...</p>
+            <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan.</p>
         </div>
     </section>
 
     <section id="kandidat" class="sec2">
         <h1>KANDIDAT</h1>
         <div class="inline2">
-            <div class="kandidat">
+            <div class="kandidat" style="margin-left: -10px;">
                 <h1 class="judul">01</h1>
                 <img src="/Backend/img/harry.jpg" alt="">
                 <p>[Nama Kandidat] adalah seorang pemimpin yang berkomitmen pada inovasi dan kemajuan. Dengan pengalaman
@@ -108,7 +108,7 @@ if ($result->num_rows > 0) {
     <section id="rules" class="sec3">
         <div class="inline3">
             <h1>Peraturan yang berlaku</h1>
-            <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi peraturan yang berlaku. Gunakan
+            <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi <a href="">peraturan yang berlaku</a>. Gunakan
                 hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman. Suara Anda menentukan
                 arah kebijakan ke depan!</p>
         </div>
