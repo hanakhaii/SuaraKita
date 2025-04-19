@@ -11,11 +11,14 @@
 /* Navigasi */
 header {
     display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
     align-items: center;
-    justify-content: space-between;
-    padding: 25px 75px;
+    justify-content: space-around;
+    padding: 15px;
     background-color: #0056d6;
-    position: relative;
 }
 
 .nav-toggle {
@@ -83,7 +86,7 @@ li a{
 
 /* setion 1 */
 .sec1{
-    padding: 125px 75px;
+    padding: 245px 75px;
 }
 
 .sec1 span{
@@ -127,7 +130,7 @@ li a{
 
 .inline2{
     display: flex;
-    margin-top: 100px;
+    justify-content: space-between;
 }
 
 
@@ -139,9 +142,9 @@ li a{
     text-align: center;
     background-color: #0056d6;
     color: white;
-    margin: 0px 20px;
     border-radius: 28px;
-    padding: 40px 10px;
+    margin: 80px 10px 20px;
+    padding: 10px;
     box-shadow: 0px 0px 10px 0px black;
 }
 
@@ -190,8 +193,6 @@ button:hover {
     color: white;
 }
 
-
-
 /* section 3 */
 .sec3{
     margin-top: 120px;
@@ -211,6 +212,16 @@ button:hover {
     text-align: center;
     width: 700px;
     margin-left: 21%;
+}
+
+.inline3 a {
+    color: #0056d6;
+}
+
+.inline3:hover a {
+    background-color: white;
+    color: #FC0134;
+    text-decoration: underline;
 }
 
 /* section 4 */
