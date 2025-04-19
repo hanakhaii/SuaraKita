@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Poppins", serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+section button {
+    color: white;
+    background-color: black;
+}
+
+section button:hover {
+    background-color: rgb(194, 197, 218);
+}
+
+nav {
+    top: 0;
+    background-color: #4e90f5;
+    padding: 10px;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav span {
+    color: rgb(255, 32, 32);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding-right: 10px;
+}
+
+nav ul li {
+    padding: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: white;
+    background-color: red;
+    padding: 6px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+nav button {
+    position: fixed;
+}
+
+h3, ul {
+    transform: translate(0, 25%);
+}
+
+/* slideshow */
+.slideshow {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 70vh;
+    margin-top: 6%;
+}
+
+/* Efek hover tetap ada */
+li button:hover, 
+.inline3 button:hover, 
+.text-overlay button:hover {
+    background-color: #FC0134; /* Merah seperti logo */
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+
+/* Simulasi hover saat tap (touch) */
+li button:active, 
+.inline3 button:active, 
+.text-overlay button:active {
+    background-color: #d4002a; /* Warna lebih gelap saat ditekan */
+    transform: scale(0.95);
+    border: none;
+    transition: transform 0.1s ease-in-out;
+}
+
+.slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Gelap dengan transparansi */
+    z-index: 1;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex: 1 0 100%;
+    min-width: 100%;
+    height: 70vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 2; /* Di atas overlay */
+}
+
+.text-overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.text-overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.text-overlay button {
+    padding: 10px 20px;
+    background-color: #11223b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.text-overlay button:hover {
+    background-color: #003d9a;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.about-us {
+    display: flex;
+    transform: translate(3%, 0);
+    padding: 60px;
+    margin: 30px;
+    position: relative;
+}
+
+.about-us img {
+    transform: translate(0, 25%);
+}
+
+mark {
+    background-color: aliceblue;
+}
+
+mark:hover {
+    background-color: rgba(255, 0, 0, 0.203);
+}
+
+h4 {
+    font-weight: bold;
+    font-size: large;
+    margin-top: 20px;
+}
+
+main {
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 50px;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+.kandidat {
+    padding: 80px;
+}
+
+.kandidat-space {
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.192);
+}
+
+.kandidat-space h3 {
+    margin-top: 4%;
+    font-weight: bolder;
+}
+
+.kandidat-space p {
+    margin: 4%;
+}
+
+.kandidat-grid {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    padding-top: 0;
+    background-color: rgba(0, 102, 255, 0.12);
+}
+
+.kandidat-grid h3 {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 8px 2px;
+    transform: translate(100%, 70%);
+    margin-bottom: 30%;
+}
+
+.kandidat-grid img {
+    margin-top: 20px;
+}
+
+.grid1, .grid2, .grid3 {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.quickcount {
+    padding: 80px;
+}
+
+footer {
+    display: flex;
+    padding: 30px 50px 10px;
+    color: white;
+    justify-content: space-between;
+    background-color: #4e91f5dd;
+    font-size: 12px;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: #003d9a;
+}
