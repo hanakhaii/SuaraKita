@@ -69,6 +69,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             <button onclick="window.location.href = 'dashboard.html';">Login</button>
         </form>
     </main>
+    <footer>
+        <p>&copy; 2023 SuaraKita. All rights reserved.</p>
+    </footer>
     <script>
         // untuk validasi password
         function togglePassword() {

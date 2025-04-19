@@ -66,7 +66,7 @@ $dbsuara = new Database();
             padding: 40px;
             border-radius: 25px;
             box-shadow:0px 0px 7px 0px black;
-            margin: 0 auto; /* Ini akan membuatnya berada di tengah */
+            margin: 0 auto; 
         }
 
         .form-group {
@@ -158,7 +158,7 @@ $dbsuara = new Database();
                     <option value="user" <?php echo ($editPemilih['role'] == 'user') ? 'selected' : ''; ?>>User</option>
                 </select>
             </div>
-
+            
             <!-- edit validasi memilih -->
             <div class="form-group">
                 <label for="validasi_memilih">Validasi Memilih:</label>
