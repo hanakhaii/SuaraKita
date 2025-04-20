@@ -1,10 +1,11 @@
-<?php 
+<?php
 include 'db.php';
-$dbsuara = new Database(); 
+$dbsuara = new Database();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,8 @@ $dbsuara = new Database();
             margin: 20px auto;
             padding: 20px;
         }
-        
-        .logo{
+
+        .logo {
             display: flex;
             align-items: center;
         }
@@ -30,14 +31,14 @@ $dbsuara = new Database();
             text-align: center;
         }
 
-        h3{
+        h3 {
             margin-top: -20px;
             font-weight: bold;
             font-size: 27px;
             text-align: center;
         }
 
-        span{
+        span {
             color: #FC0134;
             text-align: center;
         }
@@ -65,8 +66,9 @@ $dbsuara = new Database();
             background-color: #ffffff;
             padding: 40px;
             border-radius: 25px;
-            box-shadow:0px 0px 7px 0px black;
-            margin: 0 auto; /* Ini akan membuatnya berada di tengah */
+            box-shadow: 0px 0px 7px 0px black;
+            margin: 0 auto;
+            /* Ini akan membuatnya berada di tengah */
         }
 
         .form-group {
@@ -111,6 +113,7 @@ $dbsuara = new Database();
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -125,47 +128,36 @@ $dbsuara = new Database();
     </header>
 
     <!-- Judul -->
-    
+
     <main class="form-container">
         <h2>Tambah Kandidat</h2>
         <h3><Span>Suara</Span>Kita</h3>
-        <form action="process.php?action=add_kandidat" method="post" enctype="multipart/form-data">
+        <form action="process.php" method="POST" enctype="multipart/form-data">
+            <label>Foto Kandidat:</label>
+            <input type="file" name="foto" required><br>
 
-            <!-- Input Foto -->
-            <div class="form-group">
-                <label for="foto">Foto Kandidat:</label>
-                <input type="file" id="foto" name="foto" accept="image/*" required>
-            </div>
+            <label>Poster Kandidat:</label>
+            <input type="file" name="poster" required><br>
 
-            <!-- Input NIS -->
-            <div class="form-group">
-                <label for="nis">NIS:</label>
-                <input type="number" id="nis" name="nis" required>
-            </div>
+            <label>NIS:</label>
+            <input type="text" name="nis" required><br>
 
-            <!-- Input Nama -->
-            <div class="form-group">
-                <label for="nama">Nama Kandidat:</label>
-                <input type="text" id="nama" name="nama" required>
-            </div>
+            <label>Nama:</label>
+            <input type="text" name="nama" required><br>
 
-            <!-- Input Visi -->
-            <div class="form-group">
-                <label for="visi">Visi:</label>
-                <textarea id="visi" name="visi" required></textarea>
-            </div>
+            <label>Visi:</label>
+            <textarea name="visi" required></textarea><br>
 
-            <!-- Input Misi -->
-            <div class="form-group">
-                <label for="misi">Misi:</label>
-                <textarea id="misi" name="misi" required></textarea>
-            </div>
+            <label>Misi:</label>
+            <textarea name="misi" required></textarea><br>
 
-            <!-- Submit Button -->
-            <div class="form-group">
-                <button type="submit" name="submit">Upload Kandidat</button>
-            </div>
+            <label>Deskripsi:</label>
+            <textarea name="deskripsi" required></textarea><br>
+
+            <button type="submit" name="submit_kandidat">Simpan Kandidat</button>
         </form>
+
     </main>
 </body>
+
 </html>

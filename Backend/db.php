@@ -45,15 +45,15 @@ class Database
     }
 
     // Tambah kandidat
-    function inputKandidat($foto, $nis, $nama, $visi, $misi)
+    public function inputKandidat($foto, $poster, $nis, $nama, $visi, $misi, $deskripsi)
     {
-        $stmt = $this->connect->prepare("INSERT INTO kandidat (foto, nis, nama, visi, misi) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $foto, $nis, $nama, $visi, $misi);
-        if (!$stmt->execute()) {
-            die("Error: " . $stmt->error); // Tampilkan error SQL
-        }
-        return true;
+        $stmt = $this->connect->prepare("INSERT INTO kandidat (foto, poster, nis, nama, visi, misi, deskripsi) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $foto, $poster, $nis, $nama, $visi, $misi, $deskripsi);
+        $stmt->execute();
+        $stmt->close();
     }
+    
+    
 
     // Edit pemilih
     function editPemilih($nis, $username, $nama, $password)

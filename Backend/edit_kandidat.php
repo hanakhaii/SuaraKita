@@ -1,10 +1,11 @@
-<?php 
+<?php
 include 'db.php';
-$dbsuara = new Database(); 
+$dbsuara = new Database();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,8 @@ $dbsuara = new Database();
             margin: 20px auto;
             padding: 20px;
         }
-        
-        .logo{
+
+        .logo {
             display: flex;
             align-items: center;
         }
@@ -30,14 +31,14 @@ $dbsuara = new Database();
             text-align: center;
         }
 
-        h3{
+        h3 {
             margin-top: -20px;
             font-weight: bold;
             font-size: 27px;
             text-align: center;
         }
 
-        span{
+        span {
             color: #FC0134;
             text-align: center;
         }
@@ -65,8 +66,9 @@ $dbsuara = new Database();
             background-color: #ffffff;
             padding: 40px;
             border-radius: 25px;
-            box-shadow:0px 0px 7px 0px black;
-            margin: 0 auto; /* Ini akan membuatnya berada di tengah */
+            box-shadow: 0px 0px 7px 0px black;
+            margin: 0 auto;
+            /* Ini akan membuatnya berada di tengah */
         }
 
         .form-group {
@@ -111,6 +113,7 @@ $dbsuara = new Database();
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -128,12 +131,12 @@ $dbsuara = new Database();
     <main class="form-container">
         <h2>Edit Data Kandidat</h2>
         <h3><Span>Suara</Span>Kita</h3>
-    
+
         <form action="process.php?action=edit_kandidat" method="post" enctype="multipart/form-data">
 
-        <?php
-        $editKandidat = $dbsuara->getKandidatById($_GET['no_urut']);
-        ?>
+            <?php
+            $editKandidat = $dbsuara->getKandidatById($_GET['no_urut']);
+            ?>
 
             <!-- hidden input no_urut kandidat -->
             <input type="hidden" name="no_urut" value="<?php echo $editKandidat['no_urut']; ?>">
@@ -145,7 +148,7 @@ $dbsuara = new Database();
             <div class="form-group">
                 <label for="foto">Foto:</label>
                 <input type="file" name="foto">
-                <img src="uploads/<?php echo $editKandidat['foto']; ?>" width="100" height="100">
+                <img src="<?php echo $editKandidat['foto']; ?>" width="100" height="100">
             </div>
 
             <!-- edit nis kandidat -->
@@ -172,6 +175,22 @@ $dbsuara = new Database();
                 <textarea id="misi" name="misi" required><?php echo $editKandidat['misi']; ?></textarea>
             </div>
 
+            <!-- edit deskripsi kandidat -->
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea id="deskripsi" name="deskripsi" required><?php echo $editKandidat['deskripsi']; ?></textarea>
+            </div>
+
+            <!-- Tambahkan input untuk poster -->
+            <input type="hidden" name="poster_lama" value="<?php echo $editKandidat['poster']; ?>">
+
+            <div class="form-group">
+                <label for="poster">Poster:</label>
+                <input type="file" name="poster">
+                <img src="<?php echo $editKandidat['poster']; ?>" width="100" height="100">
+            </div>
+
+
             <!-- Submit Button -->
             <div class="form-group">
                 <button type="submit" name="submit">Edit Kandidat</button>
@@ -179,4 +198,5 @@ $dbsuara = new Database();
         </form>
     </main>
 </body>
+
 </html>

@@ -111,6 +111,8 @@ $dbsuara = new Database();
               <th>NAMA KANDIDAT</th>
               <th>VISI</th>
               <th>MISI</th>
+              <th>DESKRIPSI</th>
+              <th>POSTER</th>
               <th>DATA SUARA</th>
               <th>AKSI</th>
             </tr>
@@ -121,11 +123,13 @@ $dbsuara = new Database();
             ?>
               <tr>
                 <td><?php echo $dataKandidat['no_urut']; ?></td>
-                <td><img src="uploads/<?= $dataKandidat['foto'] ?>"></td>
+                <td><img src="<?= $dataKandidat['foto'] ?>"></td>
                 <td><?php echo $dataKandidat['nis']; ?></td>
                 <td><?php echo $dataKandidat['nama']; ?></td>
                 <td><?php echo $dataKandidat['visi']; ?></td>
                 <td><?php echo $dataKandidat['misi']; ?></td>
+                <td><?php echo $dataKandidat['deskripsi']; ?></td>
+                <td><img src="<?= $dataKandidat['poster'] ?>"></td>
                 <td></td>
                 <td>
                   <div class="flex-button">
