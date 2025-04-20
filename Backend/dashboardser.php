@@ -108,9 +108,15 @@ if ($result->num_rows > 0) {
     <section id="rules" class="sec3">
         <div class="inline3">
             <h1>Peraturan yang berlaku</h1>
-            <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi <a href="">peraturan yang berlaku</a>. Gunakan
-                hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman. Suara Anda menentukan
-                arah kebijakan ke depan!</p>
+            <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi peraturan yang berlaku.</p>
+
+            <div class="list-rules">
+                <p>1. <mark>Setiap pemilih hanya boleh memilih satu kandidat.</mark></p>
+                <p>2. <mark>Dilarang menghasut atau mempengaruhi pemilih lain untuk memilih calon tertentu dengan cara yang tidak etis.</mark></p>
+                <p>3. <mark>Gunakan hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman.</mark></p>
+            </div>
+            
+            <p><b>Suara Anda menentukan arah kebijakan ke depan!</b></p>
         </div>
     </section>
 

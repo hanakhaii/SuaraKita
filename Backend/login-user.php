@@ -20,7 +20,7 @@ if (isset($_POST['nis']) && isset($_POST['password'])) {
         $user = $result->fetch_assoc(); // Ambil hasil query ke dalam array
 
         // Verifikasi password
-        if (password_verify($password, $user['password'])) {
+        if ($password === $user['password']) {
             $_SESSION['nis'] = $user['nis'];
             $_SESSION['nama'] = $user['nama'];
             $_SESSION['role'] = "user";
@@ -50,6 +50,17 @@ if (isset($_POST['nis']) && isset($_POST['password'])) {
 <!-- hanaa cantikkk, lucuu, sayangg -->
 
 <body>
+    <header>
+        <div class="logo">
+            <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#0066FF" d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
+            </svg>
+            </div>
+            <a href="../Backend/home.php">Home</a>
+        </div>
+    </header>
+
     <main>
         <h1>LOGIN</h1>
         <h4>Welcome to <span>Suara</span>Kita!</h4>
@@ -70,6 +81,9 @@ if (isset($_POST['nis']) && isset($_POST['password'])) {
             <button type="submit">Login</button>
         </form>
     </main>
+    <footer>
+        <p>&copy; 2025 SuaraKita. All rights reserved.</p>
+    </footer>
     <script>
         // untuk validasi password
         function togglePassword() {

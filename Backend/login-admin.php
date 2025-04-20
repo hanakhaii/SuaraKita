@@ -20,7 +20,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $admin = $result->fetch_assoc();
 
         // Verifikasi password
-        if (password_verify($password, $admin['password'])) {
+        if ($password === $admin['password']) {
             $_SESSION['username'] = $admin['username'];
             $_SESSION['role'] = "admin";
 
@@ -49,6 +49,16 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#0066FF" d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
+                </svg>
+            </div>
+            <a href="../Backend/home.php">Home</a>
+        </div>
+    </header>
     <main>
         <h1>LOGIN</h1>
         <h4>Welcome to <span>Suara</span>Kita!</h4>
@@ -70,7 +80,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         </form>
     </main>
     <footer>
-        <p>&copy; 2023 SuaraKita. All rights reserved.</p>
+        <p>&copy; 2025 SuaraKita. All rights reserved.</p>
     </footer>
     <script>
         // untuk validasi password

@@ -2,9 +2,31 @@ body {
     text-align: center;
     font-family: 'Poppins';
 }
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.logo{
+    display: flex;
+    transform: translate(10%, 60%);
+}
+
+a {
+    text-decoration: none;
+    color: #0066FF;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #181B3C;
+    text-decoration: underline;
+}
+
 /* hanaaa lucuuu cantikkk*/
 main {
-    margin: 90px;
+    margin: 50px;
     margin-left: 430px;
     margin-right: 430px;
     background-color: #0066ffee;
