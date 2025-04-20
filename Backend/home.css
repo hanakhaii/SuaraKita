@@ -1,51 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-/* hanaaa lucuuu cantikkk*/
-*{
+
+body {
     margin: 0;
     padding: 0;
-    list-style: none;
-    text-decoration: none;
+    height: 100%;
     font-family: "Poppins", serif;
 }
 
-/* css navigasi */
-nav{
-    display: flex;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 999;
-    margin-bottom: auto;
-    align-items: center;
-    justify-content: space-between;
-    padding: 25px 75px;
-    background-color: #0056d6;
-}
-nav h1{
-    color: #FFFF;
-    font-weight: bold;
-}
-li a:hover {
-    background-color: #FC0134; /* Warna merah seperti di logo */
-    color: white;
-}
-nav span{
-    color: #FC0134;
-}
-ul{
-    display: flex;
-    margin-top: 13px;
-}
-ul li{
-    margin: 0px 10px;
+::-webkit-scrollbar {
+    display: none;
 }
 
-li a{
+section button {
     color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: black;
+}
+
+section button:hover {
+    background-color: rgb(194, 197, 218);
+}
+
+nav {
+    top: 0;
+    background-color: #4e90f5;
+    padding: 10px;
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav span {
+    color: rgb(255, 32, 32);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding-right: 10px;
+}
+
+nav ul li {
+    padding: 10px;
+}
+
+nav ul li a {
+    color: white;
     text-decoration: none;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    color: white;
+    background-color: red;
+    padding: 6px;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+nav button {
+    position: fixed;
+}
+
+h3, ul {
+    transform: translate(0, 25%);
 }
 
 /* slideshow */
@@ -54,6 +74,7 @@ li a{
     overflow: hidden;
     width: 100%;
     height: 70vh;
+    margin-top: 6%;
 }
 
 /* Efek hover tetap ada */
@@ -125,7 +146,7 @@ li button:active,
 
 .text-overlay button {
     padding: 10px 20px;
-    background-color: #0056d6;
+    background-color: #11223b;
     color: white;
     border: none;
     border-radius: 5px;
@@ -139,10 +160,11 @@ li button:active,
 .prev, .next {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     font-size: 18px;
     padding: 10px;
@@ -158,212 +180,105 @@ li button:active,
     right: 10px;
 }
 
-/* sec1 */
-.sec1{
-    padding: 70px 70px;
-}
-
-.inline1{
+.about-us {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #0066FF;
-    padding: 50px 50px;
-    color: aliceblue;
-    border-radius: 20px;
-    box-shadow: 1px 2px 15px 5px rgba(76, 75, 75, 0.2);
+    transform: translate(3%, 0);
+    padding: 60px;
+    margin: 30px;
+    position: relative;
 }
 
-.inline1 h1{
-    font-size: 35px;
+.about-us img {
+    transform: translate(0, 25%);
 }
 
-.inline1 p{
-    width: 500px;
-    font-size: 19px;
+mark {
+    background-color: aliceblue;
 }
 
-/* sec2 */
-.sec2{
-    padding: 105px 70px;
+mark:hover {
+    background-color: rgba(255, 0, 0, 0.203);
 }
 
-.inline2 h1{
-    padding-bottom: 15px;
-    font-size:35px;
+h4 {
+    font-weight: bold;
+    font-size: large;
+    margin-top: 20px;
 }
 
-.inline2 p{
-    font-size: 19px;
-    width: 750px;
-}
-
-/* sec3 */
-.sec3{
-    padding: 70px 70px;
-}
-
-.gambal img{
-    width: 240px;
-}
-
-.inline3 h1{
-    padding-bottom: 19px;
-    font-size: 30px;
-}
-
-.inline3 p{
-    width: 750px;
-    font-size: 19px;
-    padding-bottom: 30px;
-}
-
-.inline3 button{
-    font-size: 20px;
-    background-color: #1E1E1E;
-    color: #FFFF;
-    border-radius: 10PX;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.inline3 a:hover {
-    background-color: #003d9a; /* Biru tua agar serasi */
-    color: white;
-}
-
-.inline3{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: #ffff;
-    padding: 50px 50px;
-    box-shadow: 0px 0px 10px 0px #D9D9D9;
-    border-radius:20px ;
-}
-
-/* footer */
-footer{
-    padding: 10px;
-    background-color: #0056d6;
-    color: #ffff;
+main {
     text-align: center;
 }
 
-footer p {
-    margin-bottom: 0;
+h2 {
+    margin-bottom: 50px;
+    font-size: xx-large;
+    font-weight: bolder;
 }
 
-/* responsif di mobile */
-@media only screen and (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
-        padding: 15px;
-    }
-
-    ul {
-        flex-direction: column;
-        padding-top: 10px;
-    }
-
-    ul li {
-        margin: 5px 0;
-    }
-
-    /* Slideshow */
-    .slideshow {
-        height: 40vh;
-    }
-
-    .slide {
-        height: 40vh;
-    }
-
-    .text-overlay h1 {
-        font-size: 1.8rem;
-    }
-
-    .text-overlay p {
-        font-size: 1rem;
-    }
-
-    .text-overlay button {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-    }
-
-    /* Section 1 */
-    .sec1 {
-        padding: 40px 20px;
-    }
-
-    .inline1 {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-    }
-
-    .inline1 h1 {
-        font-size: 28px;
-    }
-
-    .inline1 p {
-        font-size: 16px;
-        width: 100%;
-    }
-
-    /* Section 2 */
-    .sec2 {
-        padding: 50px 20px;
-    }
-
-    .inline2 h1 {
-        font-size: 28px;
-    }
-
-    .inline2 p {
-        font-size: 18px;
-        width: 100%;
-    }
-
-    /* Section 3 */
-    .sec3 {
-        padding: 40px 20px;
-    }
-
-    .inline3 {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-    }
-
-    .inline3 h1 {
-        font-size: 24px;
-    }
-
-    .inline3 p {
-        font-size: 16px;
-        width: 100%;
-    }
-
-    .inline3 button {
-        font-size: 16px;
-        padding: 8px 12px;
-        text-decoration: none;
-    }
-
-    .gambal img {
-        width: 200px;
-        margin-top: 15px;
-    }
-
-    /* Footer */
-    footer {
-        text-align: center;
-        padding: 20px;
-    }
+.kandidat {
+    padding: 80px;
 }
 
+.kandidat-space {
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.192);
+}
+
+.kandidat-space h3 {
+    margin-top: 4%;
+    font-weight: bolder;
+}
+
+.kandidat-space p {
+    margin: 4%;
+}
+
+.kandidat-grid {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    padding-top: 0;
+    background-color: rgba(0, 102, 255, 0.12);
+}
+
+.kandidat-grid h3 {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 8px 2px;
+    transform: translate(100%, 70%);
+    margin-bottom: 30%;
+}
+
+.kandidat-grid img {
+    margin-top: 20px;
+}
+
+.grid1, .grid2, .grid3 {
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.quickcount {
+    padding: 80px;
+}
+
+footer {
+    display: flex;
+    padding: 30px 50px 10px;
+    color: white;
+    justify-content: space-between;
+    background-color: #4e91f5dd;
+    font-size: 12px;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: #003d9a;
+}

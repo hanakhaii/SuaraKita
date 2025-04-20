@@ -177,6 +177,8 @@ elseif ($action == "edit_pemilih") {
 
     $waktu_mulai_memilih = "$tanggal_mulai $waktu_mulai_input:00";
     $waktu_selesai_memilih = "$tanggal_selesai $waktu_selesai_input:00";
+    
+    // Gabungkan tanggal dan waktu untuk quick count
     $waktu_quickcount = "$tanggal_quickcount $waktu_quickcount_input:00";
     $waktu_selesai_quickcount = "$tanggal_selesai_quickcount $waktu_selesai_quickcount_input:00";
 
@@ -186,23 +188,57 @@ elseif ($action == "edit_pemilih") {
     } else {
         die("Gagal menyimpan pengaturan waktu!");
     }
-} elseif ($action == "vote") {
-    session_start();
-    $nis = $_SESSION['nis'];
-    $selected = $_POST['kandidat'];
+}
 
+// voting ae voting
+if ($action === 'vote') {
+    session_start();
+    if (!isset($_SESSION['nis'])) {
+        header("Location: login-user.php");
+        exit();
+    }
+    $nis = $_SESSION['nis'];
+
+    // 1. Cek status pemilih
+    $pemilih = $dbsuara->getPemilihById($nis);
+    if ($pemilih['validasi_memilih'] === 'sudah_memilih') {
+        die("Anda sudah melakukan voting.");
+    }
+
+    // 2. Ambil kandidat terpilih
+    if (empty($_POST['kandidat'])) {
+        die("Anda belum memilih kandidat.");
+    }
+    $noUrut = (int) $_POST['kandidat'];
+
+    // 3. Validasi kandidat
+    $k = $dbsuara->getKandidatById($noUrut);
+    if (!$k) {
+        die("Kandidat tidak valid.");
+    }
+
+    // 4. Simpan voting
     $conn = $dbsuara->getConnection();
     $conn->begin_transaction();
     try {
-        $stmt = $conn->prepare("INSERT INTO suara (no_urut_kandidat, nis_pemilih) VALUES (?, ?)");
-        $stmt->bind_param("is", $selected, $nis);
-        $stmt->execute();
+        // a) INSERT ke tabel suara, kolom nya nis_pemilih
+        $stmt1 = $conn->prepare(
+            "INSERT INTO suara (no_urut_kandidat, nis_pemilih) VALUES (?, ?)"
+        );
+        $stmt1->bind_param("is", $noUrut, $nis);
+        $stmt1->execute();
 
-        $stmt2 = $conn->prepare("UPDATE kandidat SET jumlah_suara = jumlah_suara + 1 WHERE no_urut = ?");
-        $stmt2->bind_param("i", $selected);
+        // b) UPDATE jumlah_suara di kandidat
+        $stmt2 = $conn->prepare(
+            "UPDATE kandidat SET jumlah_suara = jumlah_suara + 1 WHERE no_urut = ?"
+        );
+        $stmt2->bind_param("i", $noUrut);
         $stmt2->execute();
 
-        $stmt3 = $conn->prepare("UPDATE pengguna SET validasi_memilih = 'sudah_memilih' WHERE nis = ?");
+        // c) UPDATE status pemilih
+        $stmt3 = $conn->prepare(
+            "UPDATE pengguna SET validasi_memilih = 'sudah_memilih' WHERE nis = ?"
+        );
         $stmt3->bind_param("s", $nis);
         $stmt3->execute();
 
@@ -210,11 +246,12 @@ elseif ($action == "edit_pemilih") {
 
         echo "<script>
             alert('Terima kasih, suara Anda berhasil disimpan!');
-            window.location.href='dashboardser.php';
+            window.location.href = 'dashboardser.php';
         </script>";
-        exit();
+        exit;
     } catch (Exception $e) {
         $conn->rollback();
         die("Gagal memproses voting: " . $e->getMessage());
     }
 }
+

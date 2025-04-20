@@ -20,7 +20,6 @@ if ($pemilih['validasi_memilih'] === 'sudah_memilih') {
     exit();
 }
 
-
 // Cek waktu voting dari pengaturan
 $sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih FROM pengaturan_waktu ORDER BY id DESC LIMIT 1";
 $result = $dbsuara->getConnection()->query($sql);
@@ -30,6 +29,22 @@ if ($result->num_rows > 0) {
     $waktu_selesai = strtotime($row['waktu_selesai_memilih']);
     $sekarang = time();
     
+    if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
+        die("<h2>Voting belum dibuka atau sudah ditutup.</h2>");
+    }
+} else {
+    die("<h2>Waktu voting belum diatur.</h2>");
+}
+
+// Cek waktu voting dari pengaturan
+$sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih FROM pengaturan_waktu ORDER BY id DESC LIMIT 1";
+$result = $dbsuara->getConnection()->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $waktu_mulai = strtotime($row['waktu_mulai_memilih']);
+    $waktu_selesai = strtotime($row['waktu_selesai_memilih']);
+    $sekarang = time();
+
     if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
         die("<h2>Voting belum dibuka atau sudah ditutup.</h2>");
     }
@@ -48,14 +63,14 @@ $dataKandidat = $dbsuara->viewKandidat();
     <link rel="stylesheet" href="voting.css">
     <title>Voting</title>
 </head>
+<!-- hanaa cantikkk, lucuu, sayangg -->
 <body>
-    <header>
-        <div class="logo"> 
+<div class="logo">
             <!-- Logo dan link ke dashboard -->
             <a href="../user/dashboardser.html">Dashboard</a>
         </div>
     </header>
-    
+
     <section class="sec">
         <div class="h1">
             <h1>Pilih Sekarang!</h1>
@@ -71,7 +86,7 @@ $dataKandidat = $dbsuara->viewKandidat();
                     <div class="kan-container">
                         <div class="kan">
                             <!-- Pastikan path file gambar benar -->
-                            <img src="<?php echo $kandidat['foto']; ?>" alt="">
+                            <img src="../Backend/uploads/<?php echo $kandidat['foto']; ?>" alt="">
                             <h1><?php echo $kandidat['nama']; ?></h1>
                         </div>
                         <div class="radio-container">
@@ -90,7 +105,7 @@ $dataKandidat = $dbsuara->viewKandidat();
     <footer>
         <p>&copy; 2025, SuaraKita. All rights reserved.</p>
     </footer>
-    
+
     <script>
         // Tambahkan JavaScript untuk highlight kandidat jika diinginkan
         const checkboxes = document.querySelectorAll(".radio-container input");
@@ -102,6 +117,14 @@ $dataKandidat = $dbsuara->viewKandidat();
                 kandidatDivs[index].classList.add("selected");
             });
         });
+
+        // Cegah back setelah voting
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.history.pushState(null, null, window.location.href);
+            };
+        }
     </script>
 </body>
 </html>

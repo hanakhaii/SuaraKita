@@ -1,112 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home SuaraKita</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="home.css">
+    <title>Home SuaraKita</title>
 </head>
-
 <body>
-    <nav>
-        <h1><span>Suara</span>Kita</h1>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#voting">Voting</a></li>
-            <li><a href="#kandidat">Kandidat</a></li>
-            <li><a href="#quickcount">QuickCount</a></li>
-            <li>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-top: -8px;">
-                    Login
-                </button>
-            </li>
-        </ul>
-    </nav>
+    <header>
+        <!-- navigasi -->
+        <nav>
+            <h3>Suara<span>Kita</span></h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#kandidat">Pilih Sekarang</a></li>
+                <li><a href="#quickcount">QuickCount</a></li>
+                <li>
+                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-top: -8px;">
+                        Login
+                    </button>
+                </li>
+            </ul>
+        </nav>
 
-    <!-- Modal Login -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login SuaraKita</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <a class="btn btn-outline-primary w-100" href="login-user.php">Login Sebagai User</a>
-                    <div class="text-center my-2">atau</div>
-                    <a class="btn btn-outline-secondary w-100" href="login-admin.php">Login Sebagai Admin</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <section class="slideshow">
-        <div class="slides">
-            <div class="slide" style="background-image: url('../Backend/img/ilustaratsiSatu.jpg');">
-                <div class="text-overlay">
-                    <h1>Welcome</h1>
-                    <p>Online Voting System</p>
-                    <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
-                </div>
-            </div>
-            <div class="slide" style="background-image: url('../Backend/img/ilustrasiDua.jpg');">
-                <div class="text-overlay">
-                    <h1>Voting is Important</h1>
-                    <p>Choose Your Leader</p>
-                    <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
-                </div>
-            </div>
-            <div class="slide" style="background-image: url('../Backend/img/ilustrasiTiga.jpg');">
-                <div class="text-overlay">
-                    <h1>Quick Count</h1>
-                    <p>Real-time Results</p>
-                    <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
+        <!-- Modal Login -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login SuaraKita</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a class="btn btn-outline-primary w-100" href="login-user.php">Login Sebagai User</a>
+                        <div class="text-center my-2">atau</div>
+                        <a class="btn btn-outline-secondary w-100" href="login-admin.php">Login Sebagai Admin</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
-    </section>
 
-    <section class="sec1" id="voting">
-        <div class="inline1">
-            <h1>Online Voting <br> System</h1>
-            <p>Sistem pemungutan suara online adalah solusi modern yang memungkinkan proses pemilihan OSIS 
-                dilakukan secara digital, cepat, dan aman.</p>
-            <a href="#" onclick="requireLogin()" class="btn btn-primary" style="background-color: #FC0134;">Mulai Voting</a>
-        </div>
-    </section>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <section class="slideshow">
+            <div class="slides">
+                <div class="slide" style="background-image: url('../Backend/img/ilustaratsiSatu.jpg');">
+                    <div class="text-overlay">
+                        <h1>Welcome</h1>
+                        <p>Online Voting System</p>
+                        <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('../Backend/img/ilustrasiDua.jpg');">
+                    <div class="text-overlay">
+                        <h1>Voting is Important</h1>
+                        <p>Choose Your Leader</p>
+                        <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('../Backend/img/ilustrasiTiga.jpg');">
+                    <div class="text-overlay">
+                        <h1>Quick Count</h1>
+                        <p>Real-time Results</p>
+                        <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
+                    </div>
+                </div>
+            </div>
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+        </section>
 
-    <section class="sec2" id="kandidat">
-        <div class="inline2">
-            <center>
-                <h1>Pilih Sekarang!</h1>
-                <p>Pilih kandidat terbaik yang memiliki visi, misi, dan program kerja sesuai dengan harapanmu.</p>
-                <a href="#" onclick="requireLogin()" class="btn btn-primary">Lihat Kandidat</a>
-            </center>
-        </div>
-    </section>
-
-    <section class="sec3" id="quickcount">
-        <div class="inline3">
+        <!-- about us section  -->
+        <section class="about-us">
+            <div style="transform: translate(0, 18%);">
+                <h2>Tentang Kami</h2>
+                <h4>Suara Anda, Masa Depan Kita!</h4>
+                <p> SuaraKita adalah platform pemungutan suara digital yang dibuat khusus untuk pemilihan OSIS. Kami ingin membuat proses pemilu jadi lebih transparan.
+                    Lewat SuaraKita, semua siswa bisa ikut berpartisipasi aktif dalam demokrasi sekolah dengan cara yang modern dan aman. <br>
+                </p>
+                <p>
+                    <b>Visi</b> kami adalah <mark>menciptakan sistem pemilihan OSIS yang jujur, mudah diakses, dan menyenangkan.</mark> <br>
+                    <b>Misi</b> kami adalah <mark>menghadirkan pengalaman pemilu yang adil, real-time, dan terbuka untuk semua pelajar.</mark>
+                </p>
+                <p>
+                    Yuk, wujudkan pemilu OSIS yang lebih berintegritas bersama SuaraKita!
+                    <b>Dirancang oleh pelajar, untuk pelajar</b>
+                </p>
+                <button class="btn btn-dark" onclick="requireLogin()">Pilih Sekarang</button>
+            </div>
             <div>
-                <h1>QuickCount</h1>
-                <p>Setelah pemungutan suara selesai, sistem akan secara otomatis menghitung hasil suara dengan metode QuickCount.</p>
-                <a href="#" onclick="requireLogin()" class="btn btn-primary">Selengkapnya</a>
+                <img src="../Backend/img/logo-suarakita.png" alt="" width="400px">
             </div>
-            <div class="gambal">
-                <img src="../Backend/img/pie-chart.png" alt="">
+        </section>
+    </header>
+
+    <main>
+        <!-- kandidat section -->
+         <section class="kandidat">
+            <div class="kandidat-space">
+                <h2>PILIH SEKARANG!</h2>
+                <div class="kandidat-grid">
+                    <div class="grid1">
+                        <h3> 01 </h3>
+                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                    </div>
+                    <div class="grid2">
+                        <h3>02</h3>
+                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                    </div>
+                    <div class="grid3">
+                        <h3>03</h3>
+                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                    </div>
+                </div>
+                <h3>🗳 Kenali, Pilih, Tentukan! 🗳</h3>
+                <p>Lihat profil kandidat, pahami visi-misinya,<br> dan buat keputusan terbaik untuk sekolah di masa yang akan datang!</p>
+                <button class="btn btn-dark" onclick="requireLogin()">Lihat Kandidat</button>
             </div>
-        </div>
-    </section>
+         </section>
+
+         <!-- quickcount -->
+          <section class="quickcount">
+            <h2>QUICKCOUNT</h2>
+            <section class="data">
+                <div style="width: 30%; height: 30%; margin: auto;">
+                    <canvas id="myChart" style="display: inline;"></canvas>
+                </div>
+                <script>
+                    // Data diagram
+                    const labels = ['Kandidat ?', 'Kandidat ?', 'Kandidat ?'];
+                    const data = [25, 150, 70]; // Jumlah suara
+        
+                    // Total jumlah suara
+                    const total = data.reduce((sum, value) => sum + value, 0);
+        
+                    // Hitung persentase setiap data
+                    const percentages = data.map(value => ((value / total) * 100).toFixed(1) + '%');
+        
+                    // Buat grafik menggunakan Chart.js
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'pie', // Jenis grafik
+                        data: {
+                            labels: labels.map((label, index) => `${label} (${percentages[index]})`), // Perbaikan template literal
+                            datasets: [{
+                                data: data,
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Warna untuk setiap bagian
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top', // Posisi legenda
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function (tooltipItem) {
+                                            const index = tooltipItem.dataIndex;
+                                            return `${labels[index]}: ${data[index]} suara (${percentages[index]})`; // Perbaikan template literal
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+            </section>
+            <h4>⏳ Hasil Cepat, Keputusan Akurat! ⏳</h4>
+            <p> Pantau perhitungan suara secara real-time dan tetap update dengan hasil terbaru!</p>
+            <button class="btn btn-dark" onclick="requireLogin()">Selengkapnya</button>
+          </section>
+    </main>
 
     <footer>
-        <p>&copy; 2025, SuaraKita. All rights reserved.</p>
+        <div>
+            <p>© 2025, SuaraKita. All rights reserved.</p> 
+            <p style="margin-left: 13px;">Send your feedback to <a href="">suarakita@gmail.com</a></p>
+        </div>
+        <div>
+            <p>Powered by Tim SuaraKita</a></p>
+            <p>Menuju masa depan demokrasi yang lebih baik!</p>
+        </div>
     </footer>
 
     <!-- JavaScript -->

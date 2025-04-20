@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-/* hanaaa lucuuu cantikkk*/
+
 * {
     margin: 0;
     padding: 0;
     text-decoration: none;
     list-style: none;
     font-family: "Poppins", serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* Navigasi */
@@ -86,7 +90,8 @@ li a{
 
 /* setion 1 */
 .sec1{
-    padding: 245px 75px;
+    padding: 200px 75px;
+    /* transform: translate(5%, 0); */
 }
 
 .sec1 span{
@@ -101,7 +106,7 @@ li a{
 .inline1{
     text-align: center;
     width: 700px;
-    margin-left: 22%;
+    transform: translate(30%);
     position: relative;
 }
 
@@ -123,7 +128,6 @@ li a{
 .sec2 h1{
     text-align: center;
     font-size: 60px;
-    
     margin-left: 2%;
     font-weight: bold;
 }
@@ -135,7 +139,8 @@ li a{
 
 
 .judul{
-    padding-bottom: 25px;
+    padding: 25px;
+    font-size: medium;
 }
 
 .kandidat{
@@ -149,10 +154,10 @@ li a{
 }
 
 .kandidat img{
-    width: 290px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
     border: 4px solid #ffff ;
-    border-radius: 100%;
-    height: 300px;
 }
 
 button {
@@ -164,6 +169,7 @@ button {
     border: none;
     font-size: 15px;
     cursor: pointer;
+    margin: 20px;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -196,7 +202,8 @@ button:hover {
 /* section 3 */
 .sec3{
     margin-top: 120px;
-    padding: 50px 75px;
+    padding: 50px;
+    text-align: center;
 }
 
 .inline3 p{
@@ -224,9 +231,32 @@ button:hover {
     text-decoration: underline;
 }
 
+.list-rules {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.192);
+    padding: 20px;
+    margin: 50px;
+}
+
+.list-rules p {
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.list-rules mark {
+    background-color: #ff00331f;
+}
+
+.list-rules mark:hover {
+    background-color: #0056d62f;
+}
+
 /* section 4 */
 .sec4{
-    padding: 25px 75px;
+    padding: 25px;
+    text-align: center;
     margin-top: 120px;
 }
 
@@ -266,7 +296,7 @@ button:hover {
 
 /* section 5 */
 .sec5{
-    padding: 25px 75px;
+    padding: 25px;
     margin-top: 90px;
 }
 
@@ -290,6 +320,7 @@ button:hover {
 .count button {
     padding: 10px 15px;
     font-size: 16px;
+    margin-left: 0;
 }
 
 .count a{

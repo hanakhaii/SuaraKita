@@ -138,11 +138,13 @@ $dbsuara = new Database();
                 </table>
             </section>
     </div>
+    
     <!-- tombol aksi -->
     <div class="tombol-aksi-kandidat">
         <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
         <a href="" style="background-color: #FC0134;">HAPUS</a>
     </div>
+
     </main>
     </div>
 
