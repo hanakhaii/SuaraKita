@@ -19,8 +19,9 @@ if (!isset($_SESSION['username'])) {
 </head>
 
 <body>
-    <!-- Mobile Menu Toggle -->
-    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+    <div class="scroll-area">
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
         <i class="bi bi-list"></i>
     </div>
     <div class="container">
@@ -53,8 +54,8 @@ if (!isset($_SESSION['username'])) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16" style="margin-top: 2px;">
                         <path fill="currentColor" d="M11 7c0 1.66-1.34 3-3 3S5 8.66 5 7s1.34-3 3-3s3 1.34 3 3" />
                         <path fill="currentColor" fill-rule="evenodd"
-                            d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75"
-                            clip-rule="evenodd" />
+                        d="M16 8c0 4.42-3.58 8-8 8s-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8M4 13.75C4.16 13.484 5.71 11 7.99 11c2.27 0 3.83 2.49 3.99 2.75A6.98 6.98 0 0 0 14.99 8c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 2.38 1.19 4.49 3.01 5.75"
+                        clip-rule="evenodd" />
                     </svg>
                     Pemilih
                 </li>
@@ -67,12 +68,12 @@ if (!isset($_SESSION['username'])) {
                     </svg>
                     Kandidat
                 </li>
-
+                
                 <li id="data-suara">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 512">
                         <path fill="currentColor"
                             d="M608 320h-64v64h22.4c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8H96v-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h576c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32m-96 64V64.3c0-17.9-14.5-32.3-32.3-32.3H160.4C142.5 32 128 46.5 128 64.3V384zM211.2 202l25.5-25.3c4.2-4.2 11-4.2 15.2.1l41.3 41.6l95.2-94.4c4.2-4.2 11-4.2 15.2.1l25.3 25.5c4.2 4.2 4.2 11-.1 15.2L300.5 292c-4.2 4.2-11 4.2-15.2-.1l-74.1-74.7c-4.3-4.2-4.2-11 0-15.2" />
-                    </svg>
+                        </svg>
                     Data Suara
                 </li>
 
@@ -86,12 +87,12 @@ if (!isset($_SESSION['username'])) {
                 <li class="logout" onclick="confirmLogout()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor"
-                            d="M6 2h9a2 2 0 0 1 2 2v2h-2V4H6v16h9v-2h2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2" />
+                        d="M6 2h9a2 2 0 0 1 2 2v2h-2V4H6v16h9v-2h2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2" />
                         <path fill="currentColor" d="M16.09 15.59L17.5 17l5-5l-5-5l-1.41 1.41L18.67 11H9v2h9.67z" />
                     </svg>
                     Logout
                 </li>
-
+                
                 <!-- buat logout -->
                 <script>
                     function confirmLogout() {
@@ -104,7 +105,7 @@ if (!isset($_SESSION['username'])) {
             <!-- footer -->
             <div class="footer">&copy; 2025, SuaraKita. All rights reserved.</div>
         </aside>
-
+        
         <!-- content -->
         <main class="main_dashboard">
             <!-- header, sapaan awal untuk Admin -->
@@ -130,7 +131,7 @@ if (!isset($_SESSION['username'])) {
                     <b>A. Pengelolaan Pemilih</b>
                     <li>Menambahkan, mengedit, atau menghapus daftar pemilih</li>
                     <li>Memberikan akses kepada pemilih agar dapat melakukan voting dan melihat hasil Quick Count saat pengumuman
-                    </li>
+                        </li>
 
                     <br>
 
@@ -144,15 +145,15 @@ if (!isset($_SESSION['username'])) {
                     <b>C. Pengelolaan Jadwal dan Waktu Pemungutan Suara</b>
                     <li>Menentukan tanggal dan waktu pemungutan suara</li>
                     <li>Mengatur kapan pemungutan suara dimulai dan berakhir secara otomatis</li>
-
+                    
                     <br>
-
+                    
                     <b>D. Pengelolaan Keamanan</b>
                     <li>Memastikan sistem hanya mengizinkan satu suara per pemilih</li>
                     <li>Mencegah akses tidak sah dan menjaga integritas data suara</li>
 
                     <br>
-
+                    
                     <b>E. Pemantauan dan Analisis</b>
                     <li>Memantau aktivitas pemungutan suara secara real-time</li>
                     <li>Melihat statistik partisipasi pemilih</li>
@@ -173,6 +174,7 @@ if (!isset($_SESSION['username'])) {
                 </ul>
             </section>
         </main>
+    </div>
     </div>
 
     <!-- javascript -->
