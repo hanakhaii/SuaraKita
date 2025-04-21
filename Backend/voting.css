@@ -29,6 +29,11 @@ header {
     color: #0066FF;
 }
 
+.logo a:hover {
+    color: #181B3C;
+    text-decoration: underline;
+}
+
 .logo svg {
     margin-left: 0;
 }

@@ -26,6 +26,11 @@ header {
     align-items: center;
 }
 
+.logo a:hover {
+    color: #181B3C;
+    text-decoration: underline;
+}
+
 .logo svg {
     margin-left: 0;
 }
@@ -41,7 +46,11 @@ header {
 /* diagram */
 /* disclaimer */
 .disclaimer {
-    padding: 80px 75px;
+    padding: 50px;
+}
+
+.disclaimer h1 {
+    text-align: center;
 }
 
 .paragraf {
@@ -67,9 +76,6 @@ footer {
     color: #ffff;
     text-align: center;
 }
-
-/* Tambahkan di bagian bawah CSS sebelum penutup </style> */
-/* Tambahkan di bagian bawah CSS sebelum penutup </style> */
 
 @media screen and (max-width: 600px) {
     header {
