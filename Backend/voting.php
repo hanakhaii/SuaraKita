@@ -14,12 +14,27 @@ if (!isset($_SESSION['nis'])) {
 $pemilih = $dbsuara->getPemilihById($_SESSION['nis']);
 if ($pemilih['validasi_memilih'] === 'sudah_memilih') {
     echo "<script>
-        alert('Anda sudah melakukan voting. Tidak bisa mengakses halaman ini lagi.');
+        alert('Anda sudah melakukan voting. Anda tidak dapat voting lagi.');
         window.location.href = 'dashboardser.php';
     </script>";
     exit();
 }
 
+// Cek waktu voting dari pengaturan
+$sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih FROM pengaturan_waktu ORDER BY id DESC LIMIT 1";
+$result = $dbsuara->getConnection()->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $waktu_mulai = strtotime($row['waktu_mulai_memilih']);
+    $waktu_selesai = strtotime($row['waktu_selesai_memilih']);
+    $sekarang = time();
+    
+    if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
+        die("<h2>Voting belum dibuka atau sudah ditutup.</h2>");
+    }
+} else {
+    die("<h2>Waktu voting belum diatur.</h2>");
+}
 
 // Cek waktu voting dari pengaturan
 $sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih FROM pengaturan_waktu ORDER BY id DESC LIMIT 1";
@@ -42,17 +57,15 @@ $dataKandidat = $dbsuara->viewKandidat();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="voting.css">
     <title>Voting</title>
 </head>
-
+<!-- hanaa cantikkk, lucuu, sayangg -->
 <body>
-    <header>
-        <div class="logo">
+<div class="logo">
             <!-- Logo dan link ke dashboard -->
             <a href="../user/dashboardser.html">Dashboard</a>
         </div>
@@ -114,5 +127,6 @@ $dataKandidat = $dbsuara->viewKandidat();
         }
     </script>
 </body>
-
 </html>
+
+<!-- apa yang perlu -->
