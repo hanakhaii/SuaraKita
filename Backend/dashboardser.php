@@ -1,14 +1,23 @@
 <?php
 session_start();
 date_default_timezone_set('Asia/Jakarta');
+
 if (!isset($_SESSION['nis'])) {
     header("Location: login-user.php");
     exit();
 }
 
-// Koneksi ke database
 include 'db.php';
 $dbsuara = new Database();
+
+//Ambil data kandidat dari database
+$sql_kandidat = "SELECT * FROM kandidat";
+$result_kandidat = $dbsuara->getConnection()->query($sql_kandidat);
+
+// Cek jika query gagal
+if (!$result_kandidat) {
+    die("Query kandidat gagal: " . $dbsuara->getConnection()->error);
+}
 
 // Ambil waktu voting terbaru
 $sql = "SELECT waktu_mulai_memilih, waktu_selesai_memilih 
@@ -32,7 +41,6 @@ if ($result->num_rows > 0) {
     }
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -55,15 +63,16 @@ if ($result->num_rows > 0) {
                 <li><a href="#rules">Peraturan</a></li>
                 <li><a href="#vote">Pilih Sekarang</a></li>
                 <li><a href="#quick">QuickCount</a></li>
-                <li><a href="#" onclick="confirmLogout()">Logout</a></li>
+                <li><a href="#" onclick="confirmLogout()">Logout</a></
+                        li>
 
-                <script>
-                    function confirmLogout() {
-                        if (confirm("Apakah Anda yakin ingin logout?")) {
-                            window.location.href = "logout.php";
+                    <script>
+                        function confirmLogout() {
+                            if (confirm("Apakah Anda yakin ingin logout?")) {
+                                window.location.href = "logout.php";
+                            }
                         }
-                    }
-                </script>
+                    </script>
             </ul>
         </nav>
     </header>
@@ -76,34 +85,24 @@ if ($result->num_rows > 0) {
     </section>
 
     <section id="kandidat" class="sec2">
-        <h1>KANDIDAT</h1>
-        <div class="inline2">
-            <div class="kandidat" style="margin-left: -10px;">
-                <h1 class="judul">01</h1>
-                <img src="/Backend/img/harry.jpg" alt="">
-                <p>[Nama Kandidat] adalah seorang pemimpin yang berkomitmen pada inovasi dan kemajuan. Dengan pengalaman
-                    dan dedikasinya, ia ingin membawa perubahan positif bagi kita semua.</p>
-                <button onclick="window.location.href='tampilan-kandidat1.php'">Lihat</button>
+        <?php if ($result_kandidat->num_rows > 0): ?>
+            <h1>KANDIDAT</h1>
+            <div class="inline2">
+                <?php while ($row = $result_kandidat->fetch_assoc()): ?>
+                    <div class="kandidat">
+                        <h1 class="judul"><?php echo $row['nama']; ?></h1>
+                        <img src="<?php echo $row['foto']; ?>" alt="">
+                        <p><?php echo substr($row['deskripsi'], 0, 150); ?>...</p>
+                        <?php
+                        $nama_file = strtolower(str_replace(' ', '-', $row['nama']));
+                        ?>
+                        <button onclick="window.location.href='tampilan-kandidat1.php?nama=<?php echo urlencode($row['nama']); ?>'">Lihat</button>
+                    </div>
+                <?php endwhile; ?>
             </div>
-            <div class="kandidat">
-                <h1 class="judul">02</h1>
-                <img src="/Backend/img/harry2.jpg" alt="">
-                <p>Dengan semangat kebersamaan, [Nama Kandidat] bertekad menciptakan lingkungan yang lebih harmonis dan
-                    inklusif. Ia percaya bahwa setiap suara memiliki peran penting dalam membangun masa depan.</p>
-                <button onclick="window.location.href='tampilan-kandidat2.php'">Lihat</button>
-
-            </div>
-            <div class="kandidat">
-                <h1 class="judul">03</h1>
-                <img src="/Backend/img/harry3.jpg" alt="">
-                <p>Kepemimpinan yang adil dan transparan adalah visi utama [Nama Kandidat]. Ia siap mendengar, bekerja,
-                    dan berkolaborasi untuk mencapai tujuan bersama.
-                </p>
-                <button onclick="window.location.href='tampilan-kandidat3.php'">Lihat</button>
-
-            </div>
-        </div>
+        <?php endif; ?>
     </section>
+
 
     <section id="rules" class="sec3">
         <div class="inline3">
@@ -115,7 +114,7 @@ if ($result->num_rows > 0) {
                 <p>2. <mark>Dilarang menghasut atau mempengaruhi pemilih lain untuk memilih calon tertentu dengan cara yang tidak etis.</mark></p>
                 <p>3. <mark>Gunakan hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman.</mark></p>
             </div>
-            
+
             <p><b>Suara Anda menentukan arah kebijakan ke depan!</b></p>
         </div>
     </section>

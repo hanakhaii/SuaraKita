@@ -1,3 +1,25 @@
+<?php
+include 'db.php'; // pastikan path-nya benar
+
+if (isset($_GET['nama'])) {
+    $nama = $_GET['nama'];
+    $stmt = $dbsuara->getConnection()->prepare("SELECT * FROM kandidat WHERE nama = ?");
+    $stmt->bind_param("s", $nama);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+
+    if (!$data) {
+        echo "Data kandidat tidak ditemukan.";
+        exit();
+    }
+} else {
+    echo "Nama kandidat tidak diberikan.";
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,9 +27,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="tampilan_kandidat.css">
-    <title>Document</title>
+    <title><?php echo htmlspecialchars($data['nama']); ?></title>
 </head>
-<!-- hanaa cantikkk, lucuu, sayangg -->
+
 <body>
     <header>
         <div class="konten">
@@ -22,10 +44,10 @@
     <section class="sec1">
         <div class="gambal">
             <center>
-                <img src="/Backend/img/harry.jpg" alt="">
+                <img src="<?php echo $data['foto']; ?>" alt="Foto Kandidat">
                 <div class="nama">
-                    <h1>Kandidat 1</h1>
-                    <p>Nama Kandidat</p>
+                    <h1><?php echo htmlspecialchars($data['nama']); ?></h1>
+                    <p><?php echo htmlspecialchars($data['deskripsi']); ?></p>
                 </div>
             </center>
         </div>
@@ -35,33 +57,38 @@
         <div class="visi">
             <h1>Visi</h1>
             <ul>
-                <li>1. Menjadi kan wadah untuk siswa, menuju siswa yang tangguh, berakhlak mulia, disiplin dan tertib.</li>
-                <li>2, Menjadi kan wadah untuk siswa, menuju siswa yang tangguh, berakhlak mulia, disiplin dan tertib.</li>
+                <?php
+                $visi_lines = explode("\n", $data['visi']);
+                foreach ($visi_lines as $i => $line) {
+                    echo "<li>" . ($i + 1) . ". " . htmlspecialchars($line) . "</li>";
+                }
+                ?>
             </ul>
         </div>
     </section>
 
     <section class="sec3">
         <div class="misi">
-            <h1>misi</h1>
+            <h1>Misi</h1>
             <ul>
-                <li>1. memajukan prestasi sekolah dengan segala bidang.</li>
-                <li>2. menjadikan lingkungan sekolah yang aman dan nyaman.</li>
-                <li>3. Memperkuat rasa kekeluargaan antar siswa dan guru.</li>
-                <li>4. Membuat program pengembangan bakat dan potensi siswa.</li>
+                <?php
+                $misi_lines = explode("\n", $data['misi']);
+                foreach ($misi_lines as $i => $line) {
+                    echo "<li>" . ($i + 1) . ". " . htmlspecialchars($line) . "</li>";
+                }
+                ?>
             </ul>
         </div>
     </section>
 
     <section class="sec4">
         <center>
-            <img src="/Backend/img/poster.png" alt="" srcset="">
+            <img src="<?php echo $data['poster']; ?>" alt="Poster Kandidat">
         </center>
     </section>
-    
+
     <footer>
-        <p>&copy; 2025, SuaraKita. All rights reserved.
-        </p>
+        <p>&copy; 2025, SuaraKita. All rights reserved.</p>
     </footer>
 </body>
 
