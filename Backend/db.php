@@ -35,14 +35,14 @@ class Database
         return $query->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Tambah pemilih dengan password hashed
-    function inputPemilih($nis, $password, $username, $nama)
+    // Tambah pemilih
+    function inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih)
     {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->connect->prepare("INSERT INTO pengguna (nis, password, username, nama, role, validasi_memilih) VALUES (?, ?, ?, ?, 'user', 'belum_memilih')");
-        $stmt->bind_param("ssss", $nis, $hashed_password, $username, $nama);
+        $stmt = $this->connect->prepare("INSERT INTO pengguna (nis, password, username, nama, role, validasi_memilih) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $nis, $password, $username, $nama, $role, $validasi_memilih);
         return $stmt->execute();
     }
+
 
     // Tambah kandidat
     public function inputKandidat($foto, $poster, $nis, $nama, $visi, $misi, $deskripsi)
@@ -52,13 +52,12 @@ class Database
         $stmt->execute();
         $stmt->close();
     }
-    
-    
+
+
 
     // Edit pemilih
     function editPemilih($nis, $username, $nama, $password)
     {
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->connect->prepare("UPDATE pengguna SET username=?, nama=?, password=? WHERE nis=?");
         $stmt->bind_param("ssss", $username, $nama, $hashed_password, $nis);
         return $stmt->execute();
@@ -131,8 +130,16 @@ class Database
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
 
-        return ($result && password_verify($password, $result['password'])) ? $result : false;
+        if (!$result) return false;
+
+        // Cek apakah password di-hash atau tidak
+        if (password_get_info($result['password'])['algo']) {
+            return password_verify($password, $result['password']) ? $result : false;
+        } else {
+            return ($password === $result['password']) ? $result : false;
+        }
     }
+
     // Logout
     function logout()
     {
@@ -142,28 +149,31 @@ class Database
         exit();
     }
 
-    public function simpanPengaturanWaktu($waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount) {
+    public function simpanPengaturanWaktu($waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount)
+    {
         $stmt = $this->getConnection()->prepare("INSERT INTO pengaturan_waktu 
             (waktu_mulai_memilih, waktu_selesai_memilih, waktu_quickcount, waktu_selesai_quickcount) 
             VALUES (?, ?, ?, ?)");
         $stmt->bind_param("ssss", $waktu_mulai_memilih, $waktu_selesai_memilih, $waktu_quickcount, $waktu_selesai_quickcount);
         return $stmt->execute();
     }
-    
-    public function getPengaturanWaktu() {
+
+    public function getPengaturanWaktu()
+    {
         $query = "SELECT * FROM pengaturan_waktu ORDER BY id DESC LIMIT 1";
         $stmt = $this->connect->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result(); // ambil result
         return $result->fetch_assoc(); // ambil satu baris sebagai array asosiatif
     }
-    
-    public function getAllKandidat() {
+
+    public function getAllKandidat()
+    {
         $stmt = $this->connect->prepare("SELECT nama, jumlah_suara FROM kandidat");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
-    }    
+    }
 }
 
 // Instansiasi database

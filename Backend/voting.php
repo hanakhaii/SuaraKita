@@ -86,7 +86,7 @@ $dataKandidat = $dbsuara->viewKandidat();
                     <div class="kan-container">
                         <div class="kan">
                             <!-- Pastikan path file gambar benar -->
-                            <img src="../Backend/uploads/<?php echo $kandidat['foto']; ?>" alt="">
+                            <img src="<?php echo $kandidat['foto']; ?>" alt="">
                             <h1><?php echo $kandidat['nama']; ?></h1>
                         </div>
                         <div class="radio-container">
