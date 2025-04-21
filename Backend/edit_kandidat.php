@@ -20,6 +20,25 @@ $dbsuara = new Database();
             padding: 20px;
         }
 
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #bbc4c4;
+        }
+
+        ::-webkit-scrollbar-track:hover {      
+            background: transparent;
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #000dff;
+            border-radius: 6px;
+        }
+
         .logo {
             display: flex;
             align-items: center;

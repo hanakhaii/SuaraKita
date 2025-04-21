@@ -46,9 +46,9 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-
-    <header>
-        <h1><span>Suara</span>Kita</h1>
+    <div class="scroll-area">
+        <header>
+            <h1><span>Suara</span>Kita</h1>
         <nav>
             <ul>
                 <li><a href="#kandidat">Kandidat</a></li>
@@ -56,7 +56,7 @@ if ($result->num_rows > 0) {
                 <li><a href="#vote">Pilih Sekarang</a></li>
                 <li><a href="#quick">QuickCount</a></li>
                 <li><a href="#" onclick="confirmLogout()">Logout</a></li>
-
+                
                 <script>
                     function confirmLogout() {
                         if (confirm("Apakah Anda yakin ingin logout?")) {
@@ -67,14 +67,14 @@ if ($result->num_rows > 0) {
             </ul>
         </nav>
     </header>
-
+    
     <section class="sec1">
         <div class="inline1">
             <h1>Halo, Selamat Datang <br> <span><?php echo $_SESSION['nama']; ?>!</span></h1>
             <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan.</p>
         </div>
     </section>
-
+    
     <section id="kandidat" class="sec2">
         <h1>KANDIDAT</h1>
         <div class="inline2">
@@ -83,16 +83,16 @@ if ($result->num_rows > 0) {
                 <img src="/Backend/img/harry.jpg" alt="">
                 <p>[Nama Kandidat] adalah seorang pemimpin yang berkomitmen pada inovasi dan kemajuan. Dengan pengalaman
                     dan dedikasinya, ia ingin membawa perubahan positif bagi kita semua.</p>
-                <button onclick="window.location.href='tampilan-kandidat1.php'">Lihat</button>
+                    <button onclick="window.location.href='tampilan-kandidat1.php'">Lihat</button>
             </div>
             <div class="kandidat">
                 <h1 class="judul">02</h1>
                 <img src="/Backend/img/harry2.jpg" alt="">
                 <p>Dengan semangat kebersamaan, [Nama Kandidat] bertekad menciptakan lingkungan yang lebih harmonis dan
                     inklusif. Ia percaya bahwa setiap suara memiliki peran penting dalam membangun masa depan.</p>
-                <button onclick="window.location.href='tampilan-kandidat2.php'">Lihat</button>
+                    <button onclick="window.location.href='tampilan-kandidat2.php'">Lihat</button>
 
-            </div>
+                </div>
             <div class="kandidat">
                 <h1 class="judul">03</h1>
                 <img src="/Backend/img/harry3.jpg" alt="">
@@ -100,11 +100,12 @@ if ($result->num_rows > 0) {
                     dan berkolaborasi untuk mencapai tujuan bersama.
                 </p>
                 <button onclick="window.location.href='tampilan-kandidat3.php'">Lihat</button>
-
+                
             </div>
         </div>
+    </div>
     </section>
-
+    
     <section id="rules" class="sec3">
         <div class="inline3">
             <h1>Peraturan yang berlaku</h1>
