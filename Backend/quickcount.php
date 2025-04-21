@@ -4,7 +4,23 @@ date_default_timezone_set('Asia/Jakarta');
 include 'db.php';
 $dbsuara = new Database();
 
-// Ambil waktu quickcount terbaru
+// Jika user belum login, arahkan ke login
+if (!isset($_SESSION['nis'])) {
+    header("Location: login-user.php");
+    exit();
+}
+
+// Cek status pemilih
+$pemilih = $dbsuara->getPemilihById($_SESSION['nis']);
+if ($pemilih['validasi_memilih'] === 'belum_memilih') {
+    echo "<script>
+        alert('Anda belum melakukan voting. Tidak bisa mengakses halaman ini.');
+        window.location.href = 'dashboardser.php';
+    </script>";
+    exit();
+}
+
+// Ambil pengaturan quickcount
 $pengaturan = $dbsuara->getPengaturanWaktu();
 $sekarang = time();
 
@@ -12,14 +28,25 @@ if (!$pengaturan || !$pengaturan['waktu_quickcount'] || !$pengaturan['waktu_sele
     die("Quick count belum diatur!");
 }
 
-
 $waktu_mulai = strtotime($pengaturan['waktu_quickcount']);
 $waktu_selesai = strtotime($pengaturan['waktu_selesai_quickcount']);
 
-// Cek apakah waktu sekarang dalam rentang quick count
 if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
     die("Quick count hanya dapat diakses antara " . date('d M Y H:i', $waktu_mulai) . " hingga " . date('d M Y H:i', $waktu_selesai));
 }
+
+// Ambil data kandidat
+$kandidat = $dbsuara->getAllKandidat(); // pastikan ini ada di class Database
+$labels = [];
+$data = [];
+
+foreach ($kandidat as $k) {
+    $labels[] = $k['nama'];
+    $data[] = (int)$k['jumlah_suara'];
+}
+
+$labels_json = json_encode($labels);
+$data_json = json_encode($data);
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +54,11 @@ if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagram dengan Persentase</title>
+    <title>Quick Count - SuaraKita</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="quickcount.css">
 </head>
-<!-- hanaa cantikkk, lucuu, sayangg -->
+
 <body>
     <header>
         <div class="logo">
@@ -45,51 +71,42 @@ if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
     </header>
 
     <section class="h1">
-        <div>
-            <h1 style="text-align: center;">
-                HASIL REKAPITULASI PEMILIHAN <br> KETUA OSIS SMKN 1 DEPOK
-            </h1>
-        </div>
+        <h1 style="text-align: center;">HASIL REKAPITULASI PEMILIHAN<br>KETUA OSIS SMKN 1 DEPOK</h1>
     </section>
 
     <section class="data">
         <div style="width: 50%; margin: auto;">
-            <canvas id="myChart" style="display: inline;"></canvas>
+            <canvas id="myChart"></canvas>
         </div>
+
         <script>
-            // Data diagram
-            const labels = ['Kandidat A', 'Kandidat B', 'Kandidat C'];
-            const data = [140, 125, 35]; // Jumlah suara
+            const labels = <?= $labels_json ?>;
+            const data = <?= $data_json ?>;
 
-            // Total jumlah suara
-            const total = data.reduce((sum, value) => sum + value, 0);
+            const total = data.reduce((sum, val) => sum + val, 0);
+            const percentages = data.map(v => ((v / total) * 100).toFixed(1) + '%');
 
-            // Hitung persentase setiap data
-            const percentages = data.map(value => ((value / total) * 100).toFixed(1) + '%');
-
-            // Buat grafik menggunakan Chart.js
             const ctx = document.getElementById('myChart').getContext('2d');
             const myChart = new Chart(ctx, {
-                type: 'pie', // Jenis grafik
+                type: 'pie',
                 data: {
-                    labels: labels.map((label, index) => `${label} (${percentages[index]})`), // Perbaikan template literal
+                    labels: labels.map((label, i) => `${label} (${percentages[i]})`),
                     datasets: [{
                         data: data,
-                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Warna untuk setiap bagian
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'], // tambahin sesuai jumlah kandidat
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         legend: {
-                            display: true,
-                            position: 'top', // Posisi legenda
+                            position: 'top',
                         },
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {
-                                    const index = tooltipItem.dataIndex;
-                                    return `${labels[index]}: ${data[index]} suara (${percentages[index]})`; // Perbaikan template literal
+                                    const i = tooltipItem.dataIndex;
+                                    return `${labels[i]}: ${data[i]} suara (${percentages[i]})`;
                                 }
                             }
                         }
@@ -101,25 +118,15 @@ if ($sekarang < $waktu_mulai || $sekarang > $waktu_selesai) {
 
     <section class="disclaimer">
         <div class="paragraf">
-            <h1 style="text-align: center;"> Disclaimer </h1>
-            <li><span>1) </span> Data Suara berdasarkan quikcount tidak menampilkan jumlah data secara tranparan atau
-                terang-terangan.
-                Baru berupa penghitungan oleh program menjadi dalam bentuk nilai persen.</li>
-            <li> <span>2) </span> Pengguna di harapkan tidak menganggap data ini sebagai data yang bersifat real atau
-                permanen. Karena jumlah
-                persentase data ini dapat berubah sesuai dengan jumlah data yang masuk
-            </li>
-            <li> <span>3) </span> Pengguna harap bijak dalam menyebarkan informasi karena quickqount hanya menampikan
-                data secara umum dan
-                dalam bentuk persentase yang nilainya dapat berubah kapan saja. Tunggu hingga mendapat kan informasi
-                resmi
-                dari pengurus.
-            </li>
+            <h1 style="text-align: center;">Disclaimer</h1>
+            <li><span>1)</span> Data suara berdasarkan quick count hanya menampilkan persentase, bukan jumlah secara eksplisit.</li>
+            <li><span>2)</span> Persentase dapat berubah seiring waktu, bukan data final.</li>
+            <li><span>3)</span> Harap tidak menyebarluaskan informasi sebelum hasil resmi dari panitia diumumkan.</li>
         </div>
     </section>
 
     <footer>
-        <p> &copy; 2025, SuaraKita. All rights reserved.</p>
+        <p>&copy; 2025, SuaraKita. All rights reserved.</p>
     </footer>
 </body>
 

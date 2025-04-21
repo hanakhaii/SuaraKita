@@ -158,7 +158,12 @@ class Database
         return $result->fetch_assoc(); // ambil satu baris sebagai array asosiatif
     }
     
-    
+    public function getAllKandidat() {
+        $stmt = $this->connect->prepare("SELECT nama, jumlah_suara FROM kandidat");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
 }
 
 // Instansiasi database
