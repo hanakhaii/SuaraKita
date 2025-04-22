@@ -140,7 +140,8 @@ $dbsuara = new Database();
             <!-- tombol aksi -->
             <div class="tombol-aksi-pengguna">
                 <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
-                <a href="" style="background-color: #FC0134;">HAPUS</a>
+                <a href="process.php?action=delete_all_pemilih" 
+                onclick="return confirm('Yakin ingin menghapus semua pemilih?')" style="background-color: #FC0134;">HAPUS</a>
             </div>
         </div>
     </main>

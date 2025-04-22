@@ -142,7 +142,25 @@ elseif ($action == "edit_pemilih") {
     } else {
         die("Gagal menghapus kandidat!");
     }
-} elseif ($action == "login") {
+}   elseif ($action == "delete_all_pemilih") {
+    // panggil method yang baru saja kita buat
+    if ($dbsuara->deleteAllPemilih()) {
+        header("Location: data_pemilih.php");
+        exit();
+    } else {
+        die("Gagal menghapus semua pemilih!");
+    }
+}
+elseif ($action === "delete_all_kandidat") {
+    // panggil method yang baru saja kita buat
+    if ($dbsuara->deleteAllKandidat()) {
+        header("Location: data_kandidat.php");
+        exit();
+    } else {
+        die("Gagal menghapus semua kandidat!");
+    }
+}
+elseif ($action == "login") {
     $result = $dbsuara->loginAdmin($_POST['username'], $_POST['password']);
     if ($result) {
         session_start();

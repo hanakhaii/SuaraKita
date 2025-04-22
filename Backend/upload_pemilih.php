@@ -133,7 +133,7 @@ $dbsuara = new Database();
                 <input type="number" id="nis" name="nis" required>
             </div>
 
-            <!-- Input Password -->
+            <!-- Input Password --> 
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="text" id="password" name="password" required>

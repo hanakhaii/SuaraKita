@@ -85,11 +85,25 @@ class Database
         return $stmt->execute();
     }
 
+    // Hapus semua kandidat
+    public function deleteAllKandidat()
+    {
+        $stmt = $this->connect->prepare("DELETE FROM kandidat");
+        return $stmt->execute();
+    }
+
     // Hapus pemilih
     function deletePemilih($nis)
     {
         $stmt = $this->connect->prepare("DELETE FROM pengguna WHERE nis=?");
         $stmt->bind_param("s", $nis);
+        return $stmt->execute();
+    }
+
+    // Hapus semua pemilih
+    public function deleteAllPemilih()
+    {
+        $stmt = $this->connect->prepare("DELETE FROM pengguna");
         return $stmt->execute();
     }
 

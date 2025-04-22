@@ -12,7 +12,8 @@ $dbsuara = new Database();
   <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/x-con" href="">
   <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="dashboardmin.css" />
@@ -152,7 +153,10 @@ $dbsuara = new Database();
   <!-- tombol aksi -->
   <div class="tombol-aksi-kandidat">
     <a href="upload_kandidat.php" style="background-color: #181B3C;">TAMBAH</a>
-    <a href="" style="background-color: #FC0134;">HAPUS</a>
+    <a href="process.php?action=delete_all_kandidat" style="background-color: #FC0134;"
+      onclick="return confirm('Yakin ingin menghapus SEMUA kandidat beserta datanya?')">
+      HAPUS
+    </a>
   </div>
   </main>
   </div>
