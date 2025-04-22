@@ -178,9 +178,9 @@ body {
             margin: 0 auto;
         }
 
-        .tablemilih{
-            width: 700px;
-            border-collapse: collapse;
+        .tablemilih {
+            width: 95%; /* atau nilai tertentu */
+            max-width: 1200px; /* contoh */
             margin: 0 auto;
         }
         
@@ -256,14 +256,14 @@ body {
             display: flex;
         }
 
-        /* Style untuk tombol TAMBAH dan HAPUS data pengguna */
         .tombol-aksi-pengguna {
-            margin-top: -50px;
+            width: 95%; /* sama dengan tabel */
+            max-width: 1200px; /* sama dengan tabel */
+            margin: 20px auto 100px;
             text-align: right;
-            margin-bottom: 100px;
-            transform: translate(-13%);
+            padding-right: 20px;
         }
-
+        
         .tombol-aksi-pengguna a {
             padding: 6px 10px;
             border-radius: 8px;
@@ -273,19 +273,19 @@ body {
             transition: all 0.3s;
             margin-left: 15px;
         }
-
+        
         .tombol-aksi-pengguna a:first-child {
             background-color: #0066FF;
             border: none;
         }
-
+        
         .tombol-aksi-pengguna a:last-child {
             background-color: #FF4444;
             border: none;
         }
-
+        
         .tombol-aksi-pengguna a:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px); /* Efek hover yang lebih halus */
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 

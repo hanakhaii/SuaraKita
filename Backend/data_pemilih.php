@@ -8,6 +8,10 @@ $dbsuara = new Database();
 
 <head>
     <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
@@ -107,10 +111,7 @@ $dbsuara = new Database();
                         <tr>
                             <th>NO</th>
                             <th>NIS</th>
-
-                            <th>USERNAME</th>
                             <th>NAMA</th>
-
                             <th>VALIDASI PEMILIHAN</th>
                             <th>AKSI</th>
                         </tr>
@@ -123,7 +124,6 @@ $dbsuara = new Database();
                             <tr>
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $dataPemilih['nis']; ?></td>
-                                <td><?php echo $dataPemilih['username']; ?></td>
                                 <td><?php echo $dataPemilih['nama']; ?></td>
                                 <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
                                 <td>
@@ -137,14 +137,12 @@ $dbsuara = new Database();
                         </tbody>
                 </table>
             </section>
-    </div>
-    
-    <!-- tombol aksi -->
-    <div class="tombol-aksi-kandidat">
-        <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
-        <a href="" style="background-color: #FC0134;">HAPUS</a>
-    </div>
-
+            <!-- tombol aksi -->
+            <div class="tombol-aksi-pengguna">
+                <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
+                <a href="" style="background-color: #FC0134;">HAPUS</a>
+            </div>
+        </div>
     </main>
     </div>
 

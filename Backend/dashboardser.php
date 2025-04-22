@@ -49,6 +49,10 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
     <link rel="stylesheet" href="dashboardser.css">
     <title>Dashboard User</title>
 </head>
@@ -91,7 +95,7 @@ if ($result->num_rows > 0) {
                         <div class="kandidat">
                             <h1 class="judul"><?php echo $row['nama']; ?></h1>
                             <img src="<?php echo $row['foto']; ?>" alt="">
-                            <p><?php echo substr($row['deskripsi'], 0, 150); ?>...</p>
+                            <p><?php echo substr($row['deskripsi'], 0, 150); ?></p>
                             <?php
                             $nama_file = strtolower(str_replace(' ', '-', $row['nama']));
                             ?>

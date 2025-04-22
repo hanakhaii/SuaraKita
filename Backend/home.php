@@ -51,7 +51,7 @@
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         
-        <section class="slideshow">
+        <section id="home" class="slideshow">
             <div class="slides">
                 <div class="slide" style="background-image: url('../Backend/img/ilustaratsiSatu.jpg');">
                     <div class="text-overlay">
@@ -80,7 +80,7 @@
         </section>
 
         <!-- about us section  -->
-        <section class="about-us">
+        <section id="about" class="about-us">
             <div style="transform: translate(0, 18%);">
                 <h2>Tentang Kami</h2>
                 <h4>Suara Anda, Masa Depan Kita!</h4>
@@ -105,7 +105,7 @@
 
     <main>
         <!-- kandidat section -->
-         <section class="kandidat">
+         <section id="kandidat" class="kandidat">
             <div class="kandidat-space">
                 <h2>PILIH SEKARANG!</h2>
                 <div class="kandidat-grid">
@@ -129,7 +129,7 @@
          </section>
 
          <!-- quickcount -->
-          <section class="quickcount">
+          <section id="quickcount" class="quickcount">
             <h2>QUICKCOUNT</h2>
             <section class="data">
                 <div style="width: 30%; height: 30%; margin: auto;">
@@ -196,6 +196,23 @@
 
     <!-- JavaScript -->
     <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const links = document.querySelectorAll("nav ul li a[href^='#']");
+                links.forEach(link => {
+                    link.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute("href").substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 50,
+                                behavior: "smooth"
+                            });
+                        }
+                    });
+                });
+            });
+
         function requireLogin() {
             var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
             loginModal.show();

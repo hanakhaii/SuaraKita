@@ -55,6 +55,10 @@ $data_json = json_encode($data);
 <head>
     <meta charset="UTF-8">
     <title>Quick Count - SuaraKita</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="quickcount.css">
 </head>
