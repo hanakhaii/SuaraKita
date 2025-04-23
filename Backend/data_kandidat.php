@@ -1,6 +1,8 @@
 <?php
 include 'db.php';
 $dbsuara = new Database();
+
+$totalSuara = $dbsuara->getTotalSuara();
 ?>
 
 <!DOCTYPE html>
@@ -125,17 +127,21 @@ $dbsuara = new Database();
           <tbody>
             <?php
             foreach ($dbsuara->viewKandidat() as $dataKandidat) {
+              // Hitung persentase
+              $persentase = ($totalSuara > 0)
+                ? ($dataKandidat['jumlah_suara'] / $totalSuara) * 100
+                : 0;
             ?>
               <tr>
-                <td><?php echo $dataKandidat['no_urut']; ?></td>
+                <td><?= $dataKandidat['no_urut'] ?></td>
                 <td><img src="<?= $dataKandidat['foto'] ?>"></td>
-                <td><?php echo $dataKandidat['nis']; ?></td>
-                <td><?php echo $dataKandidat['nama']; ?></td>
-                <td><?php echo $dataKandidat['visi']; ?></td>
-                <td><?php echo $dataKandidat['misi']; ?></td>
-                <td><?php echo $dataKandidat['deskripsi']; ?></td>
+                <td><?= $dataKandidat['nis'] ?></td>
+                <td><?= $dataKandidat['nama'] ?></td>
+                <td><?= $dataKandidat['visi'] ?></td>
+                <td><?= $dataKandidat['misi'] ?></td>
+                <td><?= $dataKandidat['deskripsi'] ?></td>
                 <td><img src="<?= $dataKandidat['poster'] ?>"></td>
-                <td></td>
+                <td><?= number_format($persentase, 2) ?>%</td>
                 <td>
                   <div class="flex-button">
                     <a href="edit_kandidat.php?no_urut=<?php echo $dataKandidat['no_urut']; ?>&action=edit_kandidat">Edit</a> |
@@ -143,9 +149,7 @@ $dbsuara = new Database();
                   </div>
                 </td>
               </tr>
-            <?php
-            }
-            ?>
+            <?php } ?>
           </tbody>
         </table>
       </section>

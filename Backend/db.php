@@ -22,8 +22,7 @@ class Database
     }
 
     // Tampilkan semua kandidat
-    function viewKandidat()
-    {
+    public function viewKandidat() {
         $query = $this->connect->query("SELECT * FROM kandidat");
         return $query->fetch_all(MYSQLI_ASSOC);
     }
@@ -183,10 +182,30 @@ class Database
 
     public function getAllKandidat()
     {
-        $stmt = $this->connect->prepare("SELECT nama, jumlah_suara FROM kandidat");
+        $stmt = $this->connect->prepare("SELECT no_urut, nama, jumlah_suara, foto FROM kandidat");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllSuara()
+    {
+        $query = "SELECT s.*, p.nama AS nama_pemilih, k.nama AS nama_kandidat 
+                FROM suara s 
+                JOIN pengguna p ON s.nis_pemilih = p.nis 
+                JOIN kandidat k ON s.no_urut_kandidat = k.no_urut";
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Di dalam class Database di db.php
+    public function getTotalSuara()
+    {
+        $query = "SELECT SUM(jumlah_suara) as total FROM kandidat";
+        $result = $this->connect->query($query);
+        $row = $result->fetch_assoc();
+        return $row['total'] ?? 0;
     }
 }
 

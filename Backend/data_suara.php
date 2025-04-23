@@ -1,3 +1,11 @@
+<?php
+include 'db.php';
+$db = new Database();
+$kandidatData = $db->getAllKandidat(); // Ambil data kandidat dari database
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +15,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <link rel="stylesheet" href="dashboardmin.css">
@@ -103,56 +112,47 @@
                 <canvas id="voteChart" style="display: inline;"></canvas>
             </div>
 
-            <div class="data-container">
-                <div class="data-box">
-                    <div><img src="../img/bng_mandra.jpg" alt="" srcset="" style="width: 60px; border-radius: 50%;"></div>
-                    <div>
-                        <div class="candidate-name">Kandidat 1</div>
-                        <div>
-                            <p>Bang Mandra</p>
-                        </div>
-                    </div>
-                    <div class="horizontal-line"></div>
-                    <div>
-                        <div class="vote-count">1.234</div>
-                        <div class="percentage">32%</div>
-                    </div>
-                </div>
+            <!-- Di bagian HTML, tambahkan ini setelah chart -->
+            <div class="table-container">
+                <h2>Detail Data Suara</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NIS Pemilih</th>
+                            <th>Nama Pemilih</th>
+                            <th>Kandidat Dipilih</th>
+                            <th>Waktu Memilih</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $suara = $db->getAllSuara();
 
-                <div class="data-box">
-                    <div><img src="../img/davit_glasses.jpg" alt="" srcset="" style="width: 60px; border-radius: 50%;"></div>
-                    <div>
-                        <div class="candidate-name">Kandidat 2</div>
-                        <div>
-                            <p>David Glasses</p>
-                        </div>
-                    </div>
-                    <div class="horizontal-line"></div>
-                    <div>
-                        <div class="vote-count">987</div>
-                        <div class="percentage">26%</div>
-                    </div>
-                </div>
-
-                <div class="data-box">
-                    <div><img src="../img/amba_yungkai.jpg" alt="" srcset="" style="width: 60px; border-radius: 50%;"></div>
-                    <div class="name">
-                        <div class="candidate-name">Kandidat 3</div>
-                        <div>
-                            <p>Bung Amba</p>
-                        </div>
-                    </div>
-                    <div class="horizontal-line"></div>
-                    <div class="jumlah">
-                        <div class="vote-count">1.567</div>
-                        <div class="percentage">42%</div>
-                    </div>
-                </div>
+                        foreach ($suara as $data) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($data['id_suara']) . "</td>";
+                            echo "<td>" . htmlspecialchars($data['nis_pemilih']) . "</td>";
+                            echo "<td>" . htmlspecialchars($data['nama_pemilih']) . "</td>";
+                            echo "<td>" . htmlspecialchars($data['no_urut_kandidat'] . " - " . $data['nama_kandidat']) . "</td>";
+                            echo "<td>" . htmlspecialchars($data['waktu_milih']) . "</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- <script src="../js/script(hanaa).js"></script> -->
+
+
         </main>
     </div>
+
+    <script>
+        // Konversi data PHP ke JavaScript
+        const kandidatLabels = <?php echo json_encode(array_column($kandidatData, 'nama')); ?>;
+        const jumlahSuara = <?php echo json_encode(array_column($kandidatData, 'jumlah_suara')); ?>;
+    </script>
 
     <!-- javascript -->
     <script>
@@ -214,16 +214,17 @@
             li.addEventListener('click', handleLiClick);
         });
 
-        // Data untuk diagram
+        // Ganti data statis dengan data dari PHP
         const voteData = {
-            labels: ['Kandidat 1', 'Kandidat 2', 'Kandidat 3'],
+            labels: kandidatLabels, // Menggunakan nama kandidat dari database
             datasets: [{
                 label: 'Jumlah Suara',
-                data: [1234, 987, 167],
+                data: jumlahSuara, // Menggunakan jumlah suara dari database
                 backgroundColor: [
                     '#3498db',
                     '#e74c3c',
-                    '#2ecc71'
+                    '#2ecc71',
+                    // Tambahkan lebih banyak warna jika ada kandidat lebih dari 3
                 ],
                 borderWidth: 1
             }]
