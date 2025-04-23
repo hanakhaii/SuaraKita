@@ -30,7 +30,7 @@ class Database
     // Tampilkan semua pemilih
     function viewPemilih()
     {
-        $query = $this->connect->query("SELECT * FROM pengguna");
+        $query = $this->connect->query("SELECT * FROM pengguna WHERE role = 'user'");
         return $query->fetch_all(MYSQLI_ASSOC);
     }
 
@@ -102,7 +102,7 @@ class Database
     // Hapus semua pemilih
     public function deleteAllPemilih()
     {
-        $stmt = $this->connect->prepare("DELETE FROM pengguna");
+        $stmt = $this->connect->prepare("DELETE FROM pengguna WHERE role = 'user'");
         return $stmt->execute();
     }
 
