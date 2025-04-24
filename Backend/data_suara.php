@@ -1,9 +1,8 @@
 <?php
 include 'db.php';
 $db = new Database();
-$kandidatData = $db->getAllKandidat(); // Ambil data kandidat dari database
-
-
+$kandidatData = $db->getAllKandidat();
+$totalSuara = $dbsuara->getTotalSuara();
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +21,14 @@ $kandidatData = $db->getAllKandidat(); // Ambil data kandidat dari database
     <link rel="stylesheet" href="dashboardmin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Admin SuaraKita</title>
+
+    <style>
+        img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 
 <body>
@@ -131,9 +138,30 @@ $kandidatData = $db->getAllKandidat(); // Ambil data kandidat dari database
                     </tbody>
                 </table>
             </div>
-
-
-
+            <?php
+            // Loop untuk menampilkan data kandidat + persentase
+            foreach ($kandidatData as $dataKandidat) {
+                $persentase = ($totalSuara > 0)
+                    ? ($dataKandidat['jumlah_suara'] / $totalSuara) * 100
+                    : 0;
+            ?>
+            <div class="data-container">
+                <div class="data-box">
+                    <div class="img-kandidat"><img src="<?= $dataKandidat['foto'] ?>"></div>
+                    <div class="name">
+                        <div class="candidate-name">Kandidat <?= $dataKandidat['no_urut'] ?></div>
+                        <div>
+                            <p><?= $dataKandidat['nama'] ?></p>
+                        </div>
+                    </div>
+                    <div class="horizontal-line"></div>
+                    <div class="jumlah">
+                        <div class="vote-count"><?= number_format($dataKandidat['jumlah_suara']) ?></div>
+                        <div class="percentage"><?= number_format($persentase, 2) ?>%</div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?>
         </main>
     </div>
 
