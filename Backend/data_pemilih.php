@@ -1,6 +1,8 @@
 <?php
 include 'db.php';
 $dbsuara = new Database();
+
+$search = isset($_GET['search']) ? $_GET['search'] : '';
 ?>
 <!-- dataa pemilihhhhhhhhhh -->
 <!DOCTYPE html>
@@ -11,7 +13,8 @@ $dbsuara = new Database();
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
@@ -99,12 +102,32 @@ $dbsuara = new Database();
 
         <!-- content -->
         <main class="table_view" align="center">
-            <!-- judul -->
+
             <section class="table_header">
                 <h1>DATA PEMILIH</h1>
+                <form method="GET" action="">
+                    <center>
+                        <div class="search-input">
+                            <input type="text" name="search" placeholder="Cari nama pemilih..."
+                                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                            <button type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396l1.414-1.414l-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8s3.589 8 8 8m0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6s-6-2.691-6-6s2.691-6 6-6" />
+                                </svg>
+                                Cari
+                            </button>
+                            <?php if (isset($_GET['search']) && !empty($_GET['search'])) : ?>
+                                <a href="data_pemilih.php" class="reset-search" title="Reset pencarian">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" />
+                                    </svg>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </center>
+                </form>
             </section>
 
-            <!-- daftar penmilih (data bersifat dummy) -->
             <section class="table_body_pemilih">
                 <table align="center" border="1" class="tablemilih">
                     <thead>
@@ -116,37 +139,116 @@ $dbsuara = new Database();
                             <th>AKSI</th>
                         </tr>
                     </thead>
-                    <?php
-                    $no = 1;
-                    foreach ($dbsuara->viewPemilih() as $dataPemilih) {
-                    ?>
-                        <tbody>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+                        if (empty($dbsuara->viewPemilih($search))) : ?>
                             <tr>
-                                <td><?php echo $no++; ?></td>
-                                <td><?php echo $dataPemilih['nis']; ?></td>
-                                <td><?php echo $dataPemilih['nama']; ?></td>
-                                <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
-                                <td>
-                                    <div class="flex-button-milih">
-                                        <a href="edit_pemilih.php?nis=<?php echo $dataPemilih['nis']; ?>">Edit</a> |
-                                        <a href="process.php?action=delete_pemilih&nis=<?php echo $dataPemilih['nis']; ?>" onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
-                                    </div>
+                                <td colspan="5" style="text-align: center; padding: 30px;">
+                                    Tidak ada data ditemukan untuk "<?php echo htmlspecialchars($search) ?>"
                                 </td>
                             </tr>
-                        <?php } ?>
-                        </tbody>
+                        <?php else : ?>
+                            <?php foreach ($dbsuara->viewPemilih($search) as $dataPemilih) : ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $dataPemilih['nis']; ?></td>
+                                    <td><?php echo $dataPemilih['nama']; ?></td>
+                                    <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
+                                    <td>
+                                        <div class="flex-button-milih">
+                                            <a href="edit_pemilih.php?nis=<?php echo $dataPemilih['nis']; ?>">Edit</a> |
+                                            <a href="process.php?action=delete_pemilih&nis=<?php echo $dataPemilih['nis']; ?>"
+                                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </tbody>
                 </table>
             </section>
             <!-- tombol aksi -->
             <div class="tombol-aksi-pengguna">
                 <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
-                <a href="process.php?action=delete_all_pemilih" 
-                onclick="return confirm('Yakin ingin menghapus semua pemilih?')" style="background-color: #FC0134;">HAPUS</a>
+                <a href="process.php?action=delete_all_pemilih"
+                    onclick="return confirm('Yakin ingin menghapus semua pemilih?')" style="background-color: #FC0134;">HAPUS</a>
             </div>
-        </div>
-    </main>
+        </main>
     </div>
 
+    <style>
+            .search-input {
+                position: relative;
+                width: 300px;
+            }
+
+            .search-input input {
+                width: 100%;
+                padding: 12px 50px 12px 20px;
+                border: 2px solid #ddd;
+                border-radius: 30px;
+                font-size: 14px;
+                transition: all 0.3s;
+                background: #f8f9fa;
+            }
+
+            .search-input input:focus {
+                outline: none;
+                border-color: #0066FF;
+                box-shadow: 0 0 12px rgba(0, 102, 255, 0.2);
+                background: white;
+            }
+
+            .search-input button {
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: #0066FF;
+                border: none;
+                cursor: pointer;
+                padding: 8px 15px;
+                border-radius: 25px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: white;
+                transition: all 0.3s;
+            }
+
+            .search-input button:hover {
+                background: #0052cc;
+                box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
+            }
+
+            .search-input button svg {
+                width: 18px;
+                height: 18px;
+                color: white;
+            }
+
+            .reset-search {
+                position: absolute;
+                right: 110px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #999;    
+                cursor: pointer;
+                transition: all 0.2s;
+                background: rgba(255, 255, 255, 0.9);
+                padding: 4px;
+                border-radius: 50%;
+                display: flex;
+            }
+
+            .reset-search:hover {
+                color: #ff4444;
+                background: rgba(255, 68, 68, 0.1);
+            }
+    </style>
     <!-- javascript -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

@@ -181,7 +181,7 @@ body {
         .tablemilih {
             width: 95%; /* atau nilai tertentu */
             max-width: 1200px; /* contoh */
-            margin: 0 auto;
+            /* margin: 0 auto; */margin-top: 20px;
         }
         
         th {

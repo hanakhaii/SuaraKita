@@ -22,15 +22,23 @@ class Database
     }
 
     // Tampilkan semua kandidat
-    public function viewKandidat() {
+    public function viewKandidat()
+    {
         $query = $this->connect->query("SELECT * FROM kandidat");
         return $query->fetch_all(MYSQLI_ASSOC);
     }
 
     // Tampilkan semua pemilih
-    function viewPemilih()
+    function viewPemilih($search = '')
     {
-        $query = $this->connect->query("SELECT * FROM pengguna WHERE role = 'user'");
+        $sql = "SELECT * FROM pengguna WHERE role = 'user'";
+
+        if (!empty($search)) {
+            $search = $this->connect->real_escape_string($search);
+            $sql .= " AND nama LIKE '%$search%'";
+        }
+
+        $query = $this->connect->query($sql);
         return $query->fetch_all(MYSQLI_ASSOC);
     }
 
