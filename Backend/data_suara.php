@@ -115,8 +115,6 @@ $totalSuara = $dbsuara->getTotalSuara();
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NIS Pemilih</th>
-                            <th>Nama Pemilih</th>
                             <th>Kandidat Dipilih</th>
                             <th>Waktu Memilih</th>
                         </tr>
@@ -128,8 +126,6 @@ $totalSuara = $dbsuara->getTotalSuara();
                         foreach ($suara as $data) {
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($data['id_suara']) . "</td>";
-                            echo "<td>" . htmlspecialchars($data['nis_pemilih']) . "</td>";
-                            echo "<td>" . htmlspecialchars($data['nama_pemilih']) . "</td>";
                             echo "<td>" . htmlspecialchars($data['no_urut_kandidat'] . " - " . $data['nama_kandidat']) . "</td>";
                             echo "<td>" . htmlspecialchars($data['waktu_milih']) . "</td>";
                             echo "</tr>";
