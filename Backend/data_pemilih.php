@@ -194,7 +194,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
             .search-input button {
                 position: absolute;
-                right: 5px;
+                right: -23%;
                 top: 50%;
                 transform: translateY(-50%);
                 background: #0066FF;
@@ -222,9 +222,8 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
             .reset-search {
                 position: absolute;
-                right: 110px;
-                top: 50%;
-                transform: translateY(-50%);
+                right: 5%;
+                top: 15%;
                 color: #999;    
                 cursor: pointer;
                 transition: all 0.2s;
@@ -236,6 +235,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
             .reset-search:hover {
                 color: #ff4444;
+                transform: translateY(-50%);
                 background: rgba(255, 68, 68, 0.1);
             }
     </style>
