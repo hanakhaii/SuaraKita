@@ -128,7 +128,7 @@ $dbsuara = new Database();
             border-radius: 4px;
             cursor: pointer;
             transition: 0.3s ease-in-out;
-            margin-left: 461px;
+            margin-left: 458px;
         }
 
         button:hover {
@@ -156,6 +156,9 @@ $dbsuara = new Database();
         <h2>Tambah Kandidat</h2>
         <h3><Span>Suara</Span>Kita</h3>
         <form action="process.php" method="POST" enctype="multipart/form-data">
+            <!-- hidden input -->
+            <input type="hidden" name="no_urut">
+
             <label>Foto Kandidat:</label>
             <input type="file" name="foto" required><br>
 

@@ -458,3 +458,14 @@ body {
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
+        .settings {
+            display: flex;
+            gap: 10px;
+            background-color: transparent;
+            cursor: pointer;
+            padding: 20px;
+        }
+
+        .settings:hover {
+            background-color: #e9ecef;
+        }
