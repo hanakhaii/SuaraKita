@@ -161,83 +161,85 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
             </section>
             <!-- tombol aksi -->
             <div class="tombol-aksi-pengguna">
-                <a href="upload_pemilih.php? " style="background-color: #181B3C;">TAMBAH</a>
-                <a href="process.php?action=delete_all_pemilih" 
-                onclick="return confirm('Yakin ingin menghapus semua pemilih?')" style="background-color: #FC0134;">HAPUS</a>
+                <a href="upload_pemilih.php" style="background-color: #181B3C;">TAMBAH</a>
+                <a href="import_excel.php" style="background-color: #4CAF50;">IMPORT EXCEL</a>
+                <a href="process.php?action=delete_all_pemilih"
+                    onclick="return confirm('Yakin hapus semua pemilih?')"
+                    style="background-color: #FC0134;">HAPUS SEMUA</a>
             </div>
-        </div>
+    </div>
     </main>
     </div>
 
     <style>
-            .search-input {
-                position: relative;
-                width: 300px;
-            }
+        .search-input {
+            position: relative;
+            width: 300px;
+        }
 
-            .search-input input {
-                width: 100%;
-                padding: 12px 50px 12px 20px;
-                border: 2px solid #ddd;
-                border-radius: 30px;
-                font-size: 14px;
-                transition: all 0.3s;
-                background: #f8f9fa;
-            }
+        .search-input input {
+            width: 100%;
+            padding: 12px 50px 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
 
-            .search-input input:focus {
-                outline: none;
-                border-color: #0066FF;
-                box-shadow: 0 0 12px rgba(0, 102, 255, 0.2);
-                background: white;
-            }
+        .search-input input:focus {
+            outline: none;
+            border-color: #0066FF;
+            box-shadow: 0 0 12px rgba(0, 102, 255, 0.2);
+            background: white;
+        }
 
-            .search-input button {
-                position: absolute;
-                right: -23%;
-                top: 50%;
-                transform: translateY(-50%);
-                background: #0066FF;
-                border: none;
-                cursor: pointer;
-                padding: 8px 15px;
-                border-radius: 25px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                color: white;
-                transition: all 0.3s;
-            }
+        .search-input button {
+            position: absolute;
+            right: -23%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #0066FF;
+            border: none;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            transition: all 0.3s;
+        }
 
-            .search-input button:hover {
-                background: #0052cc;
-                box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
-            }
+        .search-input button:hover {
+            background: #0052cc;
+            box-shadow: 0 3px 10px rgba(0, 102, 255, 0.3);
+        }
 
-            .search-input button svg {
-                width: 18px;
-                height: 18px;
-                color: white;
-            }
+        .search-input button svg {
+            width: 18px;
+            height: 18px;
+            color: white;
+        }
 
-            .reset-search {
-                position: absolute;
-                right: 5%;
-                top: 15%;
-                color: #999;    
-                cursor: pointer;
-                transition: all 0.2s;
-                background: rgba(255, 255, 255, 0.9);
-                padding: 4px;
-                border-radius: 50%;
-                display: flex;
-            }
+        .reset-search {
+            position: absolute;
+            right: 5%;
+            top: 15%;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px;
+            border-radius: 50%;
+            display: flex;
+        }
 
-            .reset-search:hover {
-                color: #ff4444;
-                transform: translateY(-50%);
-                background: rgba(255, 68, 68, 0.1);
-            }
+        .reset-search:hover {
+            color: #ff4444;
+            transform: translateY(-50%);
+            background: rgba(255, 68, 68, 0.1);
+        }
     </style>
     <!-- javascript -->
     <script>
