@@ -126,10 +126,11 @@ elseif ($action == "edit_pemilih") {
 } elseif ($action == "delete_pemilih") {
     $nis = $_GET['nis'];
     if ($dbsuara->deletePemilih($nis)) {
-        header("location:data_pemilih.php");
+        header("location:data_pemilih.php?status=success&message=Data pemilih berhasil dihapus");
         exit();
     } else {
-        echo "Hapus pemilih gagal!";
+        header("location:data_pemilih.php?status=error&message=Gagal menghapus pemilih");
+        exit();
     }
 } elseif ($action == "delete_kandidat") {
     if (!isset($_GET['no_urut'])) {
@@ -143,12 +144,12 @@ elseif ($action == "edit_pemilih") {
         die("Gagal menghapus kandidat!");
     }
 }   elseif ($action == "delete_all_pemilih") {
-    // panggil method yang baru saja kita buat
     if ($dbsuara->deleteAllPemilih()) {
-        header("Location: data_pemilih.php");
+        header("Location: data_pemilih.php?status=success&message=Semua data pemilih berhasil dihapus");
         exit();
     } else {
-        die("Gagal menghapus semua pemilih!");
+        header("Location: data_pemilih.php?status=error&message=Gagal menghapus semua pemilih");
+        exit();
     }
 }
 elseif ($action === "delete_all_kandidat") {

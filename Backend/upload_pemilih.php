@@ -7,6 +7,7 @@ $dbsuara = new Database();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
@@ -179,6 +180,27 @@ $dbsuara = new Database();
                 <button type="submit" name="submit">Upload Pemilih</button>
             </div>
         </form>
+        <?php if (isset($_GET['status'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                <?php if ($_GET['status'] === 'sukses'): ?>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data pemilih berhasil ditambahkan.',
+                        confirmButtonColor: '#0066FF'
+                    });
+                <?php elseif ($_GET['status'] === 'gagal'): ?>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat menambahkan data.',
+                        confirmButtonColor: '#FC0134'
+                    });
+                <?php endif; ?>
+            });
+        </script>
+        <?php endif; ?>
     </main>
 </body>
 </html>

@@ -4,6 +4,12 @@ if (!isset($_SESSION['username'])) {
     header("Location: login-admin.php");
     exit;
 }
+
+$showWelcome = false;
+if (!isset($_SESSION['welcome_shown'])) {
+    $_SESSION['welcome_shown'] = true;
+    $showWelcome = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -241,6 +247,19 @@ if (!isset($_SESSION['username'])) {
             li.addEventListener('click', handleLiClick);
         });
     </script>
+
+    <?php if ($showWelcome): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                title: 'Welcome to Dashboard!',
+                text: 'Selamat datang di halaman admin SuaraKita!',
+                icon: 'success',
+                confirmButtonText: 'Oke'
+            });
+        });
+    </script>
+    <?php endif; ?>
 </body>
 
 </html>

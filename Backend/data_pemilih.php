@@ -10,6 +10,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
@@ -148,9 +149,10 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                                     <td><?php echo $dataPemilih['validasi_memilih']; ?></td>
                                     <td>
                                         <div class="flex-button-milih">
-                                            <a href="edit_pemilih.php?nis=<?php echo $dataPemilih['nis']; ?>">Edit</a> |
-                                            <a href="process.php?action=delete_pemilih&nis=<?php echo $dataPemilih['nis']; ?>"
-                                                onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                                            <div class="flex-button-milih">
+                                                <a href="edit_pemilih.php?nis=<?php echo $dataPemilih['nis']; ?>">Edit</a> |
+                                                <a href="#" onclick="confirmDelete('<?php echo $dataPemilih['nis']; ?>')">Hapus</a>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -163,9 +165,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
             <div class="tombol-aksi-pengguna">
                 <a href="upload_pemilih.php" style="background-color: #181B3C;">TAMBAH</a>
                 <a href="import_excel.php" style="background-color: #4CAF50;">IMPORT EXCEL</a>
-                <a href="process.php?action=delete_all_pemilih"
-                    onclick="return confirm('Yakin hapus semua pemilih?')"
-                    style="background-color: #FC0134;">HAPUS SEMUA</a>
+                <a href="#" onclick="confirmDeleteAll()" style="background-color: #FC0134;">HAPUS SEMUA</a>
             </div>
     </div>
     </main>
@@ -302,6 +302,67 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
         // Tambahkan event listener untuk setiap elemen <li>
         liElements.forEach(li => {
             li.addEventListener('click', handleLiClick);
+        });
+
+        // Fungsi untuk konfirmasi hapus satu pemilih
+        function confirmDelete(nis) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan menghapus pemilih ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `process.php?action=delete_pemilih&nis=${nis}`;
+                }
+            });
+        }
+
+        // Fungsi untuk konfirmasi hapus semua pemilih
+        function confirmDeleteAll() {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan menghapus SEMUA data pemilih!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus semua!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'process.php?action=delete_all_pemilih';
+                }
+            });
+        }
+
+        // Cek jika ada parameter status di URL untuk menampilkan notifikasi
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const message = urlParams.get('message');
+
+            if (status && message) {
+                if (status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: message,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                } else if (status === 'error') {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: message
+                    });
+                }
+            }
         });
     </script>
 </body>

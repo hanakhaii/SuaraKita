@@ -23,24 +23,23 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         if ($password === $admin['password']) {
             $_SESSION['username'] = $admin['username'];
             $_SESSION['role'] = "admin";
-
+        
+            // Reset session welcome agar bisa tampil lagi setelah login
+            unset($_SESSION['welcome_shown']);
+        
             header('Location: dashboardmin.php');
             exit;
-        } else {
-            echo "<script>alert('Username atau Password salah!'); window.location.href='login-admin.php';</script>";
-        }
-    } else {
-        echo "<script>alert('Username tidak ditemukan!'); window.location.href='login-admin.php';</script>";
+        }        
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
@@ -101,6 +100,33 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 eyeIcon.classList.remove('fa-eye-slash');
                 eyeIcon.classList.add('fa-eye'); // Ganti ikon ke mata terbuka
             }
+        }
+
+        // untuk pop up login
+        // Cek parameter error di URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        if (error === 'username') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: 'Username tidak ditemukan!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        } else if (error === 'password') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Login',
+                text: 'Password kamu salah!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
+
+        if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.pathname);
         }
     </script>
 </body>
