@@ -175,6 +175,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
         .search-input {
             position: relative;
             width: 300px;
+            justify-content: center;
         }
 
         .search-input input {
@@ -361,6 +362,10 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                         title: 'Gagal!',
                         text: message
                     });
+                }
+            
+                if (window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.pathname);
                 }
             }
         });

@@ -46,8 +46,13 @@ elseif ($action == "add_pemilih") {
     $role = 'user';
     $validasi_memilih = 'belum_memilih';
 
-    $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih);
-    header("location:data_pemilih.php");
+    $berhasil = $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih);
+
+    if ($berhasil) {
+        header("location:data_pemilih.php?status=sukses");
+    } else {
+        header("location:upload_pemilih.php?status=gagal");
+    }
     exit();
 }
 
@@ -115,7 +120,10 @@ if ($action == "edit_kandidat") {
     } else {
         echo "Gagal mengupdate kandidat: " . $koneksi->error;
     }
-} elseif ($action == "edit_pemilih") {
+}
+
+
+elseif ($action == "edit_pemilih") {
     $nis = $_POST['nis'];
     $username = $_POST['username'];
     $nama = $_POST['nama'];
@@ -202,7 +210,7 @@ elseif ($action == "login") {
 
     $waktu_mulai_memilih = "$tanggal_mulai $waktu_mulai_input:00";
     $waktu_selesai_memilih = "$tanggal_selesai $waktu_selesai_input:00";
-
+    
     // Gabungkan tanggal dan waktu untuk quick count
     $waktu_quickcount = "$tanggal_quickcount $waktu_quickcount_input:00";
     $waktu_selesai_quickcount = "$tanggal_selesai_quickcount $waktu_selesai_quickcount_input:00";
