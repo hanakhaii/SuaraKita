@@ -110,7 +110,7 @@ $data_json = json_encode($data);
                             callbacks: {
                                 label: function (tooltipItem) {
                                     const i = tooltipItem.dataIndex;
-                                    return `${labels[i]}: ${data[i]} suara (${percentages[i]})`;
+                                    return `${labels[i]}: (${percentages[i]})`;
                                 }
                             }
                         }

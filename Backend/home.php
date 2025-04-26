@@ -1,20 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="home.css">
     <title>SuaraKita</title>
 </head>
+
 <body>
+    <!-- Hamburger Menu dan Overlay -->
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="overlay"></div>
     <header>
+
         <!-- navigasi -->
         <nav>
             <h3>Suara<span>Kita</span></h3>
@@ -50,7 +61,7 @@
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        
+
         <section id="home" class="slideshow">
             <div class="slides">
                 <div class="slide" style="background-image: url('../Backend/img/ilustaratsiSatu.jpg');">
@@ -105,7 +116,7 @@
 
     <main>
         <!-- kandidat section -->
-         <section id="kandidat" class="kandidat">
+        <section id="kandidat" class="kandidat">
             <div class="kandidat-space">
                 <h2>PILIH SEKARANG!</h2>
                 <div class="kandidat-grid">
@@ -126,10 +137,10 @@
                 <p>Lihat profil kandidat, pahami visi-misinya,<br> dan buat keputusan terbaik untuk sekolah di masa yang akan datang!</p>
                 <button class="btn btn-dark" onclick="requireLogin()">Lihat Kandidat</button>
             </div>
-         </section>
+        </section>
 
-         <!-- quickcount -->
-          <section id="quickcount" class="quickcount">
+        <!-- quickcount -->
+        <section id="quickcount" class="quickcount">
             <h2>QUICKCOUNT</h2>
             <section class="data">
                 <div style="width: 30%; height: 30%; margin: auto;">
@@ -139,13 +150,13 @@
                     // Data diagram
                     const labels = ['Kandidat ?', 'Kandidat ?', 'Kandidat ?'];
                     const data = [25, 150, 70]; // Jumlah suara
-        
+
                     // Total jumlah suara
                     const total = data.reduce((sum, value) => sum + value, 0);
-        
+
                     // Hitung persentase setiap data
                     const percentages = data.map(value => ((value / total) * 100).toFixed(1) + '%');
-        
+
                     // Buat grafik menggunakan Chart.js
                     const ctx = document.getElementById('myChart').getContext('2d');
                     const myChart = new Chart(ctx, {
@@ -166,7 +177,7 @@
                                 },
                                 tooltip: {
                                     callbacks: {
-                                        label: function (tooltipItem) {
+                                        label: function(tooltipItem) {
                                             const index = tooltipItem.dataIndex;
                                             return `${labels[index]}: ${data[index]} suara (${percentages[index]})`; // Perbaikan template literal
                                         }
@@ -180,12 +191,12 @@
             <h4>⏳ Hasil Cepat, Keputusan Akurat! ⏳</h4>
             <p> Pantau perhitungan suara secara real-time dan tetap update dengan hasil terbaru!</p>
             <button class="btn btn-dark" onclick="requireLogin()">Selengkapnya</button>
-          </section>
+        </section>
     </main>
 
     <footer>
         <div>
-            <p>© 2025, SuaraKita. All rights reserved.</p> 
+            <p>© 2025, SuaraKita. All rights reserved.</p>
             <p style="margin-left: 13px;">Send your feedback to <a href="">suarakita@gmail.com</a></p>
         </div>
         <div>
@@ -196,22 +207,22 @@
 
     <!-- JavaScript -->
     <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const links = document.querySelectorAll("nav ul li a[href^='#']");
-                links.forEach(link => {
-                    link.addEventListener("click", function(e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute("href").substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 50,
-                                behavior: "smooth"
-                            });
-                        }
-                    });
+        document.addEventListener("DOMContentLoaded", function() {
+            const links = document.querySelectorAll("nav ul li a[href^='#']");
+            links.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 50,
+                            behavior: "smooth"
+                        });
+                    }
                 });
             });
+        });
 
         function requireLogin() {
             var loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
@@ -244,6 +255,39 @@
         });
 
         setInterval(autoSlide, 3000);
+
+        //script untuk toggle sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('nav');
+            const overlay = document.querySelector('.overlay');
+
+            menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                nav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('sidebar-active');
+            });
+
+            overlay.addEventListener('click', function() {
+                this.classList.remove('active');
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('sidebar-active');
+            });
+
+            // Tutup sidebar saat link diklik
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    nav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('sidebar-active');
+                });
+            });
+        });
     </script>
 </body>
+
 </html>

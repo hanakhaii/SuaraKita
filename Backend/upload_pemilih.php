@@ -1,28 +1,31 @@
-<?php 
+<?php
 include 'db.php';
-$dbsuara = new Database(); 
+$dbsuara = new Database();
 ?>
 <!-- inputtt pemilih -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <title>Upload Pemilih</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 20px auto;
             padding: 20px;
         }
-        
-        .logo{
+
+        .logo {
             display: flex;
             align-items: center;
         }
@@ -33,14 +36,14 @@ $dbsuara = new Database();
             text-align: center;
         }
 
-        h3{
+        h3 {
             margin-top: -20px;
             font-weight: bold;
             font-size: 27px;
             text-align: center;
         }
 
-        span{
+        span {
             color: #FC0134;
             text-align: center;
         }
@@ -68,7 +71,7 @@ $dbsuara = new Database();
             background-color: #ffffff;
             padding: 40px;
             border-radius: 25px;
-            box-shadow:0px 0px 7px 0px black;
+            box-shadow: 0px 0px 7px 0px black;
             margin: 0 auto;
         }
 
@@ -109,6 +112,7 @@ $dbsuara = new Database();
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -127,58 +131,18 @@ $dbsuara = new Database();
         <h2>Tambah Pemilih</h2>
         <h3><span>Suara</span>Kita</h3>
         <form action="process.php?action=add_pemilih" method="post">
-            <!-- Input NIS -->
+            <!-- Hanya input NIS dan Nama -->
             <div class="form-group">
                 <label for="nis">NIS:</label>
                 <input type="number" id="nis" name="nis" required>
             </div>
-
-            <!-- Input Password --> 
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="text" id="password" name="password" required>
-            </div>
-
-            <!-- Input Username -->
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-
-            <!-- Input Nama -->
             <div class="form-group">
                 <label for="nama">Nama:</label>
                 <input type="text" id="nama" name="nama" required>
             </div>
-
-            <!-- Input Role -->
-            <div class="form-group">
-                <label>Masuk Sebagai:</label>
-                <div style="display: flex; align-items: center;">
-                    <input type="radio" id="admin" name="role" value="admin" required> 
-                    <label for="admin">Admin</label>
-                </div>
-                <div style="display: flex; align-items: center;">
-                    <input type="radio" id="user" name="role" value="user">
-                    <label for="user">User</label>
-                </div>
-            </div>
-
-            <!-- Input Status Pemilihan -->
-            <div class="form-group">
-                <label for="validasi_memilih">Status Pemilihan:</label>
-                <select name="validasi_memilih" id="validasi_memilih" required>
-                    <option value="">Pilih status</option>
-                    <option value="sudah_memilih">Sudah Memilih</option>
-                    <option value="belum_memilih">Belum Memilih</option>
-                </select>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="form-group">
-                <button type="submit" name="submit">Upload Pemilih</button>
-            </div>
+            <button type="submit" name="submit">Upload Pemilih</button>
         </form>
     </main>
 </body>
+
 </html>

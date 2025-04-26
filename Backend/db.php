@@ -92,12 +92,14 @@ class Database
         return $stmt->execute();
     }
 
-    // Hapus semua kandidat
+    // Di dalam class Database di db.php    
     public function deleteAllKandidat()
     {
-        $stmt = $this->connect->prepare("DELETE FROM kandidat");
-        return $stmt->execute();
+        $this->connect->query("DELETE FROM kandidat"); // Hapus semua data
+        $this->connect->query("ALTER TABLE kandidat AUTO_INCREMENT = 1"); // Reset AUTO_INCREMENT ke 1
+        return true;
     }
+
 
     // Hapus pemilih
     function deletePemilih($nis)

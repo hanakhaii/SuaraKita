@@ -52,7 +52,8 @@ if ($result->num_rows > 0) {
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <link rel="stylesheet" href="dashboardser.css">
     <title>Dashboard User</title>
 </head>
@@ -81,9 +82,13 @@ if ($result->num_rows > 0) {
         </header>
 
         <section class="sec1">
+            <div class="floating"></div>
+            <div class="floating"></div>
+            <div class="floating"></div>
+
             <div class="inline1">
                 <h1>Halo, Selamat Datang <br> <span><?php echo $_SESSION['nama']; ?>!</span></h1>
-                <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan.</p>
+                <p>Selamat datang di SuaraKita! Platform pemungutan suara yang transparan, adil, dan mudah digunakan. Suara Anda adalah kekuatan perubahan!</p>
             </div>
         </section>
 
