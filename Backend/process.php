@@ -37,7 +37,16 @@ if (isset($_POST['submit_kandidat'])) {
 
 // tambah pemilih 
 elseif ($action == "add_pemilih") {
-    $dbsuara->inputPemilih($_POST['nis'], $_POST['password'], $_POST['username'], $_POST['nama'], $_POST['role'], $_POST['validasi_memilih']);
+    $nis = $_POST['nis'];
+    $nama = $_POST['nama'];
+
+    // Default values (password plain text)
+    $username = $nis;
+    $password = '123456'; // Tidak di-hash
+    $role = 'user';
+    $validasi_memilih = 'belum_memilih';
+
+    $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih);
     header("location:data_pemilih.php");
     exit();
 }
@@ -106,10 +115,7 @@ if ($action == "edit_kandidat") {
     } else {
         echo "Gagal mengupdate kandidat: " . $koneksi->error;
     }
-}
-
-
-elseif ($action == "edit_pemilih") {
+} elseif ($action == "edit_pemilih") {
     $nis = $_POST['nis'];
     $username = $_POST['username'];
     $nama = $_POST['nama'];
@@ -196,7 +202,7 @@ elseif ($action == "login") {
 
     $waktu_mulai_memilih = "$tanggal_mulai $waktu_mulai_input:00";
     $waktu_selesai_memilih = "$tanggal_selesai $waktu_selesai_input:00";
-    
+
     // Gabungkan tanggal dan waktu untuk quick count
     $waktu_quickcount = "$tanggal_quickcount $waktu_quickcount_input:00";
     $waktu_selesai_quickcount = "$tanggal_selesai_quickcount $waktu_selesai_quickcount_input:00";
@@ -273,4 +279,3 @@ if ($action === 'vote') {
         die("Gagal memproses voting: " . $e->getMessage());
     }
 }
-

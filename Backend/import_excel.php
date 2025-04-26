@@ -47,20 +47,17 @@ if (isset($_POST['import'])) {
             $dataRows = array_slice($rows, $headerRowIndex + 1);
 
             foreach ($dataRows as $row) {
-                // Pastikan struktur kolom: NIS di kolom B (indeks 1), Nama di kolom E (indeks 4)
                 $nis = $row[1] ?? '';
                 $nama = $row[4] ?? '';
-
-                // Skip baris kosong atau NIS tidak valid
+            
                 if (empty($nis) || $nis === '-' || empty($nama)) continue;
-
-                // Generate username dan password
+            
+                // Default values (password tidak di-hash)
                 $username = $nis;
-                $password = password_hash($nis, PASSWORD_DEFAULT);
+                $password = '123456'; // Plain text
                 $role = 'user';
                 $validasi = 'belum_memilih';
-
-                // Cek duplikat NIS
+            
                 if (!$dbsuara->getPemilihById($nis)) {
                     $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi);
                 }
