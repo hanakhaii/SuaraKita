@@ -17,15 +17,7 @@
 </head>
 
 <body>
-    <!-- Hamburger Menu dan Overlay -->
-    <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div class="overlay"></div>
     <header>
-
         <!-- navigasi -->
         <nav>
             <h3>Suara<span>Kita</span></h3>
@@ -40,6 +32,14 @@
                     </button>
                 </li>
             </ul>
+
+            <!-- Hamburger Menu dan Overlay -->
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="overlay"></div>
         </nav>
 
         <!-- Modal Login -->
@@ -207,6 +207,15 @@
 
     <!-- JavaScript -->
     <script>
+        // untuk navigasi mobile
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navUl = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navUl.classList.toggle('show');
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             const links = document.querySelectorAll("nav ul li a[href^='#']");
             links.forEach(link => {

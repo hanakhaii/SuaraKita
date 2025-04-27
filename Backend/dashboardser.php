@@ -164,6 +164,11 @@ if ($result->num_rows > 0) {
 
 
         <script>
+            // untuk mobile
+            document.querySelector('.nav-toggle').addEventListener('click', function() {
+                document.querySelector('nav').classList.toggle('active');
+            });
+
             document.addEventListener("DOMContentLoaded", function() {
                 const links = document.querySelectorAll("nav ul li a[href^='#']");
                 links.forEach(link => {
