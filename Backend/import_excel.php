@@ -25,8 +25,7 @@ if (isset($_POST['import'])) {
         foreach ($spreadsheet->getWorksheetIterator() as $worksheet) {
             $sheetName = $worksheet->getTitle();
 
-            // Skip sheet yang tidak relevan (sesuaikan jika perlu)
-            if (strpos($sheetName, '11') === false) continue;
+            
 
             $rows = $worksheet->toArray();
 

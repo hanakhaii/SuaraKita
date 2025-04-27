@@ -363,7 +363,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                         text: message
                     });
                 }
-            
+
                 if (window.history.replaceState) {
                     window.history.replaceState(null, null, window.location.pathname);
                 }

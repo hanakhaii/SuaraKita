@@ -2,12 +2,12 @@
 include 'db.php';
 $dbsuara = new Database();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
@@ -15,7 +15,7 @@ $dbsuara = new Database();
     <link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
-    <title>Edit Data Pemilih</title>
+    <title>Upload Admin</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
@@ -86,7 +86,7 @@ $dbsuara = new Database();
         }
 
         input[type="text"],
-        input[type="password"],
+        input[type="number"],
         select {
             width: 100%;
             padding: 8px;
@@ -103,7 +103,8 @@ $dbsuara = new Database();
             border-radius: 4px;
             cursor: pointer;
             transition: 0.3s ease-in-out;
-            margin-left: 461px;
+            display: block;
+            margin: 20px auto 0;
         }
 
         button:hover {
@@ -125,39 +126,45 @@ $dbsuara = new Database();
         </div>
     </header>
 
-    <!-- Judul -->
     <main class="form-container">
-        <h2>Edit Data Pemilih</h2>
-        <h3><Span>Suara</Span>Kita</h3>
-
-        <form action="process.php?action=edit_pemilih" method="post">
-            <?php
-            $editPemilih = $dbsuara->getPemilihById($_GET['nis']);
-            ?>
-
-
-            <!-- Input NIS Lama (hidden) -->
-            <input type="hidden" name="nis_lama" value="<?php echo $editPemilih['nis']; ?>">
-
-            <!-- Edit NIS -->
+        <h2>Tambah Admin</h2>
+        <h3><span>Suara</span>Kita</h3>
+        <form action="process.php?action=add_admin" method="post">
             <div class="form-group">
                 <label for="nis">NIS:</label>
-                <input type="text" name="nis_baru" value="<?php echo $editPemilih['nis']; ?>" required>
+                <input type="number" id="nis" name="nis" required>
             </div>
-
-            <!-- Edit Nama -->
             <div class="form-group">
                 <label for="nama">Nama:</label>
-                <input type="text" name="nama" value="<?php echo $editPemilih['nama']; ?>" required>
+                <input type="text" id="nama" name="nama" required>
             </div>
-
-
-            <!-- Submit Button -->
             <div class="form-group">
-                <button type="submit" name="submit">Edit Pemilih</button>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
             </div>
+            <button type="submit" name="submit">Upload Admin</button>
         </form>
+        <?php if (isset($_GET['status'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                <?php if ($_GET['status'] === 'sukses'): ?>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data admin berhasil ditambahkan.',
+                        confirmButtonColor: '#0066FF'
+                    });
+                <?php elseif ($_GET['status'] === 'gagal'): ?>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat menambahkan data.',
+                        confirmButtonColor: '#FC0134'
+                    });
+                <?php endif; ?>
+            });
+        </script>
+        <?php endif; ?>
     </main>
 </body>
-
 </html>

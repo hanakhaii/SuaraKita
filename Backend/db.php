@@ -61,12 +61,11 @@ class Database
     }
 
 
-
-    // Edit pemilih
-    function editPemilih($nis, $username, $nama, $password)
+    // Edit pemilih (HANYA nama dan NIS)
+    function editPemilih($nis_lama, $nis_baru, $nama)
     {
-        $stmt = $this->connect->prepare("UPDATE pengguna SET username=?, nama=?, password=? WHERE nis=?");
-        $stmt->bind_param("ssss", $username, $nama, $hashed_password, $nis);
+        $stmt = $this->connect->prepare("UPDATE pengguna SET nis=?, nama=? WHERE nis=?");
+        $stmt->bind_param("sss", $nis_baru, $nama, $nis_lama);
         return $stmt->execute();
     }
 
@@ -115,6 +114,47 @@ class Database
         $stmt = $this->connect->prepare("DELETE FROM pengguna WHERE role = 'user'");
         return $stmt->execute();
     }
+
+        // Tampilkan semua admin
+        public function viewAdmin($search = '')
+        {
+            $sql = "SELECT * FROM pengguna WHERE role = 'admin'";
+            if (!empty($search)) {
+                $search = $this->connect->real_escape_string($search);
+                $sql .= " AND nama LIKE '%$search%'";
+            }
+            $query = $this->connect->query($sql);
+            return $query->fetch_all(MYSQLI_ASSOC);
+        }
+    
+        // Edit admin (nama, username, nis)
+        public function editAdmin($nis_lama, $nis_baru, $nama, $username)
+        {
+            $stmt = $this->connect->prepare(
+                "UPDATE pengguna SET nis = ?, nama = ?, username = ? WHERE nis = ? AND role = 'admin'"
+            );
+            $stmt->bind_param("ssss", $nis_baru, $nama, $username, $nis_lama);
+            return $stmt->execute();
+        }
+    
+        // Hapus admin
+        public function deleteAdmin($nis)
+        {
+            $stmt = $this->connect->prepare(
+                "DELETE FROM pengguna WHERE nis = ? AND role = 'admin'"
+            );
+            $stmt->bind_param("s", $nis);
+            return $stmt->execute();
+        }
+    
+        // Hapus semua admin
+        public function deleteAllAdmin()
+        {
+            $stmt = $this->connect->prepare(
+                "DELETE FROM pengguna WHERE role = 'admin'"
+            );
+            return $stmt->execute();
+        }
 
     // Dapatkan data pemilih berdasarkan NIS
     function getPemilihById($nis)

@@ -124,18 +124,16 @@ if ($action == "edit_kandidat") {
 
 
 elseif ($action == "edit_pemilih") {
-    $nis = $_POST['nis'];
-    $username = $_POST['username'];
+    $nis_lama = $_POST['nis_lama'];
+    $nis_baru = $_POST['nis_baru'];
     $nama = $_POST['nama'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
-    $validasi_memilih = $_POST['validasi_memilih'];
 
-    if ($dbsuara->editPemilih($nis, $username, $nama, $password, $role, $validasi_memilih)) {
-        header("location:data_pemilih.php");
+    if ($dbsuara->editPemilih($nis_lama, $nis_baru, $nama)) {
+        header("location:data_pemilih.php?status=success&message=Data berhasil diupdate");
         exit();
     } else {
-        echo "Edit pemilih gagal!";
+        header("location:data_pemilih.php?status=error&message=Gagal mengupdate data");
+        exit();
     }
 } elseif ($action == "delete_pemilih") {
     $nis = $_GET['nis'];
@@ -166,6 +164,59 @@ elseif ($action == "edit_pemilih") {
         exit();
     }
 }
+elseif ($action == "add_admin") {
+    $nis = $_POST['nis'];
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+
+    // Default values
+    $password = 'admin1234'; // Password tidak di-hash
+    $role = 'admin';
+    $validasi_memilih = 'belum_memilih';
+
+    $berhasil = $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi_memilih);
+
+    if ($berhasil) {
+        header("location:data_admin.php?status=sukses");
+    } else {
+        header("location:upload_admin.php?status=gagal");
+    }
+    exit();
+} elseif ($action === "edit_admin") {
+    $nis_lama = $_POST['nis_lama'];
+    $nis_baru = $_POST['nis'];
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+
+    if ($dbsuara->editAdmin($nis_lama, $nis_baru, $nama, $username)) {
+        header("Location: data_admin.php?status=success&message=Data admin berhasil diupdate");
+    } else {
+        header("Location: data_admin.php?status=error&message=Gagal mengupdate data admin");
+    }
+    exit();
+}
+
+// Hapus admin
+elseif ($action === "delete_admin") {
+    $nis = $_GET['nis'];
+    if ($dbsuara->deleteAdmin($nis)) {
+        header("Location: data_admin.php?status=success&message=Admin berhasil dihapus");
+    } else {
+        header("Location: data_admin.php?status=error&message=Gagal menghapus admin");
+    }
+    exit();
+}
+
+// Hapus semua admin
+elseif ($action === "delete_all_admin") {
+    if ($dbsuara->deleteAllAdmin()) {
+        header("Location: data_admin.php?status=success");
+    } else {
+        header("Location: data_admin.php?status=error&message=Gagal menghapus semua admin");
+    }
+    exit();
+}
+
 elseif ($action === "delete_all_kandidat") {
     // panggil method yang baru saja kita buat
     if ($dbsuara->deleteAllKandidat()) {
