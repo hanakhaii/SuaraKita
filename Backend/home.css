@@ -283,211 +283,189 @@ footer a:hover {
     color: #003d9a;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-    /* Navigation */
-    /* Navigation - Sidebar Style */
+@media only screen and (max-width: 768px) {
+    /* 1. NAVIGASI MOBILE YANG LEBIH RAPI */
     nav {
-        position: fixed;
-        width: 0;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: #4e90f5;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-        z-index: 1000;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px 20px;
+      position: relative;
     }
     
-    nav.active {
-        width: 250px;
-    }
-    
+    /* Logo/Teks Judul */
     nav h3 {
-        position: absolute;
-        top: 15px;
-        left: 20px;
-        font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
     }
     
+    /* Menu Navigasi */
     nav ul {
-        flex-direction: column;
-        padding: 0;
-        margin-top: 20px;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      display: none; /* Sembunyikan dulu */
+    }
+    
+    nav ul.show {
+      display: flex; /* Tampilkan saat aktif */
     }
     
     nav ul li {
-        padding: 15px 20px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    nav ul li:last-child {
+      border-bottom: none;
     }
     
     nav ul li a {
-        display: block;
-        padding: 0;
+      display: block;
+      width: 100%;
+      padding: 8px 0;
     }
     
     nav ul li a:hover {
-        background-color: transparent;
-        color: red;
+      background-color: transparent;
+      color: #ffcc00;
+      padding: 8px 0;
     }
     
-    /* Hamburger Menu Button */
+    /* Tombol Hamburger */
     .menu-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        z-index: 1001;
-        cursor: pointer;
+      display: block;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      cursor: pointer;
+      z-index: 1000;
     }
     
     .menu-toggle span {
-        display: block;
-        width: 100%;
-        height: 3px;
-        background-color: white;
-        transition: 0.3s;
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px 0;
+      transition: all 0.3s ease;
     }
     
+    /* Animasi Hamburger */
     .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg) translate(5px, 5px);
     }
     
     .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
+      opacity: 0;
     }
     
     .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+  
+    /* 2. PENYESUAIAN LAYOUT UTAMA */
+    body {
+      padding-top: 70px; /* Ruang untuk navbar fixed */
     }
     
-    /* Overlay when sidebar is active */
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 999;
-        display: none;
-    }
-    
-    .overlay.active {
-        display: block;
-    }
-    
-    /* Adjust content when sidebar is open */
-    body.sidebar-active {
-        overflow: hidden;
-    }
-    /* Slideshow */
+    /* 3. SLIDESHOW MOBILE */
     .slideshow {
-        height: 50vh;
-        margin-top: 0;
+      height: 50vh;
+      margin-top: 0;
     }
     
     .slide {
-        height: 50vh;
+      height: 50vh;
     }
     
     .text-overlay h1 {
-        font-size: 1.8rem;
+      font-size: 1.8rem;
+      padding: 0 15px;
     }
     
     .text-overlay p {
-        font-size: 1rem;
+      font-size: 1rem;
+      padding: 0 15px;
     }
     
-    .prev, .next {
-        width: 35px;
-        height: 35px;
-        font-size: 14px;
-    }
-
-    /* About Section */
+    /* 4. ABOUT SECTION */
     .about-us {
-        flex-direction: column-reverse;
-        padding: 20px;
-        margin: 0;
-        text-align: center;
+      flex-direction: column;
+      padding: 30px 20px;
+      margin: 0;
     }
     
     .about-us img {
-        width: 250px;
-        margin: 0 auto;
-        transform: none;
+      width: 100%;
+      transform: none;
+      margin-bottom: 20px;
     }
     
-    .about-us div {
-        margin-top: 20px;
-        transform: none !important;
-    }
-
-    /* Kandidat Section */
+    /* 5. KANDIDAT SECTION */
     .kandidat {
-        padding: 20px;
-    }
-    
-    .kandidat-space {
-        padding: 20px;
+      padding: 40px 20px;
     }
     
     .kandidat-grid {
-        flex-direction: column;
-        padding: 20px;
+      flex-direction: column;
+      align-items: center;
     }
     
-    .kandidat-grid > div {
-        margin: 15px 0;
+    .grid1, .grid2, .grid3 {
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 300px;
     }
-    
+
     .kandidat-grid h3 {
         transform: none;
-        margin: -25px auto 15px;
-        position: static;
-    }
-
-    /* Quick Count */
-    .quickcount {
-        padding: 20px;
+        margin: 0 auto 15px;
     }
     
-    .quickcount .data {
-        width: 100% !important;
+    /* Quickcount */
+    .quickcount {
+        padding: 30px 10px;
     }
-
+    
     /* Footer */
     footer {
         flex-direction: column;
-        text-align: center;
         padding: 20px;
+        text-align: center;
     }
     
     footer div {
-        margin: 10px 0;
+        margin-bottom: 15px;
+    }
+}
+
+/* Additional adjustments for very small screens */
+@media only screen and (max-width: 480px) {
+    .slideshow {
+        height: 40vh;
+        margin-top: 20%;
+    }
+    
+    .slide {
+        height: 40vh;
+    }
+    
+    .text-overlay h1 {
+        font-size: 1.5rem;
+    }
+    
+    .text-overlay p {
+        font-size: 0.9rem;
     }
 
-    /* General Adjustments */
+    .text-overlay button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
     h2 {
         font-size: 1.5rem;
         margin-bottom: 30px;
-    }
-    
-    h3 {
-        font-size: 1.2rem;
-    }
-    
-    .btn {
-        width: 100%;
-        margin: 10px 0;
-    }
-    
-    .modal-content {
-        margin: 0 10px;
     }
 }
