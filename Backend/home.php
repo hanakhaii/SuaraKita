@@ -64,21 +64,21 @@
 
         <section id="home" class="slideshow">
             <div class="slides">
-                <div class="slide" style="background-image: url('../Backend/img/ilustaratsiSatu.jpg');">
+                <div class="slide" style="background-image: url('../img/ilustaratsiSatu.jpg');">
                     <div class="text-overlay">
                         <h1>Welcome</h1>
                         <p>Online Voting System</p>
                         <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
                     </div>
                 </div>
-                <div class="slide" style="background-image: url('../Backend/img/ilustrasiDua.jpg');">
+                <div class="slide" style="background-image: url('../img/ilustrasiDua.jpg');">
                     <div class="text-overlay">
                         <h1>Voting is Important</h1>
                         <p>Choose Your Leader</p>
                         <button class="btn btn-primary" onclick="requireLogin()">Vote Now</button>
                     </div>
                 </div>
-                <div class="slide" style="background-image: url('../Backend/img/ilustrasiTiga.jpg');">
+                <div class="slide" style="background-image: url('../img/ilustrasiTiga.jpg');">
                     <div class="text-overlay">
                         <h1>Quick Count</h1>
                         <p>Real-time Results</p>
@@ -207,15 +207,6 @@
 
     <!-- JavaScript -->
     <script>
-        // untuk navigasi mobile
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navUl = document.querySelector('nav ul');
-
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navUl.classList.toggle('show');
-        });
-
         document.addEventListener("DOMContentLoaded", function() {
             const links = document.querySelectorAll("nav ul li a[href^='#']");
             links.forEach(link => {
@@ -265,35 +256,30 @@
 
         setInterval(autoSlide, 3000);
 
-        //script untuk toggle sidebar
-        document.addEventListener('DOMContentLoaded', function() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('nav');
-            const overlay = document.querySelector('.overlay');
+        // Burger Menu Toggle
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('nav ul');
+        const overlay = document.querySelector('.overlay');
 
-            menuToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                nav.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.classList.toggle('sidebar-active');
-            });
-
-            overlay.addEventListener('click', function() {
-                this.classList.remove('active');
-                menuToggle.classList.remove('active');
-                nav.classList.remove('active');
-                document.body.classList.remove('sidebar-active');
-            });
-
-            // Tutup sidebar saat link diklik
-            const navLinks = document.querySelectorAll('nav ul li a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    menuToggle.classList.remove('active');
-                    nav.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('sidebar-active');
-                });
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+        overlay.addEventListener('click', () => {
+            burger.classList.remove('active');
+            navLinks.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        });
+        
+        // Tutup sidebar saat klik link
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                burger.classList.remove('active');
+                navUl.classList.remove('active');
+                overlay.classList.remove('active');
             });
         });
     </script>

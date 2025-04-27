@@ -17,17 +17,17 @@
     background: #bbc4c4;
 }
 
-::-webkit-scrollbar-track:hover {      
+::-webkit-scrollbar-track:hover {
     background: transparent;
     border-radius: 6px;
 }
- 
+
 ::-webkit-scrollbar-thumb:hover {
     background: #000dff;
     border-radius: 6px;
 }
 
-/* Navigasi */
+/* HEADER & NAV ----------------------- */
 header {
     display: flex;
     position: fixed;
@@ -40,6 +40,15 @@ header {
     background-color: #0056d6;
 }
 
+header h1 {
+    color: white;
+    font-weight: bold;
+}
+header h1 span {
+    color: #FC0134;
+}
+
+/* Toggle Button (Burger) */
 .nav-toggle {
     display: none;
     font-size: 28px;
@@ -47,62 +56,35 @@ header {
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 1001; /* di atas overlay/sidebar */
 }
 
+/* Desktop nav */
 nav ul {
     display: flex;
 }
-
 nav ul li {
-    margin: 0px 10px;
+    margin: 0 10px;
 }
-
 nav ul li a {
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    transition: background-color .3s, color .3s;
 }
-
-li a:hover {
+nav ul li a:hover {
     background-color: #FC0134;
-    color: white;
 }
 
-
-ul{
-    display: flex;
+/* GLOBAL OVERLAY */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
 }
-
-ul li a{
-    margin: 0px 1px;
-}
-
-li a:hover {
-    background-color: #FC0134; /* Warna merah seperti di logo */
-    color: white;
-}
-header h1{
-    color: white;
-    font-weight: bold;
-}
-header span{
-    color: #FC0134;
-}
-ul{
-    display: flex;
-}
-ul li{
-    margin: 0px 10px;
-}
-
-li a{
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
 /* setion 1 */
 .sec1 {
     padding: 150px 75px;
@@ -464,186 +446,170 @@ a:hover {
     color: white;
 }
 
-/* Mobile Responsive Styles */
+/* Burger Menu */
+.burger {
+    display: none;
+    cursor: pointer;
+    z-index: 1000;
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Menu Sidebar Mobile */
+nav ul {
+    position: fixed;
+    top: 60px;
+    right: -250px;
+    width: 250px;
+    height: calc(100vh - 60px);
+    background: #4e90f5;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    transition: 0.3s ease;
+    z-index: 998;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+nav ul.active {
+    right: 0;
+}
+
+nav ul li {
+    margin: 15px 0;
+    width: 100%;
+    text-align: left;
+}
+
+nav ul li a {
+    padding: 10px 15px;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* Tombol Logout di mobile */
+nav ul li:last-child {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+}
+
+/* Animasi Burger */
+.burger.active .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.burger.active .line2 {
+    opacity: 0;
+}
+
+.burger.active .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
+/* Modifikasi navigasi untuk mobile */
 @media only screen and (max-width: 768px) {
-    /* Navigation */
-    header {
-        padding: 15px 20px;
-        justify-content: space-between;
-    }
-    
-    .nav-toggle {
+    .burger {
         display: block;
-        z-index: 1000;
-    }
-    
-    nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 70%;
-        height: 100vh;
-        background-color: #003a8f;
-        transition: right 0.3s ease-in-out;
-        padding-top: 80px;
-        z-index: 999;
-    }
-    
-    nav.active {
-        right: 0;
     }
     
     nav ul {
-        flex-direction: column;
-        align-items: center;
+        top: 60px;
+        right: -250px;
+        height: calc(100vh - 60px);
     }
     
-    nav ul li {
-        margin: 15px 0;
+    header {
+        justify-content: space-between;
+        padding: 10px 20px;
+        height: 60px;
     }
-    
-    /* Section 1 */
-    .sec1 {
-        padding: 120px 25px;
-    }
-    
-    .inline1 h1 {
-        font-size: 2.5rem;
-    }
-    
-    .inline1 p {
-        font-size: 1.1rem;
-    }
-    
-    /* Section 2 */
-    .sec2 {
-        margin: 50px 20px;
-    }
-    
-    .sec2 h1 {
-        font-size: 2.5rem;
-        margin-left: 0;
-    }
-    
-    .inline2 {
-        flex-direction: column;
-    }
-    
-    .kandidat {
-        margin: 30px 0;
-        padding: 20px 10px;
-    }
-    
-    .kandidat p {
-        width: auto;
-        padding: 0 15px;
-    }
-    
-    /* Section 3 */
-    .sec3 {
-        margin-top: 60px;
-        padding: 25px;
-    }
-    
-    .inline3 {
-        width: auto;
-        margin-left: 0;
-    }
-    
-    .inline3 h1 {
-        font-size: 2rem;
-    }
-    
-    .inline3 p {
-        font-size: 1rem;
-    }
-    
-    .list-rules {
-        margin: 30px 15px;
-        padding: 15px;
-    }
-    
-    .list-rules p {
-        font-size: 1rem;
-    }
-    
-    /* Section 4 */
-    .sec4 {
-        margin-top: 60px;
-        padding: 15px;
-    }
-    
-    .inline4 {
-        width: auto;
-        margin-left: 0;
-        padding: 40px 20px;
-    }
-    
-    .inline4 h1 {
-        font-size: 1.8rem;
-    }
-    
-    .inline4 p {
-        font-size: 1rem;
-    }
-    
-    /* Section 5 */
-    .sec5 {
-        margin-top: 60px;
-        padding: 15px;
-    }
-    
-    .sec5 h1 {
-        font-size: 2rem;
-        padding-bottom: 40px;
-    }
-    
-    .inline5 {
-        flex-direction: column;
-        margin-left: 0;
-        margin-bottom: 0;
-    }
-    
-    .inline5 img {
-        visibility: hidden;
-    }
-    
-    .count {
-        width: 100%;
-        text-align: center;
-        margin-top: 30px;
-    }
-    
-    .count p {
-        padding-right: 0;
-        padding-bottom: 30px;
-        font-size: 1rem;
-    }
-    
-    /* Footer */
-    footer {
-        padding: 10px;
-        font-size: 12px;
-    }
+
 }
 
-/* Additional adjustments for very small screens */
-@media only screen and (max-width: 480px) {
-    .inline1 h1 {
-        font-size: 2rem;
+/* Perbaikan Responsive per Section */
+@media only screen and (max-width: 768px) {
+    .sec1 {
+        padding: 120px 25px !important;
     }
-    
-    .sec2 h1,
-    .sec5 h1 {
-        font-size: 1.8rem;
+    .inline1 h1 { font-size: 2rem !important; }
+    .inline1 p  { font-size: 1rem !important; }
+
+    /* Section 2 */
+    .inline2 {
+        flex-direction: column;
+        margin: 0 10px;
     }
-    
-    .kandidat h1 {
-        font-size: 1.5rem;
+    .kandidat {
+        margin: 30px auto !important;
+        width: 90% !important;
+        max-width: 400px;
     }
-    
-    button {
-        padding: 8px 12px;
-        font-size: 14px;
+    .kandidat img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    .kandidat p {
+        width: auto !important;
+        padding: 0 15px;
+    }
+
+    /* Section 3 */
+    .inline3 {
+        width: 90% !important;
+        margin-left: 5% !important;
+    }
+    .list-rules {
+        margin: 30px 10px !important;
+    }
+
+    /* Section 4 */
+    .inline4 {
+        width: 90% !important;
+        margin-left: 5% !important;
+        padding: 40px 20px !important;
+    }
+
+    /* Section 5 */
+    .inline5 {
+        flex-direction: column;
+        margin-left: 5% !important;
+    }
+    .inline5 img {
+        width: 200px !important;
+        margin: 30px auto;
+    }
+    .count {
+        width: 100% !important;
+        text-align: center;
+    }
+    .count p {
+        padding-right: 0 !important;
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px 15px !important;
+        text-align: center;
     }
 }

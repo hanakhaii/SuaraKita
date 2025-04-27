@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
+html, body {
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+    width: 100%;
+    max-width: 100%;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -18,6 +24,20 @@ section button {
 
 section button:hover {
     background-color: rgb(194, 197, 218);
+}
+
+.burger {
+    display: none; /* Sembunyiin di desktop */
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
 }
 
 nav {
@@ -69,6 +89,18 @@ h3, ul {
 }
 
 /* slideshow */
+.slideshow {
+    margin-top: 70px; /* Sesuaikan dengan tinggi navbar */
+    height: calc(100vh - 70px);
+}
+
+.slide {
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-size: cover;
+    background-position: center;
+}
+
 .slideshow {
     position: relative;
     overflow: hidden;
@@ -266,6 +298,22 @@ h2 {
     padding: 80px;
 }
 
+.overlay {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+    backdrop-filter: blur(3px);
+}
+
+.overlay.active {
+    display: block;
+}
+
 footer {
     display: flex;
     padding: 30px 50px 10px;
@@ -283,189 +331,153 @@ footer a:hover {
     color: #003d9a;
 }
 
+/* ===== MOBILE RESPONSIVE ===== */
 @media only screen and (max-width: 768px) {
-    /* 1. NAVIGASI MOBILE YANG LEBIH RAPI */
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 15px 20px;
-      position: relative;
-    }
-    
-    /* Logo/Teks Judul */
-    nav h3 {
-      margin-bottom: 15px;
-      font-size: 1.3rem;
-    }
-    
-    /* Menu Navigasi */
-    nav ul {
-      flex-direction: column;
-      width: 100%;
-      padding: 0;
-      margin: 0;
-      display: none; /* Sembunyikan dulu */
-    }
-    
-    nav ul.show {
-      display: flex; /* Tampilkan saat aktif */
-    }
-    
-    nav ul li {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    nav ul li:last-child {
-      border-bottom: none;
-    }
-    
-    nav ul li a {
-      display: block;
-      width: 100%;
-      padding: 8px 0;
-    }
-    
-    nav ul li a:hover {
-      background-color: transparent;
-      color: #ffcc00;
-      padding: 8px 0;
-    }
-    
-    /* Tombol Hamburger */
-    .menu-toggle {
-      display: block;
-      position: absolute;
-      right: 20px;
-      top: 15px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-    
-    .menu-toggle span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      margin: 5px 0;
-      transition: all 0.3s ease;
-    }
-    
-    /* Animasi Hamburger */
-    .menu-toggle.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .menu-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .menu-toggle.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-  
-    /* 2. PENYESUAIAN LAYOUT UTAMA */
+    /* Global Mobile Adjustments */
     body {
-      padding-top: 70px; /* Ruang untuk navbar fixed */
+        font-size: 15px;
+        overflow-x: hidden;
     }
     
-    /* 3. SLIDESHOW MOBILE */
-    .slideshow {
-      height: 50vh;
-      margin-top: 0;
-    }
-    
-    .slide {
-      height: 50vh;
-    }
-    
-    .text-overlay h1 {
-      font-size: 1.8rem;
-      padding: 0 15px;
-    }
-    
-    .text-overlay p {
-      font-size: 1rem;
-      padding: 0 15px;
-    }
-    
-    /* 4. ABOUT SECTION */
-    .about-us {
-      flex-direction: column;
-      padding: 30px 20px;
-      margin: 0;
-    }
-    
-    .about-us img {
-      width: 100%;
-      transform: none;
-      margin-bottom: 20px;
-    }
-    
-    /* 5. KANDIDAT SECTION */
-    .kandidat {
-      padding: 40px 20px;
-    }
-    
-    .kandidat-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .grid1, .grid2, .grid3 {
-      margin-bottom: 40px;
-      width: 100%;
-      max-width: 300px;
-    }
-
-    .kandidat-grid h3 {
-        transform: none;
-        margin: 0 auto 15px;
-    }
-    
-    /* Quickcount */
-    .quickcount {
-        padding: 30px 10px;
-    }
-    
-    /* Footer */
-    footer {
-        flex-direction: column;
-        padding: 20px;
-        text-align: center;
-    }
-    
-    footer div {
-        margin-bottom: 15px;
-    }
-}
-
-/* Additional adjustments for very small screens */
-@media only screen and (max-width: 480px) {
-    .slideshow {
-        height: 40vh;
-        margin-top: 20%;
-    }
-    
-    .slide {
-        height: 40vh;
-    }
-    
-    .text-overlay h1 {
-        font-size: 1.5rem;
-    }
-    
-    .text-overlay p {
-        font-size: 0.9rem;
-    }
-
-    .text-overlay button {
-        padding: 8px 15px;
-        font-size: 0.9rem;
+    section {
+        padding: 30px 20px !important;
     }
     
     h2 {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Sidebar Navbar */
+    /* Navbar */
+    nav {
+        justify-content: space-between;
+        padding: 10px 20px;
+        height: 60px;
+    }
+
+    /* Menu Sidebar */
+    nav ul {
+        position: fixed;
+        top: 60px;
+        right: -250px; /* Sembunyikan di luar layar */
+        width: 250px;
+        height: calc(100vh - 60px);
+        background: #4e90f5;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        transition: 0.3s ease;
+        z-index: 998;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    nav ul.active {
+        right: 0;
+        margin-top: -140px;
+    }
+
+    nav ul li {
+        margin: 15px 0;
+        width: 100%;
+        text-align: left;
+    }
+
+    nav ul li a {
+        padding: 10px 15px;
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+    nav ul li a:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    /* Tombol Login tetap terlihat */
+    nav ul li:last-child {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .burger.active + .overlay {
+        display: block;
+    }
+
+    /* Burger Button */
+    .burger {
+        display: block;
+        position: relative;
+        right: 0;
+        top: 0;
+        margin-left: 0;
+    }
+
+    /* Hero Section */
+    .slideshow {
+        margin-top: 10px;
+        /* width: 1000px; */
+        height: calc(100vh - 60px);
+    }
+
+
+    .prev, .next {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .text-overlay {
+        width: 85%;
+    }
+    
+    .text-overlay h1 {
+        font-size: 1.8rem;
+    }
+
+    /* About Section */
+    .about-us {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 !important;
+    }
+    
+    .about-us img {
+        width: 65%;
+        max-width: 220px;
+        margin: 20px auto;
+    }
+    
+    .about-us div:first-child {
+        padding: 0 15px;
+    }
+
+    /* Candidates Section */
+    .kandidat-grid {
+        flex-direction: column;
+        gap: 2.5rem;
+        padding: 1.5rem 0 !important;
+    }
+    
+    .kandidat-grid > div {
+        width: 75%;
+        max-width: 180px;
+        margin: 0 auto;
+    }
+
+    /* Quick Count */
+    .quickcount .data {
+        width: 95% !important;
+        margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 2rem 1rem;
     }
 }

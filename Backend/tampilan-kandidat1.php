@@ -51,7 +51,7 @@ if (isset($_GET['nama'])) {
                 <img src="<?php echo $data['foto']; ?>" alt="Foto Kandidat">
                 <div class="nama">
                     <h1><?php echo htmlspecialchars($data['nama']); ?></h1>
-                    <p><?php echo htmlspecialchars($data['deskripsi']); ?></p>
+                    <p style="width: 900px;"><?php echo htmlspecialchars($data['deskripsi']); ?></p>
                 </div>
             </center>
         </div>

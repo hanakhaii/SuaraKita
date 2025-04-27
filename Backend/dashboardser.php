@@ -62,6 +62,15 @@ if ($result->num_rows > 0) {
     <div class="scroll-area">
         <header>
             <h1><span>Suara</span>Kita</h1>
+
+            <!-- Burger Menu -->
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <div class="overlay"></div>
+
             <nav>
                 <ul>
                     <li><a href="#kandidat">Kandidat</a></li>
@@ -69,14 +78,6 @@ if ($result->num_rows > 0) {
                     <li><a href="#vote">Pilih Sekarang</a></li>
                     <li><a href="#quick">QuickCount</a></li>
                     <li><a href="#" onclick="confirmLogout()">Logout</a></li>
-
-                    <script>
-                        function confirmLogout() {
-                            if (confirm("Apakah Anda yakin ingin logout?")) {
-                                window.location.href = "logout.php";
-                            }
-                        }
-                    </script>
                 </ul>
             </nav>
         </header>
@@ -153,7 +154,7 @@ if ($result->num_rows > 0) {
                     <?php endif; ?>
                 </div>
                 <div>
-                    <img src="/Backend/img/pie-chart.png" alt="" srcset="">
+                    <img src="../img/pie-chart.png" alt="" srcset="">
                 </div>
             </div>
         </section>
@@ -164,36 +165,49 @@ if ($result->num_rows > 0) {
 
 
         <script>
-            // untuk mobile
-            document.querySelector('.nav-toggle').addEventListener('click', function() {
-                document.querySelector('nav').classList.toggle('active');
-            });
-
-            document.addEventListener("DOMContentLoaded", function() {
-                const links = document.querySelectorAll("nav ul li a[href^='#']");
-                links.forEach(link => {
-                    link.addEventListener("click", function(e) {
-                        e.preventDefault();
-                        const targetId = this.getAttribute("href").substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 80,
-                                behavior: "smooth"
-                            });
-                        }
-                    });
-                });
-            });
-
             // Mengunci fungsi tombol "Back"
             history.pushState(null, null, location.href);
 
-            window.onpopstate = function() {
-                // Saat tombol "Back" diklik, tetap berada di halaman ini
-                history.pushState(null, null, location.href);
-                alert("Navigasi mundur tidak diizinkan pada halaman ini!");
-            };
+            // Cegah tombol back browser
+            // history.pushState(null, null, location.href);
+            // window.onpopstate = function() {
+            //     history.pushState(null, null, location.href);
+            //     alert("Navigasi mundur tidak diizinkan pada halaman ini!");
+            // };
+
+            const burger = document.querySelector('.burger');
+            const navUl = document.querySelector('nav ul');
+            const overlay = document.querySelector('.overlay');
+            let allowBack = false;
+
+            // Fungsi logout
+            function confirmLogout() {
+                if (confirm("Apakah Anda yakin ingin logout?")) {
+                    allowBack = true; // Izinkan navigasi
+                    window.location.href = "logout.php";
+                }
+            }
+
+            // Burger Menu Toggle
+            burger.addEventListener('click', () => {
+                navUl.classList.toggle('active');
+                burger.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            });
+
+            // Tutup sidebar
+            overlay.addEventListener('click', closeSidebar);
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.addEventListener('click', closeSidebar);
+            });
+
+            function closeSidebar() {
+                burger.classList.remove('active');
+                navUl.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
         </script>
 
 </body>
