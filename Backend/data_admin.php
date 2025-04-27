@@ -22,7 +22,7 @@ require_once 'db.php';
             }
         }
     </script>
-</head>
+</head> 
 <body>
     <h1>Halaman Data Admin</h1>
     <section class="table_body_admin">
