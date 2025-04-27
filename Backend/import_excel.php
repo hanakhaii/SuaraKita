@@ -4,32 +4,43 @@ include 'db.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
+session_start();
 $dbsuara = new Database();
 
+function setAlert($type, $title, $message, $redirect = '')
+{
+    $_SESSION['alert'] = [
+        'type' => $type,
+        'title' => $title,
+        'message' => $message,
+        'redirect' => $redirect
+    ];
+}
+
 if (isset($_POST['import'])) {
+    if (!isset($_FILES['file_excel']) || $_FILES['file_excel']['error'] !== UPLOAD_ERR_OK) {
+        setAlert('error', 'Error', 'File tidak valid atau terjadi kesalahan upload');
+        header("Location: import_excel.php");
+        exit();
+    }
+
     $file = $_FILES['file_excel']['tmp_name'];
     $fileName = $_FILES['file_excel']['name'];
-
-    // Validasi ekstensi file
     $allowedExtensions = ['xls', 'xlsx'];
-    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
     if (!in_array($fileExtension, $allowedExtensions)) {
-        die("<script>alert('Hanya file Excel (.xls, .xlsx) yang diperbolehkan!'); window.history.back();</script>");
+        setAlert('error', 'Error', 'Hanya file Excel (.xls, .xlsx) yang diperbolehkan!');
+        header("Location: import_excel.php");
+        exit();
     }
 
     try {
         $spreadsheet = IOFactory::load($file);
+        $importedCount = 0;
 
-        // Loop melalui semua sheet
         foreach ($spreadsheet->getWorksheetIterator() as $worksheet) {
-            $sheetName = $worksheet->getTitle();
-
-            
-
             $rows = $worksheet->toArray();
-
-            // Cari baris header (No | NIS | NISN | L/P | NAMA | TTD)
             $headerRowIndex = null;
             foreach ($rows as $index => $row) {
                 if (isset($row[1]) && trim($row[1]) === 'NIS' && isset($row[4]) && trim($row[4]) === 'NAMA') {
@@ -38,37 +49,39 @@ if (isset($_POST['import'])) {
                 }
             }
 
-            if ($headerRowIndex === null) {
-                continue; // Skip sheet jika header tidak ditemukan
-            }
+            if ($headerRowIndex === null) continue;
 
-            // Ambil data mulai dari baris setelah header
             $dataRows = array_slice($rows, $headerRowIndex + 1);
-
             foreach ($dataRows as $row) {
                 $nis = $row[1] ?? '';
                 $nama = $row[4] ?? '';
 
                 if (empty($nis) || $nis === '-' || empty($nama)) continue;
 
-                // Default values (password tidak di-hash)
                 $username = $nis;
-                $password = '123456'; // Plain text
+                $password = '123456';
                 $role = 'user';
                 $validasi = 'belum_memilih';
 
                 if (!$dbsuara->getPemilihById($nis)) {
-                    $dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi);
+                    if ($dbsuara->inputPemilih($nis, $password, $username, $nama, $role, $validasi)) {
+                        $importedCount++;
+                    }
                 }
             }
         }
 
-        echo "<script>
-            alert('Data berhasil diimport!');
-            window.location.href = 'data_pemilih.php';
-        </script>";
+        if ($importedCount > 0) {
+            setAlert('success', 'Sukses', "Berhasil mengimport $importedCount data pemilih!", 'data_pemilih.php');
+            exit();
+        } else {
+            setAlert('info', 'Info', 'Tidak ada data baru yang diimport.', 'import_excel.php');
+            exit();
+        }
     } catch (Exception $e) {
-        die("<script>alert('Error: " . addslashes($e->getMessage()) . "'); window.history.back();</script>");
+        setAlert('error', 'Error', 'Terjadi kesalahan: ' . $e->getMessage());
+        header("Location: import_excel.php");
+        exit();
     }
 }
 ?>
@@ -79,11 +92,12 @@ if (isset($_POST['import'])) {
 <head>
     <meta charset="UTF-8">
     <title>Import Data Pemilih</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-        body { 
+        body {
             font-family: 'Poppins', sans-serif;
             margin: 20px auto;
             padding: 20px;
@@ -138,7 +152,7 @@ if (isset($_POST['import'])) {
         button:hover {
             cursor: pointer;
             transition: 0.3s ease-in-out;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -179,7 +193,46 @@ if (isset($_POST['import'])) {
                 <input type="file" name="file_excel" accept=".xls,.xlsx" required>
                 <button type="submit" name="import" class="btn-import">IMPORT</button>
             </form>
-        </section>
-    </main>
+
+            <script>
+                // untuk alert berhasil/gagal import excel
+                $(document).ready(function() {
+                    <?php if (isset($_SESSION['alert'])): ?>
+                        Swal.fire({
+                            icon: '<?php echo $_SESSION['alert']['type']; ?>',
+                            title: '<?php echo $_SESSION['alert']['title']; ?>',
+                            text: '<?php echo addslashes($_SESSION['alert']['message']); ?>',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                <?php if (!empty($_SESSION['alert']['redirect'])): ?>
+                                    window.location.href = '<?php echo $_SESSION['alert']['redirect']; ?>';
+                                <?php endif; ?>
+                            }
+                        });
+                        <?php unset($_SESSION['alert']); ?>
+                    <?php endif; ?>
+                });
+
+                // Konfirmasi sebelum submit
+                $('#importForm').on('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Konfirmasi Import',
+                        text: 'Apakah Anda yakin ingin mengimpor data pemilih dari file Excel ini?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#0066FF',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, Import!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
+                });
+            </script>
 </body>
+
 </html>

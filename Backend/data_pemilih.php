@@ -11,6 +11,7 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
@@ -369,7 +370,19 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                 }
             }
         });
+
+        // alert untuk import excel
+        $(document).ready(function() {
+            <?php if(isset($_SESSION['alert'])): ?>
+                Swal.fire({
+                    icon: '<?php echo $_SESSION['alert']['type']; ?>',
+                    title: '<?php echo $_SESSION['alert']['title']; ?>',
+                    text: '<?php echo addslashes($_SESSION['alert']['message']); ?>',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['alert']); ?>
+            <?php endif; ?>
+        });
     </script>
 </body>
-
 </html>

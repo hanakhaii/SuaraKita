@@ -3,6 +3,8 @@
   $dbsuara = new Database();
 
   $totalSuara = $dbsuara->getTotalSuara();
+
+  session_start();
   ?>
 
   <!DOCTYPE html>
@@ -10,6 +12,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
@@ -216,7 +219,21 @@
       liElements.forEach(li => {
         li.addEventListener('click', handleLiClick);
       });
-    </script>
+
+      // untuk alert upload_kandidat
+      <?php if (isset($_SESSION['alert'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'success' : 'error' ?>',
+                    title: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'Berhasil!' : 'Gagal!' ?>',
+                    text: '<?= $_SESSION['alert']['message'] ?>',
+                    confirmButtonColor: '<?= $_SESSION['alert']['status'] === 'sukses' ? '#0066FF' : '#FC0134' ?>'
+                });
+                <?php unset($_SESSION['alert']); ?>
+            });
+        </script>
+    <?php endif; ?>
   </body>
 
   </html>

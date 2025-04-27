@@ -8,10 +8,12 @@ $dbsuara = new Database();
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest"><link rel="icon" type="image/x-con" href="">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
     <title>Upload Kandidat</title>
@@ -33,11 +35,11 @@ $dbsuara = new Database();
             background: #bbc4c4;
         }
 
-        ::-webkit-scrollbar-track:hover {      
+        ::-webkit-scrollbar-track:hover {
             background: transparent;
             border-radius: 6px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: #000dff;
             border-radius: 6px;
@@ -182,8 +184,34 @@ $dbsuara = new Database();
 
             <button type="submit" name="submit_kandidat">Simpan Kandidat</button>
         </form>
-
     </main>
-</body>
 
+    <?php if (isset($_GET['status'])): ?>
+        <?php if (isset($_GET['status']) && $_GET['status'] == 'sukses'): ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data kandidat berhasil ditambahkan.',
+                        confirmButtonColor: '#0066FF'
+                    });
+                });
+            </script>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['status']) && $_GET['status'] == 'gagal'): ?>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat menambahkan data.',
+                        confirmButtonColor: '#FC0134'
+                    });
+                });
+            </script>
+        <?php endif; ?>
+    <?php endif; ?>
+</body>
 </html>

@@ -4,6 +4,7 @@ $dbsuara = new Database();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 
 // ✅ Tambahkan ini di awal
 $action = $_GET['action'] ?? $_POST['action'] ?? null;
@@ -18,20 +19,37 @@ if (isset($_POST['submit_kandidat'])) {
     $misi = $_POST['misi'];
     $deskripsi = $_POST['deskripsi'];
 
+    // Pastikan folder uploads ada dan writable
+    if (!file_exists('uploads')) {
+        mkdir('uploads', 0777, true);
+    }
+
     // Upload foto
     $foto_name = uniqid() . '_' . $foto['name'];
     $foto_path = 'uploads/' . $foto_name;
-    move_uploaded_file($foto['tmp_name'], $foto_path);
+    $foto_upload = move_uploaded_file($foto['tmp_name'], $foto_path);
 
     // Upload poster
     $poster_name = uniqid() . '_' . $poster['name'];
     $poster_path = 'uploads/' . $poster_name;
-    move_uploaded_file($poster['tmp_name'], $poster_path);
+    $poster_upload = move_uploaded_file($poster['tmp_name'], $poster_path);
 
-    $db = new Database();
-    $db->inputKandidat($foto_path, $poster_path, $nis, $nama, $visi, $misi, $deskripsi);
+    // Pastikan kedua upload berhasil
+    if ($foto_upload && $poster_upload) {
+        $db = new Database();
+        $result = $db->inputKandidat($foto_path, $poster_path, $nis, $nama, $visi, $misi, $deskripsi);
 
-    header("Location: data_kandidat.php");
+        if ($result) {
+            $_SESSION['alert'] = ['type' => 'success', 'message' => 'Data berhasil ditambahkan'];
+        } else {
+            $_SESSION['alert'] = ['type' => 'error', 'message' => 'Data gagal ditambahkan'];
+        }
+        header("Location: data_kandidat.php");
+        exit();
+    }
+
+    // Jika sampai sini berarti ada yang gagal
+    header("Location: upload_kandidat.php?status=gagal");
     exit();
 }
 
@@ -115,10 +133,11 @@ if ($action == "edit_kandidat") {
                 WHERE no_urut = '$no_urut'";
 
     if ($koneksi->query($query)) {
-        header("Location: data_kandidat.php");
-        exit;
+        header("Location: data_kandidat.php?status=success&message=Data berhasil diupdate");
+        exit();
     } else {
         echo "Gagal mengupdate kandidat: " . $koneksi->error;
+        exit();
     }
 }
 
