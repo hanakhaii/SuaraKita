@@ -33,13 +33,6 @@
                 </li>
             </ul>
 
-            <!-- Hamburger Menu dan Overlay -->
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-            <div class="overlay"></div>
         </nav>
 
         <!-- Modal Login -->
@@ -256,32 +249,7 @@
 
         setInterval(autoSlide, 3000);
 
-        // Burger Menu Toggle
-        const burger = document.querySelector('.burger');
-        const navLinks = document.querySelector('nav ul');
-        const overlay = document.querySelector('.overlay');
-
-        burger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            burger.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.classList.toggle('no-scroll');
-        });
-        overlay.addEventListener('click', () => {
-            burger.classList.remove('active');
-            navLinks.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-        });
         
-        // Tutup sidebar saat klik link
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', () => {
-                burger.classList.remove('active');
-                navUl.classList.remove('active');
-                overlay.classList.remove('active');
-            });
-        });
     </script>
 </body>
 

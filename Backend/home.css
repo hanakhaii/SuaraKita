@@ -13,9 +13,6 @@ body {
     font-family: "Poppins", serif;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
 
 section button {
     color: white;
@@ -26,18 +23,8 @@ section button:hover {
     background-color: rgb(194, 197, 218);
 }
 
-.burger {
-    display: none; /* Sembunyiin di desktop */
-    cursor: pointer;
-    z-index: 1000;
-}
-
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px;
-    transition: all 0.3s ease;
+::-webkit-scrollbar {
+    display: none;
 }
 
 nav {
@@ -298,21 +285,7 @@ h2 {
     padding: 80px;
 }
 
-.overlay {
-    display: none;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 60px);
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 997;
-    backdrop-filter: blur(3px);
-}
 
-.overlay.active {
-    display: block;
-}
 
 footer {
     display: flex;
@@ -349,71 +322,7 @@ footer a:hover {
     }
 
     /* Sidebar Navbar */
-    /* Navbar */
-    nav {
-        justify-content: space-between;
-        padding: 10px 20px;
-        height: 60px;
-    }
-
-    /* Menu Sidebar */
-    nav ul {
-        position: fixed;
-        top: 60px;
-        right: -250px; /* Sembunyikan di luar layar */
-        width: 250px;
-        height: calc(100vh - 60px);
-        background: #4e90f5;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-        transition: 0.3s ease;
-        z-index: 998;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    }
-
-    nav ul.active {
-        right: 0;
-        margin-top: -140px;
-    }
-
-    nav ul li {
-        margin: 15px 0;
-        width: 100%;
-        text-align: left;
-    }
-
-    nav ul li a {
-        padding: 10px 15px;
-        display: block;
-        width: 100%;
-        border-radius: 5px;
-    }
-
-    nav ul li a:hover {
-        background: rgba(255,255,255,0.2);
-    }
-
-    /* Tombol Login tetap terlihat */
-    nav ul li:last-child {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        width: calc(100% - 40px);
-    }
-
-    .burger.active + .overlay {
-        display: block;
-    }
-
-    /* Burger Button */
-    .burger {
-        display: block;
-        position: relative;
-        right: 0;
-        top: 0;
-        margin-left: 0;
-    }
+   
 
     /* Hero Section */
     .slideshow {

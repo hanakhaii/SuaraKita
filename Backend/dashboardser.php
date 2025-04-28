@@ -168,17 +168,23 @@ if ($result->num_rows > 0) {
             // Mengunci fungsi tombol "Back"
             history.pushState(null, null, location.href);
 
-            // Cegah tombol back browser
-            // history.pushState(null, null, location.href);
-            // window.onpopstate = function() {
-            //     history.pushState(null, null, location.href);
-            //     alert("Navigasi mundur tidak diizinkan pada halaman ini!");
-            // };
+            document.addEventListener("DOMContentLoaded", function() {
+            const links = document.querySelectorAll("nav ul li a[href^='#']");
+            links.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href").substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 50,
+                            behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        });
 
-            const burger = document.querySelector('.burger');
-            const navUl = document.querySelector('nav ul');
-            const overlay = document.querySelector('.overlay');
-            let allowBack = false;
 
             // Fungsi logout
             function confirmLogout() {
@@ -186,27 +192,6 @@ if ($result->num_rows > 0) {
                     allowBack = true; // Izinkan navigasi
                     window.location.href = "logout.php";
                 }
-            }
-
-            // Burger Menu Toggle
-            burger.addEventListener('click', () => {
-                navUl.classList.toggle('active');
-                burger.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.classList.toggle('no-scroll');
-            });
-
-            // Tutup sidebar
-            overlay.addEventListener('click', closeSidebar);
-            document.querySelectorAll('nav ul li a').forEach(link => {
-                link.addEventListener('click', closeSidebar);
-            });
-
-            function closeSidebar() {
-                burger.classList.remove('active');
-                navUl.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.classList.remove('no-scroll');
             }
         </script>
 
