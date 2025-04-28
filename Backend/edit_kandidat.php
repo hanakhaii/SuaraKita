@@ -220,6 +220,29 @@ $dbsuara = new Database();
             </div>
         </form>
     </main>
+
+    
+    <?php if (isset($_GET['status'])): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                <?php if ($_GET['status'] === 'success'): ?>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil!',
+                        text: 'Data pemilih berhasil diedit!',
+                        confirmButtonColor: '#0066FF'
+                    });
+                <?php elseif ($_GET['status'] === 'error'): ?>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: 'Terjadi kesalahan saat mengedit data.',
+                        confirmButtonColor: '#FC0134'
+                    });
+                <?php endif; ?>
+            });
+        </script>
+    <?php endif; ?>
 </body>
 
 </html>
