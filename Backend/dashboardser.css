@@ -48,16 +48,6 @@ header h1 span {
     color: #FC0134;
 }
 
-/* Toggle Button (Burger) */
-.nav-toggle {
-    display: none;
-    font-size: 28px;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1001; /* di atas overlay/sidebar */
-}
 
 /* Desktop nav */
 nav ul {
@@ -446,9 +436,109 @@ a:hover {
     color: white;
 }
 
+.burger {
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    right: 5%;
+    top: 20px;
+    z-index: 1000;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi burger saat aktif */
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media only screen and (max-width: 900px) {
+    /* Nav Mobile */
+    .nav-links {
+        position: fixed;
+        right: 0;
+        height: 40vh;
+        top: 0;
+        background-color: #0056d6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        padding-top: 40px;
+        z-index: 999;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        margin: 20px 0;
+    }
+
+    .burger {
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 15px;
+    }
+
+    .nav-active {
+        transform: translateX(0%) !important;
+    }
+
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+    
+    /* Perbaikan posisi header */
+    header {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+    
+    .nav-links a {
+        font-size: 1.2rem;
+        padding: 15px !important;
+    }
+}
+
+
 
 /* Perbaikan Responsive per Section */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 900px) {
+    /* bagian navigasi */
+    nav ul{
+        display: block;
+        padding: 6px 6px;
+    }
+
+    header{
+        display: block;
+        text-align: center;
+    }
+
     .sec1 {
         padding: 120px 25px !important;
     }
@@ -472,21 +562,26 @@ a:hover {
     .kandidat p {
         width: auto !important;
         padding: 0 15px;
+        
     }
 
     /* Section 3 */
     .inline3 {
-        width: 90% !important;
-        margin-left: 5% !important;
+        width: 350px;
+        margin-left: -10px;
     }
     .list-rules {
         margin: 30px 10px !important;
     }
 
+    .list-rules p{
+        width: 310px;
+    }
+
     /* Section 4 */
     .inline4 {
         width: 90% !important;
-        margin-left: 5% !important;
+        margin-left: -1% !important;
         padding: 40px 20px !important;
     }
 
@@ -498,6 +593,7 @@ a:hover {
     .inline5 img {
         width: 200px !important;
         margin: 30px auto;
+        margin-left: 60px;
     }
     .count {
         width: 100% !important;

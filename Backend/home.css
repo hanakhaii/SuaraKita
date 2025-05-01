@@ -285,7 +285,10 @@ h2 {
     padding: 80px;
 }
 
-
+#myChart {
+    width: 600px;
+    height: 400px;
+  }  
 
 footer {
     display: flex;
@@ -304,8 +307,84 @@ footer a:hover {
     color: #003d9a;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
-@media only screen and (max-width: 768px) {
+.burger {
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    right: 5%;
+    top: 20px;
+    z-index: 1000;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi burger saat aktif */
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@media only screen and (max-width: 900px) {
+    .nav-links {
+        position: fixed;
+        right: 0;
+        height: 60vh;
+        top: 0;
+        background-color: #4e90f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        padding-top: 70px;
+        z-index: 999;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        margin: 20px 0;
+    }
+
+    .burger {
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 15px;
+    }
+
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    @keyframes navLinkFade {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+}
+
+
+
+@media only screen and (max-width: 900px) {
     /* Global Mobile Adjustments */
     body {
         font-size: 15px;
@@ -322,15 +401,32 @@ footer a:hover {
     }
 
     /* Sidebar Navbar */
+    nav{
+        display: block;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    nav ul{
+        display: block;
+        text-align: center;
+    }
+
+    ul{
+        margin-top: -60px;
+    }
+
+    ul li button{
+        transform: translate(-50%);
+    }
    
 
     /* Hero Section */
     .slideshow {
         margin-top: 10px;
         /* width: 1000px; */
-        height: calc(100vh - 60px);
+        height: calc(50vh - 60px);
     }
-
 
     .prev, .next {
         width: 40px;
@@ -340,6 +436,7 @@ footer a:hover {
     
     .text-overlay {
         width: 85%;
+        margin-top: -90px;
     }
     
     .text-overlay h1 {
@@ -349,31 +446,73 @@ footer a:hover {
     /* About Section */
     .about-us {
         flex-direction: column;
-        text-align: center;
-        padding: 0 !important;
+        text-align: left;
+        margin: 10px;
     }
     
     .about-us img {
-        width: 65%;
-        max-width: 220px;
-        margin: 20px auto;
+        visibility: hidden;
+        margin-bottom: -280px;
     }
     
     .about-us div:first-child {
         padding: 0 15px;
     }
 
-    /* Candidates Section */
+    /* Candidates Section */ 
+    .kandidat-space {
+        padding: 20px;
+    }
+
+    .kandidat-space h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
     .kandidat-grid {
-        flex-direction: column;
-        gap: 2.5rem;
-        padding: 1.5rem 0 !important;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem 0 !important;
     }
     
-    .kandidat-grid > div {
-        width: 75%;
-        max-width: 180px;
-        margin: 0 auto;
+    .kandidat-grid h3 {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        font-size: 15px;
+        padding: 5px 0;
+        transform: translate(40%);
+        margin-bottom: 30%;
+    }
+
+    .kandidat-grid img {
+        width: 60px;
+        margin-top: 10px;
+    }
+
+    .grid1, .grid2, .grid3 {
+        text-align: center;
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .kandidat-space h3:nth-of-type(2) {
+        font-size: 18px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .kandidat-space p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .kandidat-space button {
+        display: block;
+        margin: 10px auto 0 auto;
     }
 
     /* Quick Count */
@@ -382,11 +521,29 @@ footer a:hover {
         margin: 0 auto;
     }
 
+    #myChart {
+        width: 100% !important;
+        height: auto !important;
+      }
+      
     /* Footer */
     footer {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
         padding: 2rem 1rem;
+    }
+
+    /* Container untuk canvas */
+    .quickcount .data {
+      width: 100% !important;
+      margin: 0 auto;
+      height: 400px;           /* naikkan tinggi container */
+    }
+  
+    /* Canvas myChart mengisi penuh container */
+    #myChart {
+      width: 100% !important;
+      height: 100% !important; /* isi 100% dari .data */
     }
 }

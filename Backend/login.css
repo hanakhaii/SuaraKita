@@ -117,3 +117,91 @@ button:active {
 .toggle-password:hover {
     color: #435bd3; /* Warna ikon mata saat dihover */
 }
+
+@media only screen and (max-width: 900px) {
+    .logo {
+        transform: translate(5%, 40%);
+    }
+    
+    main {
+        margin: 150px 50px;
+        justify-content: center;
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 22px;
+    }
+    
+    .label {
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+    
+    h4 {
+        font-size: 10px;
+    }
+    
+    button {
+        padding: 8px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #0066FF;
+        margin-left: 5px;
+        font-weight: bold;
+    }
+    
+    a:hover {
+        color: #181B3C;
+        text-decoration: underline;
+    }
+    
+    span {
+        color: red;
+        font-size: 12px;
+    }
+    
+    .label {
+        color: white;
+        margin-top: 10px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    input:focus {
+        border: 2px solid #435bd3;
+    }
+    
+    button:hover {
+        border-color: #0056b3; 
+        background-color: #ff0033; 
+    }
+    
+    button:active {
+        background-color: #1b75cf; 
+    }
+    
+    .password-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .toggle-password {
+        margin-top: -3px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #8eaddd;
+    }
+    
+    .toggle-password:hover {
+        color: #435bd3;
+    }
+}

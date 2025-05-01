@@ -61,18 +61,14 @@ if ($result->num_rows > 0) {
 <body>
     <div class="scroll-area">
         <header>
-            <h1><span>Suara</span>Kita</h1>
-
-            <!-- Burger Menu -->
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
-            <div class="overlay"></div>
-
+            <h1><span>Suara</span>Kita</h1>
             <nav>
-                <ul>
+                <ul class="nav-links">
                     <li><a href="#kandidat">Kandidat</a></li>
                     <li><a href="#rules">Peraturan</a></li>
                     <li><a href="#vote">Pilih Sekarang</a></li>
@@ -169,21 +165,21 @@ if ($result->num_rows > 0) {
             history.pushState(null, null, location.href);
 
             document.addEventListener("DOMContentLoaded", function() {
-            const links = document.querySelectorAll("nav ul li a[href^='#']");
-            links.forEach(link => {
-                link.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute("href").substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 50,
-                            behavior: "smooth"
-                        });
-                    }
+                const links = document.querySelectorAll("nav ul li a[href^='#']");
+                links.forEach(link => {
+                    link.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute("href").substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 50,
+                                behavior: "smooth"
+                            });
+                        }
+                    });
                 });
             });
-        });
 
 
             // Fungsi logout
@@ -193,6 +189,50 @@ if ($result->num_rows > 0) {
                     window.location.href = "logout.php";
                 }
             }
+
+            // js untuk navbarr buat hanaa tersayangg 💗
+            const burger = document.querySelector('.burger');
+            const navLinks = document.querySelector('.nav-links');
+            const navItems = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                // Toggle Nav
+                navLinks.classList.toggle('nav-active');
+
+                // Animate Links
+                navItems.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+
+                // Burger Animation
+                burger.classList.toggle('toggle');
+            });
+
+            // Tutup menu saat klik link atau area lain
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !burger.contains(e.target)) {
+                    navLinks.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                    navItems.forEach(link => {
+                        link.style.animation = '';
+                    });
+                }
+            });
+
+            // Handle resize window
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 900) {
+                    navLinks.classList.remove('nav-active');
+                    burger.classList.remove('toggle');
+                    navItems.forEach(link => {
+                        link.style.animation = '';
+                    });
+                }
+            });
         </script>
 
 </body>

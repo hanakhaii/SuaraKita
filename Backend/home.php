@@ -10,6 +10,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/x-con" href="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="home.css">
@@ -20,8 +21,13 @@
     <header>
         <!-- navigasi -->
         <nav>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
             <h3>Suara<span>Kita</span></h3>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">Tentang Kami</a></li>
                 <li><a href="#kandidat">Pilih Sekarang</a></li>
@@ -85,7 +91,7 @@
 
         <!-- about us section  -->
         <section id="about" class="about-us">
-            <div style="transform: translate(0, 18%);">
+            <div style="align-self: center;">
                 <h2>Tentang Kami</h2>
                 <h4>Suara Anda, Masa Depan Kita!</h4>
                 <p> SuaraKita adalah platform pemungutan suara digital yang dibuat khusus untuk pemilihan OSIS. Kami ingin membuat proses pemilu jadi lebih transparan.
@@ -102,7 +108,7 @@
                 <button class="btn btn-dark" onclick="requireLogin()">Pilih Sekarang</button>
             </div>
             <div>
-                <img src="../Backend/img/logo-suarakita.png" alt="" width="400px">
+                <img src="../img/icon-suarakita.png" alt="" width="400px">
             </div>
         </section>
     </header>
@@ -115,15 +121,15 @@
                 <div class="kandidat-grid">
                     <div class="grid1">
                         <h3> 01 </h3>
-                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                        <img src="../img/Group 30.png" alt="" width="150px">
                     </div>
                     <div class="grid2">
                         <h3>02</h3>
-                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                        <img src="../img/Group 30.png" alt="" width="150px">
                     </div>
                     <div class="grid3">
                         <h3>03</h3>
-                        <img src="../Backend/img/Group 30.png" alt="" width="150px">
+                        <img src="../img/Group 30.png" alt="" width="150px">
                     </div>
                 </div>
                 <h3>🗳 Kenali, Pilih, Tentukan! 🗳</h3>
@@ -153,7 +159,7 @@
                     // Buat grafik menggunakan Chart.js
                     const ctx = document.getElementById('myChart').getContext('2d');
                     const myChart = new Chart(ctx, {
-                        type: 'pie', // Jenis grafik
+                        type: 'pie',
                         data: {
                             labels: labels.map((label, index) => `${label} (${percentages[index]})`), // Perbaikan template literal
                             datasets: [{
@@ -163,6 +169,7 @@
                         },
                         options: {
                             responsive: true,
+                            maintainAspectRatio: false, // ← tambahkan ini
                             plugins: {
                                 legend: {
                                     display: true,
@@ -249,7 +256,38 @@
 
         setInterval(autoSlide, 3000);
 
-        
+        // Burger Menu Toggle
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+
+        burger.addEventListener('click', () => {
+            // Toggle Nav
+            nav.classList.toggle('nav-active');
+
+            // Animate Links
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+
+            // Burger Animation
+            burger.classList.toggle('toggle');
+        });
+
+        // Tutup menu saat klik link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+                navLinks.forEach(link => {
+                    link.style.animation = '';
+                });
+            });
+        });
     </script>
 </body>
 

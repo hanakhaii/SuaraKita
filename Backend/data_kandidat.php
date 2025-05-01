@@ -222,18 +222,21 @@
 
       // untuk alert upload_kandidat
       <?php if (isset($_SESSION['alert'])): ?>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'success' : 'error' ?>',
-                    title: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'Berhasil!' : 'Gagal!' ?>',
-                    text: '<?= $_SESSION['alert']['message'] ?>',
-                    confirmButtonColor: '<?= $_SESSION['alert']['status'] === 'sukses' ? '#0066FF' : '#FC0134' ?>'
-                });
-                <?php unset($_SESSION['alert']); ?>
+          <
+          script >
+          document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+              icon: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'success' : 'error' ?>',
+              title: '<?= $_SESSION['alert']['status'] === 'sukses' ? 'Berhasil!' : 'Gagal!' ?>',
+              text: '<?= $_SESSION['alert']['message'] ?>',
+              confirmButtonColor: '<?= $_SESSION['alert']['status'] === 'sukses' ? '#0066FF' : '#FC0134' ?>'
             });
-        </script>
-    <?php endif; ?>
+            <?php unset($_SESSION['alert']); ?>
+          });
+    </script>
+  <?php endif; ?>
+
+  </script>
   </body>
 
   </html>

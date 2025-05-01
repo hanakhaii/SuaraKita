@@ -142,8 +142,8 @@ $dbsuara = new Database();
 
             <!-- Edit NIS -->
             <div class="form-group">
-                <label for="nis">NIS:</label>
-                <input type="text" name="nis_baru" value="<?php echo $editPemilih['nis']; ?>" required>
+                <!-- <label for="nis">NIS:</label> -->
+                <input type="hidden" name="nis_baru" value="<?php echo $editPemilih['nis']; ?>" required>
             </div>
 
             <!-- Edit Nama -->
@@ -151,7 +151,6 @@ $dbsuara = new Database();
                 <label for="nama">Nama:</label>
                 <input type="text" name="nama" value="<?php echo $editPemilih['nama']; ?>" required>
             </div>
-
 
             <!-- Submit Button -->
             <div class="form-group">
