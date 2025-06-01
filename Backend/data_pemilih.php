@@ -12,9 +12,9 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
     <meta charset="UTF-8">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/x-con" href="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -119,6 +119,14 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                 </form>
             </section>
 
+            <!-- tombol aksi -->
+            <div class="tombol-aksi-pengguna">
+                <a href="upload_pemilih.php" style="background-color: #181B3C;">TAMBAH</a>
+                <a href="import_excel.php" style="background-color: #4CAF50;">IMPORT EXCEL</a>
+                <a href="#" onclick="confirmDeleteAll()" style="background-color: #FC0134;">HAPUS SEMUA</a>
+            </div>
+
+            <!-- table -->
             <section class="table_body_pemilih">
                 <table align="center" border="1" class="tablemilih">
                     <thead>
@@ -162,12 +170,6 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
                     </tbody>
                 </table>
             </section>
-            <!-- tombol aksi -->
-            <div class="tombol-aksi-pengguna">
-                <a href="upload_pemilih.php" style="background-color: #181B3C;">TAMBAH</a>
-                <a href="import_excel.php" style="background-color: #4CAF50;">IMPORT EXCEL</a>
-                <a href="#" onclick="confirmDeleteAll()" style="background-color: #FC0134;">HAPUS SEMUA</a>
-            </div>
     </div>
     </main>
     </div>

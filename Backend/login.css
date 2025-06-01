@@ -17,11 +17,13 @@ a {
     color: #0066FF;
     margin-left: 5px;
     font-weight: bold;
+    transition: 0.3s ease-in-out;
 }
 
 a:hover {
     color: #181B3C;
     text-decoration: underline;
+    transition: 0.3s ease-in-out;
 }
 
 /* hanaaa lucuuu cantikkk*/

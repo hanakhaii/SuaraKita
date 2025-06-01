@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/x-con" href="">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,10 +30,11 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#how">Panduan</a></li>
                 <li><a href="#kandidat">Pilih Sekarang</a></li>
                 <li><a href="#quickcount">QuickCount</a></li>
                 <li>
-                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-top: -8px;">
+                    <button type="button" class="btn-login" data-bs-toggle="modal" data-bs-target="#loginModal" style="margin-top: -7px;">
                         Login
                     </button>
                 </li>
@@ -105,7 +106,7 @@
                     Yuk, wujudkan pemilu OSIS yang lebih berintegritas bersama SuaraKita!
                     <b>Dirancang oleh pelajar, untuk pelajar</b>
                 </p>
-                <button class="btn btn-dark" onclick="requireLogin()">Pilih Sekarang</button>
+                <button class="btn-home" onclick="requireLogin()">Pilih Sekarang</button>
             </div>
             <div>
                 <img src="../img/icon-suarakita.png" alt="" width="400px">
@@ -114,6 +115,27 @@
     </header>
 
     <main>
+        <!-- panduan section -->
+        <section id="how" class="panduan">
+            <h2>3 STEP MUDAH UNTUK VOTING!</h2>
+            <div class="steps">
+                <div class="step">
+                    <img src="/img/1.png" alt="">
+                    <h3>Login sebagai user</h3>
+                </div>
+                <h1>></h1>
+                <div class="step">
+                    <img src="/img/2.png" alt="">
+                    <h3>Tentukan Pilihanmu</h3>
+                </div>
+                <h1>></h1>
+                <div class="step">
+                    <img src="/img/3.png" alt="">
+                    <h3>Voting</h3>
+                </div>
+            </div>
+        </section>
+
         <!-- kandidat section -->
         <section id="kandidat" class="kandidat">
             <div class="kandidat-space">
@@ -134,7 +156,7 @@
                 </div>
                 <h3>🗳 Kenali, Pilih, Tentukan! 🗳</h3>
                 <p>Lihat profil kandidat, pahami visi-misinya,<br> dan buat keputusan terbaik untuk sekolah di masa yang akan datang!</p>
-                <button class="btn btn-dark" onclick="requireLogin()">Lihat Kandidat</button>
+                <button class="btn-home" onclick="requireLogin()">Lihat Kandidat</button>
             </div>
         </section>
 
@@ -143,7 +165,7 @@
             <h2>QUICKCOUNT</h2>
             <section class="data">
                 <div style="width: 30%; height: 30%; margin: auto;">
-                    <canvas id="myChart" style="display: inline;"></canvas>
+                    <canvas id="myChart" style="display:block;"></canvas>
                 </div>
                 <script>
                     // Data diagram
@@ -190,7 +212,7 @@
             </section>
             <h4>⏳ Hasil Cepat, Keputusan Akurat! ⏳</h4>
             <p> Pantau perhitungan suara secara real-time dan tetap update dengan hasil terbaru!</p>
-            <button class="btn btn-dark" onclick="requireLogin()">Selengkapnya</button>
+            <button class="btn-home" onclick="requireLogin()">Selengkapnya</button>
         </section>
     </main>
 

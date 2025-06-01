@@ -4,8 +4,7 @@ date_default_timezone_set('Asia/Jakarta');
 
 if (!isset($_SESSION['nis'])) {
     header("Location: login-user.php");
-    exit();
-}
+    }
 
 include 'db.php';
 $dbsuara = new Database();
@@ -49,9 +48,9 @@ if ($result->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/x-con" href="">
     <link rel="stylesheet" href="dashboardser.css">
@@ -95,9 +94,15 @@ if ($result->num_rows > 0) {
                 <div class="inline2">
                     <?php while ($row = $result_kandidat->fetch_assoc()): ?>
                         <div class="kandidat">
-                            <h1 class="judul"><?php echo $row['nama']; ?></h1>
-                            <img src="<?php echo $row['foto']; ?>" alt="">
-                            <p><?php echo substr($row['deskripsi'], 0, 150); ?></p>
+                            <div class="kandidat-content">
+                                <h1 class="judul"><?php echo $row['nama']; ?></h1>
+                                <div class="foto">
+                                    <img src="<?php echo $row['foto']; ?>" alt=""> 
+                                </div>
+                                <div class="deskripsi">
+                                    <p><?php echo substr($row['deskripsi'], 0, 150); ?></p>
+                                </div>
+                            </div>
                             <?php
                             $nama_file = strtolower(str_replace(' ', '-', $row['nama']));
                             ?>
@@ -110,13 +115,21 @@ if ($result->num_rows > 0) {
 
         <section id="rules" class="sec3">
             <div class="inline3">
-                <h1>Peraturan yang berlaku</h1>
+                <h1>PERATURAN YANG BERLAKU</h1>
                 <p>Demi menjaga integritas pemungutan suara, setiap pemilih wajib mematuhi peraturan yang berlaku.</p>
-
-                <div class="list-rules">
-                    <p>1. <mark>Setiap pemilih hanya boleh memilih satu kandidat.</mark></p>
-                    <p>2. <mark>Dilarang menghasut atau mempengaruhi pemilih lain untuk memilih calon tertentu dengan cara yang tidak etis.</mark></p>
-                    <p>3. <mark>Gunakan hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman.</mark></p>
+                <div class="rules">
+                    <div class="list-rules">
+                        <img src="/img/rule1.png" alt="">
+                        <p>Setiap pemilih hanya boleh memilih satu kandidat</p>
+                    </div>
+                    <div class="list-rules">
+                        <img src="/img/rule2.png" alt="">
+                        <p>Dilarang menghasut atau mempengaruhi pemilih lain untuk memilih calon tertentu dengan cara yang tidak etis</p>
+                    </div>
+                    <div class="list-rules">
+                        <img src="/img/rule3.png" alt="">
+                        <p>Gunakan hak pilih dengan bijak, hindari kecurangan, dan pastikan data pribadi Anda aman</p>
+                    </div>
                 </div>
 
                 <p><b>Suara Anda menentukan arah kebijakan ke depan!</b></p>

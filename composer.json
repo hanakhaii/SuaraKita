@@ -1,16 +1,4 @@
 {
-    "name": "lenovo/suara-kita-1",
-    "autoload": {
-        "psr-4": {
-            "Lenovo\\SuaraKita1\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "galuh mtp",
-            "email": "glhmahe@gmail.com"
-        }
-    ],
     "require": {
         "phpoffice/phpspreadsheet": "^4.2"
     }

@@ -13,16 +13,6 @@ body {
     font-family: "Poppins", serif;
 }
 
-
-section button {
-    color: white;
-    background-color: black;
-}
-
-section button:hover {
-    background-color: rgb(194, 197, 218);
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
@@ -73,6 +63,34 @@ nav button {
 
 h3, ul {
     transform: translate(0, 25%);
+}
+
+nav ul li button {
+    background-color: #11223b;
+    padding: 5px 12px;
+    border: transparent;
+    border-radius: 5px;
+    color: aliceblue;
+    transition: 0.3s ease-in-out;
+}
+
+nav ul li button:hover {
+    background-color: #3c6097;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-home {
+    color: white;
+    background-color: #09295f;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: transparent;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-home:hover {
+    background-color: #49689d;
+    transition: 0.3s ease-in-out;
 }
 
 /* slideshow */
@@ -213,9 +231,11 @@ li button:active,
 
 mark {
     background-color: aliceblue;
+    transition: 0.3s ease-in-out;
 }
 
 mark:hover {
+    transition: 0.3s ease-in-out;
     background-color: rgba(255, 0, 0, 0.203);
 }
 
@@ -233,6 +253,40 @@ h2 {
     margin-bottom: 50px;
     font-size: xx-large;
     font-weight: bolder;
+}
+
+.panduan {
+    padding: 80px;
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+}
+
+.steps img {
+    width: 150px;
+}
+
+.steps h3 {
+    font-size: 18px;
+}
+
+.steps h1 {
+    transform: translateY(40%);
+}
+
+.step {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.step:hover {
+    box-shadow: 0 2px 8px #6784b0;
+    transition: 0.3s ease-in-out;
 }
 
 .kandidat {

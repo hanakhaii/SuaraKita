@@ -91,6 +91,11 @@ if (isset($_POST['import'])) {
 
 <head>
     <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/x-con" href="">
     <title>Import Data Pemilih</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

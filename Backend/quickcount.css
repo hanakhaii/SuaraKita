@@ -43,11 +43,13 @@ header {
     display: flex;
     font-weight: bold;
     align-items: center;
+    transition: 0.3s ease-in-out;
 }
 
 .logo a:hover {
     color: #181B3C;
     text-decoration: underline;
+    transition: 0.3s ease-in-out;
 }
 
 .logo svg {
@@ -73,13 +75,13 @@ header {
 }
 
 .paragraf {
-    padding: 30px 30px;
+    padding: 30px 50px;
     background-color: #0066FF;
     color: white;
     width: 900px;
-    margin-left: 11%;
+    /* transform: translateX(10%); */
     border-radius: 20px;
-    margin-top: 50px;
+    margin: 50px 100px;
 }
 
 .paragraf h1 {

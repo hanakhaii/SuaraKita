@@ -61,15 +61,14 @@ $dataKandidat = $dbsuara->viewKandidat();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="../Backend/img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../Backend/img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../Backend/img/favicon_io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="icon" type="image/x-con" href="">
     <link rel="stylesheet" href="voting.css">
     <title>Voting</title>
 </head>
-<!-- hanaa cantikkk, lucuu, sayangg -->
 
 <body>
     <div class="logo">
@@ -84,7 +83,7 @@ $dataKandidat = $dbsuara->viewKandidat();
     <section class="sec">
         <div class="h1">
             <h1>Pilih Sekarang!</h1>
-            <h3>Pilihlah Dengan Bijak</h3>
+            <p>gatau kata-katanya apa ya///</p>
         </div>
     </section>
 
@@ -95,7 +94,6 @@ $dataKandidat = $dbsuara->viewKandidat();
                 <?php foreach ($dataKandidat as $kandidat): ?>
                     <div class="kan-container">
                         <div class="kan">
-                            <!-- Pastikan path file gambar benar -->
                             <img src="<?php echo $kandidat['foto']; ?>" alt="">
                             <h1><?php echo $kandidat['nama']; ?></h1>
                         </div>
