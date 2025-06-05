@@ -9,6 +9,9 @@ session_start();
 // ✅ Tambahkan ini di awal
 $action = $_GET['action'] ?? $_POST['action'] ?? null;
 
+// isset untuk Mengecek apakah sebuah variabel atau input sudah ada atau belum. 
+//Penting untuk menghindari error saat input tidak dikirim.
+
 // submit kandidat
 if (isset($_POST['submit_kandidat'])) {
     $foto = $_FILES['foto'];
@@ -27,7 +30,8 @@ if (isset($_POST['submit_kandidat'])) {
     // Upload foto
     $foto_name = uniqid() . '_' . $foto['name'];
     $foto_path = 'uploads/' . $foto_name;
-    $foto_upload = move_uploaded_file($foto['tmp_name'], $foto_path);
+    $foto_upload = move_uploaded_file($foto['tmp_name'], $foto_path); 
+    //Memindahkan file dari folder sementara ke folder permanen di server.
 
     // Upload poster
     $poster_name = uniqid() . '_' . $poster['name'];

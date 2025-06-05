@@ -138,8 +138,7 @@ $totalSuara = $dbsuara->getTotalSuara();
             // Loop untuk menampilkan data kandidat + persentase
             foreach ($kandidatData as $dataKandidat) {
                 $persentase = ($totalSuara > 0)
-                    ? ($dataKandidat['jumlah_suara'] / $totalSuara) * 100
-                    : 0;
+                    ? ($dataKandidat['jumlah_suara'] / $totalSuara) * 100 : 0;
             ?>
             <div class="data-container">
                 <div class="data-box">

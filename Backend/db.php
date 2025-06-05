@@ -58,6 +58,8 @@ class Database
         $stmt->bind_param("sssssss", $foto, $poster, $nis, $nama, $visi, $misi, $deskripsi);
         $stmt->execute();
         $stmt->close();
+        //Kita siapkan (prepare) perintah SQL yang mau disisipin data.
+        //Tanda tanya (?) adalah tempat kosong yang akan diisi nanti.
     }
 
 
