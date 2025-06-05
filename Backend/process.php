@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-// ✅ Tambahkan ini di awal
 $action = $_GET['action'] ?? $_POST['action'] ?? null;
 
 // isset untuk Mengecek apakah sebuah variabel atau input sudah ada atau belum. 
